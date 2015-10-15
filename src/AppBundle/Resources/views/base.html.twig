@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>FreeYachting</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content='index, follow' name='robots'>
+    <meta name=description content="Компания">
+    <meta content='keyword1, keyword2' name='keywords'>
+    <link rel="apple-touch-icon" sizes="57x57" href="{{ asset('favicon/apple-icon-57x57.png') }}">
+    <link rel="apple-touch-icon" sizes="60x60" href="{{ asset('favicon/apple-icon-60x60.png') }}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('favicon/apple-icon-72x72.png') }}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('favicon/apple-icon-76x76.png') }}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{{ asset('favicon/apple-icon-114x114.png') }}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{{ asset('favicon/apple-icon-120x120.png') }}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{{ asset('favicon/apple-icon-144x144.png') }}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{{ asset('favicon/apple-icon-152x152.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('favicon/apple-icon-180x180.png') }}">
+    <link rel="icon" type="image/png" sizes="192x192"  href="{{ asset('favicon/android-icon-192x192.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="96x96" href="{{ asset('favicon/favicon-96x96.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon/favicon-16x16.png') }}">
+    <link rel="manifest" href="{{ asset('favicon/manifest.json') }}">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="{{ asset('favicon/ms-icon-144x144.png') }}">
+    <meta name="theme-color" content="#ffffff">
+    <!-- jQuery -->
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('js/media.match.min.js') }}"></script>
+    <script src="{{ asset('js/enquire.min.js') }}"></script>
+    <script src="{{ asset('js/jquery.jcarousel.min.js') }}"></script>
+    <script src="{{ asset('js/scrollator.js') }}"></script>
+    <script src="{{ asset('js/script.js') }}"></script>
+    <!--[if lt IE 9]>
+    <script src="{{ asset('js/ie9/html5shiv.min.js') }}"></script>
+    <script src="{{ asset('js/ie9/html5shiv-printshiv.min.js') }}"></script>
+    <script src="{{ asset('js/ie9/respond.js') }}"></script>
+    <![endif]-->
+    <link href="{{ asset('css/style.min.css') }}" rel="stylesheet">
+</head>
+<body>
+
+{% include 'AppBundle::modal.html.twig' %}
+
+{% block homepage %}
+{% endblock %}
+
+<header role="banner">
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-default" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle btn-tree" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Выберите пункт меню</span>
+                </button>
+                <a class="navbar-brand" href="{{ path('homepage') }}">
+                    <img src="{{ asset('img/logotype.png') }}" alt="FreeYachting">
+                </a>
+            </div>
+            <div class="collapse navbar-collapse navbar-right">
+                <a href="#" class="visible-xs" data-toggle="collapse" data-target=".navbar-collapse"><i class="fa fa-times"></i></a>
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#"><i class="fa fa-anchor"></i>Шкиперам</a></li>
+                    <li><a href="#"><i class="fa fa-life-ring"></i>Помощь</a><div class="visible-lg"></div></li>
+                    <li><a href="#" data-toggle="modal" data-target="#modal-login"><i class="fa fa-lock"></i>Личный кабинет</a></li>
+                    <li><a href="#"><i class="fa fa-globe"></i>Ru</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>
+
+{% block content %}
+{% endblock %}
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                <ul class="list-inline">
+                    <li><a href="#"><i class="fa fa-vk"></i></a></li>
+                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                    <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                    <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                    <li><a href="#"><i class="fa fa-vimeo"></i></a></li>
+                    <li><a href="#"><i class="fa fa-youtube"></i></a></li>
+                </ul>
+            </div>
+            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 text-center">
+                <ul class="list-inline">
+                    <li><a href="#">О FreeYachting</a></li>
+                    <li><a href="#">Контакты</a></li>
+                </ul>
+            </div>
+            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 text-right">
+                Дизайн сайта
+                <a href='http://www.whim.ru' target='_blank'>группа компаний ВИМ</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
