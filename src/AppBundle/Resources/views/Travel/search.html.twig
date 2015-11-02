@@ -1,0 +1,82 @@
+{% extends 'AppBundle::base.html.twig' %}
+{% trans_default_domain "AppBundle" %}
+
+{% block content %}
+    {% include 'AppBundle::breadcrumbs.html.twig' %}
+    <div class="container content traveller-cabin">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                <div class="row btn-block">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <h1>{{ 'search.label'|trans }}</h1>
+                        <p>{{ 'search.sort_label'|trans }}</p>
+                        <div class="search-filter">
+                            {{ knp_menu_render('search_menu', { template: 'AppBundle::searchMenu.html.twig', currentClass: 'active' }) }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <ul class="list-unstyled media-list media-search">
+                        {% for travel in travels %}
+                        <li>
+                            <div class="media">
+                                <div class="media-left hidden-xs">
+                                    <a href="{{ path('travel_show', { id: travel.id }) }}">
+                                        <img src="{{ asset('images/img02.jpg') }}" alt="{{ travel.name }}">
+                                    </a>
+                                </div>
+                                <div class="media-body">
+                                    <h4 class="media-heading">{{ travel.name }}</h4>
+                                    <div class="important">
+                                        <p>
+                                            <i class="icon-date"></i> {{ travel.dates }} &nbsp;&nbsp;
+                                            <i class="icon-days"></i> {{ travel.travelDays }} &nbsp;&nbsp;
+                                            <i class="icon-country"></i> {{ travel.country }}
+                                        </p>
+                                    </div>
+                                    <a class="media-left visible-xs" href="#">
+                                        <img src="{{ asset('images/img02.jpg') }}" alt="{{ travel.name }}" class="img-responsive">
+                                    </a>
+                                    <div class="property-top">
+                                        <p>{{ 'travel.skipper_rating'|trans }}: <b>5</b></p>
+                                        <p>{{ 'travel.free_places'|trans }}: <b>7</b></p>
+                                    </div>
+                                    <div class="row property-bottom">
+                                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                            {% set type = 'travel.type.' ~ travel.type %}
+                                            <p>{{ 'travel.type_label'|trans }}: <b>{{ type|trans }}</b></p>
+                                            <p>{{ 'travel.aquatory'|trans }}: <b>{{ travel.aquatory }}</b></p>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                            <p>{{ 'travel.participants_number'|trans }}: <b>8</b></p>
+                                            <p>{{ 'travel.for_all'|trans }}: <b>{{ travel.weekPrice }} {{ travel.weekPriceCurrency }}</b></p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 btn-more">
+                                            <a href="{{ path('travel_show', { id: travel.id }) }}" class="btn btn-3">
+                                                {{ 'interface.buttons.more'|trans }}
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        {% else %}
+                            {{ 'search.travels_not_found'|trans }}
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+                        <?require_once $_SERVER['DOCUMENT_ROOT']."/include/pagination.php";?>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 banner-xs">
+                {% include 'AppBundle:blocks:banners.html.twig' %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

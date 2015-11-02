@@ -1,0 +1,44 @@
+# Travel
+travel:
+    name: Название путешествия
+    type_label: Тип путешествия
+    type:
+        rest: Отдых
+        studing: Обучение
+        regatta_participation: Участие в регате
+    skipper_rating: Рейтинг капитана
+    free_places: Кол-во свободных мест
+    aquatory: Акватория путешествия
+    participants_number: Кол-во участников
+    for_all: За всех участников
+    date: Дата
+    country: Страна
+    dayPrice: В день на участника
+    price_for_all: Стоимость за всех участников
+    schedule: Расписание путешествий
+    share_with_friend: Отправить ссылку другу
+    choose_places: Выберете места <br> и забронируйте путешествия
+    important_info: Важная информация <br> для путешественников
+    included: Что входит в стоимость за место/участника:
+    excluded: Что не входит в стоимость за место/участника:
+    team_gathering_address: Место сбора участников
+    team_gathering_time: Время сбора участников
+    nearest_airpot: Ближаийший аэропорт к месту сбора участников
+    transfer_from_airport: Трансфер
+    place: место
+yacht:
+    short_description: Краткое описание
+interface:
+    buttons:
+        more: 'Подробнее'
+breadcrumbs:
+    homepage: Главная
+    search_results: Результаты поиска
+search:
+    label: Выберете свое путешествие
+    sort_label: "Сортировать по:"
+    sort:
+        price: Цене
+        date_start: Дате начала путешествия
+        skipper_rating: Рейтингу капитана
+    travels_not_found: Ничего не найдено
