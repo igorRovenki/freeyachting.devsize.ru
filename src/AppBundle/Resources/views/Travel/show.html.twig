@@ -98,72 +98,23 @@
                         <h4>{{ 'travel.schedule'|trans }}</h4>
                         <table class="table table-striped">
                             <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>12 апреля</td>
-                                <td>Москва - Питер</td>
-                                <td>70 миль</td>
-                                <td>
-                                    <a href="#" data-toggle="modal" data-target="#modal-info">
-                                        <span class="glyphicon glyphicon-question-sign"></span>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>13 апреля</td>
-                                <td>Москва - Питер</td>
-                                <td>70 миль</td>
-                                <td>
-                                    <a href="#" data-toggle="modal" data-target="#modal-info">
-                                        <span class="glyphicon glyphicon-question-sign"></span>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>14 апреля</td>
-                                <td>Москва - Питер</td>
-                                <td>70 миль</td>
-                                <td>
-                                    <a href="#" data-toggle="modal" data-target="#modal-info">
-                                        <span class="glyphicon glyphicon-question-sign"></span>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>15 апреля</td>
-                                <td>Москва - Питер</td>
-                                <td>70 миль</td>
-                                <td>
-                                    <a href="#" data-toggle="modal" data-target="#modal-info">
-                                        <span class="glyphicon glyphicon-question-sign"></span>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>16 апреля</td>
-                                <td>Москва - Питер</td>
-                                <td>70 миль</td>
-                                <td>
-                                    <a href="#" data-toggle="modal" data-target="#modal-info">
-                                        <span class="glyphicon glyphicon-question-sign"></span>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>6</td>
-                                <td>17 апреля</td>
-                                <td>Москва - Питер</td>
-                                <td>70 миль</td>
-                                <td>
-                                    <a href="#" data-toggle="modal" data-target="#modal-info">
-                                        <span class="glyphicon glyphicon-question-sign"></span>
-                                    </a>
-                                </td>
-                            </tr>
+                            {% for day in travel.days %}
+                                <tr>
+                                    <td>{{ loop.index }}</td>
+                                    <td>{{ travel.dateStart|date_modify('+' ~ loop.index ~ 'day')|date('d M') }}</td>
+                                    <td>{{ day.cityArrival }} - {{ day.cityDeparture }}</td>
+                                    <td>{{ day.routeLength }} {{ 'day.miles'|trans }}</td>
+                                    <td>
+                                        <a href="#" data-toggle="modal" data-target="#modal-info">
+                                            <span class="glyphicon glyphicon-question-sign"></span>
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td>{{ 'day.days_not_fount'|trans }}</td>
+                                </tr>
+                            {% endfor %}
                             </tbody>
                         </table>
                         <div class="row">

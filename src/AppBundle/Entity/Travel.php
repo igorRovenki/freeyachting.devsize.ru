@@ -149,9 +149,9 @@ class Travel
     /**
      * @var integer
      *
-     * @ORM\Column(name="travel_days", type="smallint")
+     * @ORM\Column(name="days_count", type="smallint")
      */
-    private $travelDays;
+    private $daysCount;
 
     /**
      * @var Country
@@ -279,9 +279,13 @@ class Travel
     private $photos;
 
     /**
-     * @var \stdClass
+     * @var ArrayCollection
      *
-     * @ORM\Column(name="days", type="object")
+     * @ORM\ManyToMany(targetEntity="Day", cascade={"persist"})
+     * @ORM\JoinTable(name="travel_has_days",
+     *  joinColumns={@ORM\JoinColumn(name="travel_id", referencedColumnName="id")},
+     *  inverseJoinColumns={@ORM\JoinColumn(name="day_id", referencedColumnName="id", unique=true)}
+     * )
      */
     private $days;
 
@@ -293,6 +297,7 @@ class Travel
         $this->skipperConfirmation = false;
         $this->percentOfDiscount = 0;
         $this->photos = new ArrayCollection();
+        $this->days = new ArrayCollection();
     }
 
     /**
@@ -724,12 +729,12 @@ class Travel
     /**
      * Set travelDays
      *
-     * @param integer $travelDays
+     * @param integer $daysCount
      * @return Travel
      */
-    public function setTravelDays($travelDays)
+    public function setDaysCount($daysCount)
     {
-        $this->travelDays = $travelDays;
+        $this->daysCount = $daysCount;
 
         return $this;
     }
@@ -739,9 +744,9 @@ class Travel
      *
      * @return integer
      */
-    public function getTravelDays()
+    public function getDaysCount()
     {
-        return $this->travelDays;
+        return $this->daysCount;
     }
 
     /**
@@ -1150,7 +1155,7 @@ class Travel
     /**
      * Set days
      *
-     * @param \stdClass $days
+     * @param array $days
      * @return Travel
      */
     public function setDays($days)
@@ -1163,10 +1168,15 @@ class Travel
     /**
      * Get days
      *
-     * @return \stdClass
+     * @return ArrayCollection
      */
     public function getDays()
     {
         return $this->days;
+    }
+
+    public function addDay(Day $day)
+    {
+        $this->days->add($day);
     }
 }

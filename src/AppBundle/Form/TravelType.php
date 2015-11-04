@@ -44,7 +44,7 @@ class TravelType extends AbstractType
             ->add('skipperConfirmation')
             ->add('dateStart')
             ->add('dateEnd')
-            ->add('travelDays')
+            ->add('daysCount')
             ->add('country')
             ->add('aquatory')
             ->add('yacht')

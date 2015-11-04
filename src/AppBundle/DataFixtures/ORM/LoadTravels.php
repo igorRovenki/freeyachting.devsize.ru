@@ -4,6 +4,7 @@ namespace AppBundle\DataFixtures\ORM;
 
 use AppBundle\Entity\Aquatory;
 use AppBundle\Entity\Country;
+use AppBundle\Entity\Day;
 use AppBundle\Entity\Travel;
 use Application\Sonata\MediaBundle\Entity\Media;
 use Doctrine\Common\DataFixtures\FixtureInterface;
@@ -30,7 +31,7 @@ class LoadTravels implements FixtureInterface, ContainerAwareInterface
             $dateString = sprintf('%s-%s-%s', 2016, rand(1, 12), rand(1, 28));
             $dateStart = new \DateTime($dateString);
             $dateEnd = new \DateTime($dateString);
-            $travelDays = rand(5, 14);
+            $daysCount = rand(5, 14);
 
             $travel = new Travel();
             $travel->setName($this->getNames()[$key]);
@@ -43,8 +44,8 @@ class LoadTravels implements FixtureInterface, ContainerAwareInterface
             $travel->setMinPlacesForTravel(10);
             $travel->setSkipperConfirmation(false);
             $travel->setDateStart($dateStart);
-            $travel->setDateEnd($dateEnd->modify("+{$travelDays} days"));
-            $travel->setTravelDays($travelDays);
+            $travel->setDateEnd($dateEnd->modify("+{$daysCount} days"));
+            $travel->setDaysCount($daysCount);
             $travel->setCountry(new Country($this->getCountries()[$key]));
             $travel->setAquatory(new Aquatory($this->getCountries()[$key]));
             $travel->setSkipperPaymentMethod('Оплата наличными капитану');
@@ -70,6 +71,7 @@ class LoadTravels implements FixtureInterface, ContainerAwareInterface
                 $travel->setType(Travel::TYPE_REST);
             }
             $this->loadPhotos($travel, $key);
+            $this->loadDays($travel);
 
             $manager->persist($travel);
         }
@@ -99,6 +101,18 @@ class LoadTravels implements FixtureInterface, ContainerAwareInterface
         ];
     }
 
+    /**
+     * Sets the Container.
+     *
+     * @param ContainerInterface|null $container A ContainerInterface instance or null
+     *
+     * @api
+     */
+    public function setContainer(ContainerInterface $container = null)
+    {
+        $this->container = $container;
+    }
+
     private function loadPhotos(Travel $travel, $country)
     {
         foreach ([0, 1] as $number) {
@@ -112,15 +126,14 @@ class LoadTravels implements FixtureInterface, ContainerAwareInterface
         }
     }
 
-    /**
-     * Sets the Container.
-     *
-     * @param ContainerInterface|null $container A ContainerInterface instance or null
-     *
-     * @api
-     */
-    public function setContainer(ContainerInterface $container = null)
+    private function loadDays(Travel $travel)
     {
-        $this->container = $container;
+        for ($i = 0; $i < $travel->getDaysCount(); $i++) {
+            $day = new Day();
+            $day->setCityArrival('Милан');
+            $day->setCityDeparture('Савона');
+            $day->setRouteLength(rand(70, 1000));
+            $travel->addDay($day);
+        }
     }
 }
