@@ -22,7 +22,7 @@
                             <div class="media">
                                 <div class="media-left hidden-xs">
                                     <a href="{{ path('travel_show', { id: travel.id }) }}">
-                                        <img src="{{ asset('images/img02.jpg') }}" alt="{{ travel.name }}">
+                                        <img src="{% path travel.photos.first, 'small' %}" alt="{{ travel.name }}">
                                     </a>
                                 </div>
                                 <div class="media-body">

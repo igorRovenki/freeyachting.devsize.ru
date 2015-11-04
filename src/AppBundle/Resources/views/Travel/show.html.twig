@@ -22,7 +22,7 @@
                 </div>
                 <div class="row">
                     <div class="col-xs-12">
-                        {% include 'AppBundle:Travel:showCarousel.html.twig' %}
+                        {% include 'AppBundle:Travel:showCarousel.html.twig' with { photos: travel.photos, targetId: 'carousel2' } %}
                     </div>
                 </div>
                 <div class="row">
@@ -345,7 +345,7 @@
                     </div>
                     <div class="row">
                         <div class="col-xs-12 col-sm-6 col-md-7">
-                            {% include 'AppBundle:Yacht:yachtCarousel.html.twig' %}
+                            {% include 'AppBundle:Travel:showCarousel.html.twig' with { photos: travel.photos, targetId: 'carousel3' } %}
                         </div>
                         <div class="col-xs-12 col-sm-6 col-md-offset-1 col-md-4">
                             <div>

@@ -2,8 +2,9 @@
 
 namespace AppBundle\Entity;
 
+use Application\Sonata\MediaBundle\Entity\Media;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Intl\DateFormatter\IntlDateFormatter;
 
 /**
  * Travel
@@ -267,9 +268,13 @@ class Travel
     private $excluded;
 
     /**
-     * @var \stdClass
+     * @var ArrayCollection
      *
-     * @ORM\Column(name="photos", type="object")
+     * @ORM\ManyToMany(targetEntity="Application\Sonata\MediaBundle\Entity\Media")
+     * @ORM\JoinTable(name="travels_photos",
+     *  joinColumns={@ORM\JoinColumn(name="travel_id", referencedColumnName="id")},
+     *  inverseJoinColumns={@ORM\JoinColumn(name="image_id", referencedColumnName="id")}
+     * )
      */
     private $photos;
 
@@ -287,6 +292,7 @@ class Travel
         $this->websiteComission = 0;
         $this->skipperConfirmation = false;
         $this->percentOfDiscount = 0;
+        $this->photos = new ArrayCollection();
     }
 
     /**
@@ -1109,7 +1115,7 @@ class Travel
     /**
      * Set photos
      *
-     * @param \stdClass $photos
+     * @param array $photos
      * @return Travel
      */
     public function setPhotos($photos)
@@ -1122,11 +1128,23 @@ class Travel
     /**
      * Get photos
      *
-     * @return \stdClass
+     * @return ArrayCollection
      */
     public function getPhotos()
     {
         return $this->photos;
+    }
+
+    /**
+     * Add photo to travel
+     * @param Media $photo
+     * @return $this
+     */
+    public function addPhoto(Media $photo)
+    {
+        $this->photos->add($photo);
+
+        return $this;
     }
 
     /**
