@@ -10,7 +10,7 @@ class DefaultController extends Controller
 {
     /**
      * @Route("/", name="homepage")
-     * @Template()
+     * @Template(template="AppBundle:default:index.html.twig")
      */
     public function indexAction()
     {
