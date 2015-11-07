@@ -1,0 +1,133 @@
+{% trans_default_domain "AppBundle" %}
+<div class="row">
+    <div class="col-xs-12 col-sm-offset-1 col-sm-10 choose-block text-center">
+        <div class="filter">
+            <a href="#" class="visible-xs" id="closeFilterXS"><i class="fa fa-times"></i></a>
+            <div class="h1">{{ 'search_form.choose_travel'|trans }}</div>
+            <form action="{{ path('search_travel') }}" role="form" method="get">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+                        <div class="input-group main-select">
+                            <span class="input-group-addon"><div id="addonType" class="hidden-sm"></div></span>
+                            <input type="hidden" name="type">
+                            <input type="text" class="form-control" aria-label="Text input with dropdown button"
+                                   placeholder="{{ 'travel.type_label'|trans }}" aria-describedby="addonType">
+                            <div class="input-group-btn">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false"><span class="caret"></span></button>
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li><a href="#" data-value="{{ constant('AppBundle\\Entity\\Travel::TYPE_REST') }}">{{ 'travel.type.rest'|trans }}</a></li>
+                                    <li><a href="#" data-value="{{ constant('AppBundle\\Entity\\Travel::TYPE_STUDING') }}">{{ 'travel.type.studing'|trans }}</a></li>
+                                    <li><a href="#" data-value="{{ constant('AppBundle\\Entity\\Travel::TYPE_REGATTA_PARTICIPATION') }}">{{ 'travel.type.regatta_participation'|trans }}</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+                        <div class="input-group main-select">
+                            <span class="input-group-addon"><div id="addonDate" class="hidden-sm"></div></span>
+                            <input type="date" class="form-control" aria-label="Text input with dropdown button"
+                                   placeholder="{{ 'search_form.date'|trans }}" aria-describedby="addonType" name="dateStart">
+                            <div class="input-group-btn">
+                                <button type="button" class="btn btn-default dropdown-toggle"><span class="caret"></span></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+                        <div class="input-group main-select">
+                            <span class="input-group-addon"><div id="addonCountry" class="hidden-sm"></div></span>
+                            <input type="hidden" name="country">
+                            <input type="text" class="form-control" aria-label="Text input with dropdown button"
+                                   placeholder="{{ 'search_form.country'|trans }}" aria-describedby="addonType">
+                            <div class="input-group-btn">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false"><span class="caret"></span></button>
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    {% for country in countries %}
+                                        <li><a href="#" data-value="{{ country.id }}">{{ country }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+                        <div class="input-group main-select">
+                            <span class="input-group-addon"><div id="addonAqwa" class="hidden-sm"></div></span>
+                            <input type="hidden" name="aquatory">
+                            <input type="text" class="form-control" aria-label="Text input with dropdown button"
+                                   placeholder="{{ 'search_form.aquatory'|trans }}" aria-describedby="addonType">
+                            <div class="input-group-btn">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false"><span class="caret"></span></button>
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    {% for aquatory in aquatories %}
+                                        <li><a href="#" data-value="{{ aquatory.id }}">{{ aquatory }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+                        <div class="input-group main-select">
+                            <span class="input-group-addon"><div id="addonNU" class="hidden-sm"></div></span>
+                            <input type="text" class="form-control" aria-label="Text input with dropdown button"
+                                   placeholder="{{ 'travel.participants_number'|trans }}" aria-describedby="addonType">
+                            <div class="input-group-btn">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false"><span class="caret"></span></button>
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    {% for number in 1..20 %}
+                                        <li><a href="#">{{ number }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+                        <div class="input-group main-select">
+                            <span class="input-group-addon"><div id="addonNK" class="hidden-sm"></div></span>
+                            <input type="text" class="form-control" aria-label="Text input with dropdown button"
+                                   placeholder="{{ 'search_form.number_2_bed_cabins'|trans }}" aria-describedby="addonType">
+                            <div class="input-group-btn">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false"><span class="caret"></span></button>
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li><a href="#">1</a></li>
+                                    <li><a href="#">2</a></li>
+                                    <li><a href="#">3</a></li>
+                                    <li><a href="#">4</a></li>
+                                    <li><a href="#">5</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-offset-2 col-sm-4 col-md-offset-0 col-md-3">
+                        <div class="input-group main-select">
+                            <span class="input-group-addon"><div id="addonChild" class="hidden-sm"></div></span>
+                            <input type="hidden" name="children">
+                            <input type="text" class="form-control" aria-label="Text input with dropdown button"
+                                   placeholder="{{ 'search_form.has_children'|trans }}" aria-describedby="addonType">
+                            <div class="input-group-btn">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false"><span class="caret"></span></button>
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li><a href="#" id="yesChild" data-value="yes">{{ 'search_form.yes'|trans }}</a></li>
+                                    <li><a href="#" id="noChild" data-value="no">{{ 'search_form.no'|trans }}</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-4 col-md-3">
+                        <div class="input-group main-select disabled" id="ageChild">
+                            <span class="input-group-addon"></span>
+                            <input type="text" class="form-control" placeholder="{{ 'search_form.min_child_age'|trans }}" name="minChildAge">
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-1">Поиск</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

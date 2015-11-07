@@ -135,14 +135,14 @@ class Travel
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_start", type="datetime")
+     * @ORM\Column(name="date_start", type="date")
      */
     private $dateStart;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_end", type="datetime")
+     * @ORM\Column(name="date_end", type="date")
      */
     private $dateEnd;
 

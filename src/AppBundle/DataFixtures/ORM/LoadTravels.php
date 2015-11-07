@@ -60,14 +60,14 @@ class LoadTravels implements FixtureInterface, ContainerAwareInterface
             $travel->setTeamGatheringTime($dateStart->modify('+12 hours'));
             $travel->setIncluded('Акваланги');
             $travel->setExcluded('Полотенца');
+            $travel->setType($this->getTypes()[rand(0, 2)]);
 
-            if ($key % 2 == 0) {
+            if (rand(0, 1) == 0) {
                 $travel->setHotOffers(true);
                 $travel->setPercentOfDiscount(5);
                 $travel->setTimeForDiscountActivation(7);
-                $travel->setType(Travel::TYPE_STUDING);
-            } else {
-                $travel->setType(Travel::TYPE_REST);
+                $travel->setChildren(true);
+                $travel->setMinChildAge(rand(1, 10));
             }
             $this->loadPhotos($travel, $key);
             $this->loadDays($travel);
@@ -144,5 +144,14 @@ class LoadTravels implements FixtureInterface, ContainerAwareInterface
             $day->setDate(clone($date->modify('+1 day')));
             $travel->addDay($day);
         }
+    }
+
+    private function getTypes()
+    {
+        return [
+            0 => Travel::TYPE_REST,
+            1 => Travel::TYPE_STUDING,
+            2 => Travel::TYPE_REGATTA_PARTICIPATION,
+        ];
     }
 }

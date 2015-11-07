@@ -49,3 +49,13 @@ day:
     cityArrival: Место прибытия
     routeLength: Протяженность
     fullDescription: Описание
+search_form:
+    choose_travel: Выберите путешествие
+    date: Дата путешествия
+    country: Страна путешествия
+    aquatory: Акватория похода
+    has_children: Участие детей
+    min_child_age: Мин. возраст детей
+    number_2_bed_cabins: Кол-во 2-х мест. кают
+    yes: Да
+    no: Нет
