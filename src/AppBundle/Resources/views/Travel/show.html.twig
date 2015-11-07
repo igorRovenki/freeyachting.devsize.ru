@@ -95,17 +95,20 @@
                     </div>
                     <div class="col-xs-12 col-md-6 table-block">
                         <div class="deliver hidden-md hidden-lg"></div>
+                        {% for day in travel.days %}
+                            {% include 'AppBundle:Travel:day.html.twig' with { 'day': day } %}
+                        {% endfor %}
                         <h4>{{ 'travel.schedule'|trans }}</h4>
                         <table class="table table-striped">
                             <tbody>
                             {% for day in travel.days %}
                                 <tr>
                                     <td>{{ loop.index }}</td>
-                                    <td>{{ travel.dateStart|date_modify('+' ~ loop.index ~ 'day')|date('d M') }}</td>
+                                    <td>{{ day.date|date('d M') }}</td>
                                     <td>{{ day.cityArrival }} - {{ day.cityDeparture }}</td>
                                     <td>{{ day.routeLength }} {{ 'day.miles'|trans }}</td>
                                     <td>
-                                        <a href="#" data-toggle="modal" data-target="#modal-info">
+                                        <a href="#" data-toggle="modal" data-target="#modal-info{{ day.id }}">
                                             <span class="glyphicon glyphicon-question-sign"></span>
                                         </a>
                                     </td>

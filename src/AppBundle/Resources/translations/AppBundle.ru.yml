@@ -42,7 +42,10 @@ search:
         date_start: Дате начала путешествия
         skipper_rating: Рейтингу капитана
     travels_not_found: Ничего не найдено
-
 day:
     days_not_fount: Капитан пока не добавил информацию о днях путешествия
     miles: миль
+    cityDeparture: Место отправления
+    cityArrival: Место прибытия
+    routeLength: Протяженность
+    fullDescription: Описание

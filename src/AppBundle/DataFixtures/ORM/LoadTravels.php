@@ -45,7 +45,6 @@ class LoadTravels implements FixtureInterface, ContainerAwareInterface
             $travel->setSkipperConfirmation(false);
             $travel->setDateStart($dateStart);
             $travel->setDateEnd($dateEnd->modify("+{$daysCount} days"));
-            $travel->setDaysCount($daysCount);
             $travel->setCountry(new Country($this->getCountries()[$key]));
             $travel->setAquatory(new Aquatory($this->getCountries()[$key]));
             $travel->setSkipperPaymentMethod('Оплата наличными капитану');
@@ -128,11 +127,21 @@ class LoadTravels implements FixtureInterface, ContainerAwareInterface
 
     private function loadDays(Travel $travel)
     {
-        for ($i = 0; $i < $travel->getDaysCount(); $i++) {
+        $date = clone($travel->getDateStart());
+        $date->modify('-1 day');
+        for ($i = 0; $i < $travel->getDaysCount() + 1; $i++) {
             $day = new Day();
             $day->setCityArrival('Милан');
             $day->setCityDeparture('Савона');
-            $day->setRouteLength(rand(70, 1000));
+            $day->setRouteLength(rand(70, 200));
+            $day->setFullDescription(
+                'Аренда катамарана в Черногории позволит вам свободно перемещаться по всей
+                акватории, обойти все острова и заливы, насладиться уединенными гаванями и пляжами, а также получить
+                удовольствие от морских развлечений, как рыбалка, снорклинг и др. – все это включено в круизную
+                программу. Наша база находится в трех километрах от международного аэропорта Тиват (марина MarinaSolila)
+                и оснащена всем необходимым для обслуживания яхт.'
+            );
+            $day->setDate(clone($date->modify('+1 day')));
             $travel->addDay($day);
         }
     }

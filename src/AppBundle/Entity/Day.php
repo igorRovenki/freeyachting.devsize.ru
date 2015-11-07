@@ -77,6 +77,13 @@ class Day
      */
     private $fullDescription;
 
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date", type="datetime")
+     */
+    private $date;
+
 
     /**
      * Get id
@@ -270,5 +277,21 @@ class Day
     public function getFullDescription()
     {
         return $this->fullDescription;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * @param \DateTime $date
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
     }
 }

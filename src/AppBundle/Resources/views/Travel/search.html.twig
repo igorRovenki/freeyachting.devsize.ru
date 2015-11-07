@@ -34,8 +34,8 @@
                                             <i class="icon-country"></i> {{ travel.country }}
                                         </p>
                                     </div>
-                                    <a class="media-left visible-xs" href="#">
-                                        <img src="{{ asset('images/img02.jpg') }}" alt="{{ travel.name }}" class="img-responsive">
+                                    <a class="media-left visible-xs" href="{{ path('travel_show', { id: travel.id }) }}">
+                                        <img src="{% path travel.photos.first, 'small' %}" alt="{{ travel.name }}" class="img-responsive">
                                     </a>
                                     <div class="property-top">
                                         <p>{{ 'travel.skipper_rating'|trans }}: <b>5</b></p>

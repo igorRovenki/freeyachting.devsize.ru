@@ -147,13 +147,6 @@ class Travel
     private $dateEnd;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="days_count", type="smallint")
-     */
-    private $daysCount;
-
-    /**
      * @var Country
      *
      * @ORM\ManyToOne(targetEntity="Country", cascade={"persist"})
@@ -669,6 +662,16 @@ class Travel
     }
 
     /**
+     * Get dateEnd
+     *
+     * @return \DateTime
+     */
+    public function getDateEnd()
+    {
+        return $this->dateEnd;
+    }
+
+    /**
      * @todo refactor this to use Intl extension
      * @return string
      */
@@ -691,7 +694,19 @@ class Travel
      */
     public function getDetailDates()
     {
-        $months = [
+        return sprintf(
+            '%s %s - %s %s %s',
+            (int)$this->dateStart->format('d'),
+            $this->getMonths()[(int)$this->dateStart->format('m') - 1],
+            (int)$this->dateEnd->format('d'),
+            $this->getMonths()[(int)$this->dateEnd->format('m') - 1],
+            $this->dateEnd->format('Y')
+        );
+    }
+
+    public function getMonths()
+    {
+        return [
             'Января',
             'Февраля',
             'Марта',
@@ -705,38 +720,6 @@ class Travel
             'Ноября',
             'Декабря'
         ];
-
-        return sprintf(
-            '%s %s - %s %s %s',
-            (int)$this->dateStart->format('d'),
-            $months[(int)$this->dateStart->format('m') - 1],
-            (int)$this->dateEnd->format('d'),
-            $months[(int)$this->dateEnd->format('m') - 1],
-            $this->dateEnd->format('Y')
-        );
-    }
-
-    /**
-     * Get dateEnd
-     *
-     * @return \DateTime
-     */
-    public function getDateEnd()
-    {
-        return $this->dateEnd;
-    }
-
-    /**
-     * Set travelDays
-     *
-     * @param integer $daysCount
-     * @return Travel
-     */
-    public function setDaysCount($daysCount)
-    {
-        $this->daysCount = $daysCount;
-
-        return $this;
     }
 
     /**
@@ -746,7 +729,20 @@ class Travel
      */
     public function getDaysCount()
     {
-        return $this->daysCount;
+        return (int)$this->getDateEnd()->diff($this->getDateStart())->format('%a') + 1;
+    }
+
+    public function getDayDate($dayNumber)
+    {
+        $date = clone($this->getDateStart());
+        $date->modify('-1 day');
+        $date->modify('+' . $dayNumber . 'day');
+
+        return sprintf(
+            '%s %s',
+            $date->format('d'),
+            $this->getMonths()[(int)$date->format('m') - 1]
+        );
     }
 
     /**

@@ -1,0 +1,41 @@
+{% trans_default_domain "AppBundle" %}
+<div class="modal fade" id="modal-info{{ day.id }}">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">{{ day.date|date('d M Y') }} года</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <p>
+                            {{ 'day.cityDeparture'|trans }}<br>
+                            <strong>{{ day.cityDeparture }}</strong>
+                        </p>
+                    </div>
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <p>
+                            {{ 'day.cityArrival'|trans }}<br>
+                            <strong>{{ day.cityArrival }}</strong>
+                        </p>
+                    </div>
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <p>
+                            {{ 'day.routeLength'|trans }}<br>
+                            <strong>{{ day.routeLength }}</strong>
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <p>
+                            <strong>{{ 'day.fullDescription'|trans }}:</strong><br>
+                            {{ day.fullDescription }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
