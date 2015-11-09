@@ -29,7 +29,9 @@
                                     <h4 class="media-heading">{{ travel.name }}</h4>
                                     <div class="important">
                                         <p>
-                                            <i class="icon-date"></i> {{ travel.dates }} &nbsp;&nbsp;
+                                            <i class="icon-date"></i>
+                                                {{ travel.dateStart|localizeddate('none', 'none', null, null, 'd MMM')|trim('.') }} -
+                                                {{ travel.dateEnd|localizeddate('none', 'none', null, null, 'd MMM')|trim('.') }} &nbsp;&nbsp;
                                             <i class="icon-days"></i> {{ travel.daysCount }} &nbsp;&nbsp;
                                             <i class="icon-country"></i> {{ travel.country }}
                                         </p>

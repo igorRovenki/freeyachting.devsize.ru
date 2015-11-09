@@ -672,57 +672,6 @@ class Travel
     }
 
     /**
-     * @todo refactor this to use Intl extension
-     * @return string
-     */
-    public function getDates()
-    {
-        $months = ['Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июн', 'Июл', 'Авг', 'Сен', 'Окт',  'Нояб', 'Дек'];
-
-        return sprintf(
-            '%s %s - %s %s',
-            (int)$this->dateStart->format('d'),
-            $months[(int)$this->dateStart->format('m') - 1],
-            (int)$this->dateEnd->format('d'),
-            $months[(int)$this->dateEnd->format('m') - 1]
-        );
-    }
-
-    /**
-     * @todo refactor this to use Intl extension
-     * @return string
-     */
-    public function getDetailDates()
-    {
-        return sprintf(
-            '%s %s - %s %s %s',
-            (int)$this->dateStart->format('d'),
-            $this->getMonths()[(int)$this->dateStart->format('m') - 1],
-            (int)$this->dateEnd->format('d'),
-            $this->getMonths()[(int)$this->dateEnd->format('m') - 1],
-            $this->dateEnd->format('Y')
-        );
-    }
-
-    public function getMonths()
-    {
-        return [
-            'Января',
-            'Февраля',
-            'Марта',
-            'Апреля',
-            'Мая',
-            'Июня',
-            'Июля',
-            'Августа',
-            'Сентября',
-            'Октября',
-            'Ноября',
-            'Декабря'
-        ];
-    }
-
-    /**
      * Get travelDays
      *
      * @return integer
@@ -730,19 +679,6 @@ class Travel
     public function getDaysCount()
     {
         return (int)$this->getDateEnd()->diff($this->getDateStart())->format('%a') + 1;
-    }
-
-    public function getDayDate($dayNumber)
-    {
-        $date = clone($this->getDateStart());
-        $date->modify('-1 day');
-        $date->modify('+' . $dayNumber . 'day');
-
-        return sprintf(
-            '%s %s',
-            $date->format('d'),
-            $this->getMonths()[(int)$date->format('m') - 1]
-        );
     }
 
     /**

@@ -177,6 +177,15 @@ jQuery(document).ready(function () {
                 });
         }
     });
+    // Datepicker
+    $('.datepicker').datepicker({
+        format: "yyyy-mm-dd",
+        language: "ru",
+        autoclose: true,
+        disableTouchKeyboard: true,
+        todayHighlight: true
+    });
+
     $('.main-select').selectator({
         useSearch: false
     });

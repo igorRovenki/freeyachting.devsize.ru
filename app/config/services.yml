@@ -11,3 +11,7 @@ services:
         tags:
          - { name: knp_menu.menu_builder, method: createSearchMenu, alias: search_menu }
          - { name: knp_menu.menu_builder, method: createBreadcrumbsMenu, alias: breadcrumbs }
+    twig.extension.intl:
+            class: Twig_Extensions_Extension_Intl
+            tags:
+                - { name: twig.extension }
