@@ -147,7 +147,7 @@
                                 <li><div class="round-green"></div> Свободно мест: <b>3</b></li>
                                 <li><div class="round-red"></div> Занято мест: <b>5</b></li>
                             </ul>
-                            <img src="{{ asset('images/yachts/yacht2.jpg') }}" alt="Яхта" class="img-responsive">
+                            <img src="{% path travel.yacht.schemaImage, 'middle' %}" alt="Яхта" class="img-responsive">
                             <div class="row">
                                 <div class="col-xs-12 col-sm-offset-1 col-sm-5 col-md-offset-0 col-md-5 text-center">
                                     <p>Вами выбрано: <span class="h4">3 места</span></p>
@@ -311,63 +311,52 @@
                         </div>
                         <div class="col-xs-12 col-sm-6 col-md-offset-1 col-md-4">
                             <div>
-                                <p>Тип судна:</p>
-                                <p class="h4">Катамаран</p>
+                                <p>{{ 'yacht.ship_type_label'|trans }}:</p>
+                                <p class="h4">{{ ('yacht.ship_type.' ~ travel.yacht.shipType)|trans }}</p>
                             </div>
                             <div class="deliver-small">
-                                <p>Тип яхты:</p>
-                                <p class="h4">Парус + Мотор</p>
+                                <p>{{ 'yacht.yacht_type_label'|trans }}:</p>
+                                <p class="h4">{{ ('yacht.yacht_type.' ~ travel.yacht.yachtType)|trans }}</p>
                             </div>
                             <div class="deliver-small">
-                                <p>Производитель / Год:</p>
-                                <p class="h4">Bavaria Yachts / 2013год</p>
+                                <p>{{ 'yacht.manufacturer'|trans }} / {{ 'yacht.year_of_producation'|trans }}:</p>
+                                <p class="h4">{{ travel.yacht.manufacturer }} / {{ travel.yacht.yearOfProduction }} {{ 'yacht.year'|trans }}</p>
                             </div>
                             <div class="deliver-small">
-                                <p>Длина яхты:</p>
-                                <p class="h4">44 ft (13.4 м)</p>
+                                <p>{{ 'yacht.length'|trans }}:</p>
+                                <p class="h4">{{ travel.yacht.yachtLengthFt }} ft ({{ travel.yacht.yachtLengthM }} м)</p>
                             </div>
                             <div class="deliver-small">
-                                <p>Мест / Кают:</p>
+                                <p>{{ 'yacht.places'|trans }} / {{ 'yacht.cabins'|trans }}:</p>
+                                {# todo: ask about 8/4 #}
                                 <p class="h4">8 / 4</p>
                             </div>
                             <div class="deliver-small">
-                                <p>Санузел (гальюн + душ):</p>
-                                <p class="h4">2</p>
+                                <p>{{ 'yacht.bathroom'|trans }}:</p>
+                                <p class="h4">{{ travel.yacht.bathroomsNumber }}</p>
                             </div>
                         </div>
                     </div>
                     <div class="row features">
                         <div class="col-xs-12">
-                            <h4>Особенности:</h4>
+                            <h4>{{ 'yacht.features'|trans }}:</h4>
                             <div class="column2">
-                                <p>
-                                    Аренда катамарана в Черногории позволит вам свободно перемещаться по всей акватории,
-                                    обойти все острова и заливы, насладиться уединенными гаванями и пляжами, а также
-                                    получить удовольствие от морских развлечений, как рыбалка, снорклинг и др. – все это
-                                    включено в круизную программу. Наша база находится в трех километрах от международного
-                                    аэропорта Тиват (марина MarinaSolila) и оснащена всем необходимым для обслуживания яхт.
-                                </p>
-                                <p>
-                                    Аренда катамарана в Черногории позволит вам свободно перемещаться по всей акватории,
-                                    обойти все острова и заливы, насладиться уединенными гаванями и пляжами, а также
-                                    получить удовольствие от морских развлечений, как рыбалка, снорклинг и др. – все это
-                                    включено в круизную программу. Наша база находится в трех километрах от международного
-                                    аэропорта Тиват (марина MarinaSolila) и оснащена всем необходимым для обслуживания яхт.
-                                </p>
+                                <p>{{ travel.yacht.description }}</p>
+                                <p>{{ travel.yacht.features }}</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="row button-block">
                     <div class="col-xs-12">
-                        <?require_once $_SERVER['DOCUMENT_ROOT']."/include/tabs.php";?>
+                        {% include 'AppBundle:Travel:tabs.html.twig' %}
                     </div>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-xs-12 banner-xs">
-                <?require_once $_SERVER['DOCUMENT_ROOT']."/include/banners-bottom.php";?>
+                {% include 'AppBundle:blocks:banners-bottom.html.twig' %}
             </div>
         </div>
     </div>

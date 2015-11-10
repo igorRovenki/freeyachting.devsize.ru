@@ -28,6 +28,24 @@ travel:
     place: место
 yacht:
     short_description: Краткое описание
+    ship_type_label: Тип судна
+    ship_type:
+        yacht: Яхта
+        catamaran: Катамаран
+        other: Другой тип судна
+    yacht_type_label: Тип яхты
+    yacht_type:
+        sail_motor: Парус / Мотор
+        sail: Парус
+        motor: Мотор
+    manufacturer: Производитель
+    year_of_producation: Год
+    year: год
+    length: Длина яхты
+    places: Мест
+    cabins: Кают
+    bathroom: Санузел (гальюн + душ)
+    features: Особенности
 interface:
     buttons:
         more: 'Подробнее'

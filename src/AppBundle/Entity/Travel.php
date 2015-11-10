@@ -163,9 +163,10 @@ class Travel
     private $aquatory;
 
     /**
-     * @var \stdClass
+     * @var Yacht
      *
-     * @ORM\Column(name="yacht", type="object")
+     * @ORM\ManyToOne(targetEntity="Yacht", cascade={"persist"})
+     * @ORM\JoinColumn(name="yacht_id", referencedColumnName="id")
      */
     private $yacht;
 
@@ -730,10 +731,10 @@ class Travel
     /**
      * Set yacht
      *
-     * @param \stdClass $yacht
+     * @param Yacht $yacht
      * @return Travel
      */
-    public function setYacht($yacht)
+    public function setYacht(Yacht $yacht)
     {
         $this->yacht = $yacht;
 
@@ -743,7 +744,7 @@ class Travel
     /**
      * Get yacht
      *
-     * @return \stdClass
+     * @return Yacht
      */
     public function getYacht()
     {

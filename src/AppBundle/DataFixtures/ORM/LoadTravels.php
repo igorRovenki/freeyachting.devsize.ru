@@ -6,11 +6,13 @@ use AppBundle\Entity\Aquatory;
 use AppBundle\Entity\Country;
 use AppBundle\Entity\Day;
 use AppBundle\Entity\Travel;
+use AppBundle\Entity\Yacht;
 use Application\Sonata\MediaBundle\Entity\Media;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\Filesystem\Filesystem;
 
 class LoadTravels implements FixtureInterface, ContainerAwareInterface
 {
@@ -26,6 +28,12 @@ class LoadTravels implements FixtureInterface, ContainerAwareInterface
      */
     public function load(ObjectManager $manager)
     {
+        $fs = new Filesystem();
+        $dirs = [__DIR__ . '/../../../../web/uploads/media/travel', __DIR__ . '/../../../../web/uploads/media/yacht'];
+        if ($fs->exists($dirs)) {
+            $fs->remove($dirs);
+        }
+
         foreach ($this->getCountries() as $key => $country) {
             $dayPrice = rand(300, 500);
             $dateString = sprintf('%s-%s-%s', 2016, rand(1, 12), rand(1, 28));
@@ -71,6 +79,7 @@ class LoadTravels implements FixtureInterface, ContainerAwareInterface
             }
             $this->loadPhotos($travel, $key);
             $this->loadDays($travel);
+            $this->loadYacht($travel);
 
             $manager->persist($travel);
         }
@@ -153,5 +162,40 @@ class LoadTravels implements FixtureInterface, ContainerAwareInterface
             1 => Travel::TYPE_STUDING,
             2 => Travel::TYPE_REGATTA_PARTICIPATION,
         ];
+    }
+
+    private function loadYacht(Travel $travel)
+    {
+        $yacht = new Yacht();
+        $yacht->setShipType(Yacht::SHIP_TYPE_YACHT);
+        $yacht->setYachtType(Yacht::YACHT_TYPE_SAIL_MOTOR);
+        $yacht->setManufacturer('Bavaria Yachts');
+        $yacht->setYearOfProduction(rand(2001, 2015));
+        $ft = rand(25, 50);
+        $yacht->setYachtLengthFt($ft);
+        $yacht->setYachtLengthM($ft * 0.30);
+        $yacht->setDoubleCabinsNumber(8);
+        $yacht->setSingleCabinsNumber(4);
+        $yacht->setBathroomsNumber(2);
+        $yacht->setDescription('Это особенная яхта!');
+        $yacht->setFeatures(
+            'Аренда катамарана в Черногории позволит вам свободно перемещаться по всей
+            акватории, обойти все острова и заливы, насладиться уединенными гаванями и пляжами, а также получить
+            удовольствие от морских развлечений, как рыбалка, снорклинг и др. – все это включено в круизную
+            программу. Наша база находится в трех километрах от международного аэропорта Тиват (марина MarinaSolila)
+            и оснащена всем необходимым для обслуживания яхт.'
+        );
+        $mediaManager = $this->container->get('sonata.media.manager.media');
+        $schemaImage = $mediaManager->findOneBy(['context' => 'yacht']);
+
+        if (!$schemaImage) {
+            $schemaImage = new Media();
+            $schemaImage->setBinaryContent(__DIR__ . '/../images/schemes/01.jpg');
+            $schemaImage->setContext('yacht');
+            $schemaImage->setProviderName('sonata.media.provider.image');
+            $mediaManager->save($schemaImage);
+        }
+        $yacht->setSchemaImage($schemaImage);
+        $travel->setYacht($yacht);
     }
 }
