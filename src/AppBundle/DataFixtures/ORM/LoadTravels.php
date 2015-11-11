@@ -140,8 +140,10 @@ class LoadTravels implements FixtureInterface, ContainerAwareInterface
         $date->modify('-1 day');
         for ($i = 0; $i < $travel->getDaysCount() + 1; $i++) {
             $day = new Day();
-            $day->setCityArrival('Милан');
-            $day->setCityDeparture('Савона');
+            $day->setCityArrival('Рим');
+            $day->setCityDeparture('Катания');
+            $day->setCityDepartureLatitude($this->getGeoLocations()[$i]['lat']);
+            $day->setCityDepartureLongitude($this->getGeoLocations()[$i]['lng']);
             $day->setRouteLength(rand(70, 200));
             $day->setFullDescription(
                 'Аренда катамарана в Черногории позволит вам свободно перемещаться по всей
@@ -153,6 +155,28 @@ class LoadTravels implements FixtureInterface, ContainerAwareInterface
             $day->setDate(clone($date->modify('+1 day')));
             $travel->addDay($day);
         }
+    }
+
+    private function getGeoLocations()
+    {
+        return [
+            ['lat' => '41.993540', 'lng' => '12.524000'],
+            ['lat' => '41.271093', 'lng' => '11.718615'],
+            ['lat' => '40.641434', 'lng' => '11.575792'],
+            ['lat' => '39.845113', 'lng' => '11.285424'],
+            ['lat' => '39.442977', 'lng' => '10.415022'],
+            ['lat' => '39.164592', 'lng' => '9.138432'],
+            ['lat' => '38.459249', 'lng' => '8.825087'],
+            ['lat' => '36.962828', 'lng' => '8.372478'],
+            ['lat' => '37.415846', 'lng' => '9.683884'],
+            ['lat' => '37.092539', 'lng' => '11.088133'],
+            ['lat' => '36.758549', 'lng' => '11.946930'],
+            ['lat' => '37.196286', 'lng' => '13.518334'],
+            ['lat' => '35.962060', 'lng' => '14.472771'],
+            ['lat' => '36.988654', 'lng' => '15.414813'],
+            ['lat' => '37.580377', 'lng' => '15.030559'],
+
+        ];
     }
 
     private function getTypes()

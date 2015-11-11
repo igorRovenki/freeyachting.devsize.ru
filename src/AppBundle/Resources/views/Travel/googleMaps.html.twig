@@ -1,0 +1,63 @@
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA_AmjKySAovlU6mkk8brF_Jo95x1DgMTI&callback=initMap"></script>
+<script type="text/javascript">
+    // This example creates an interactive map which constructs a polyline based on
+    // user clicks. Note that the polyline only appears once its path property
+    // contains two LatLng coordinates.
+
+    var poly;
+    var map;
+    var latlngbounds;
+
+    function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 3,
+            center: {
+                lat: {{ travel.days.first.cityDepartureLatitude }},
+                lng: {{ travel.days.first.cityDepartureLongitude }}
+            }
+        });
+        initPoly();
+        addMarkers();
+        map.setCenter(latlngbounds.getCenter(), map.fitBounds(latlngbounds));
+    }
+    function addMarkers() {
+        var positions = [
+            {% for day in travel.days %}
+                { lat: {{ day.cityDepartureLatitude }}, lng: {{ day.cityDepartureLongitude }} },
+            {% endfor %}
+        ];
+        latlngbounds = new google.maps.LatLngBounds();
+        for (var item in positions) {
+            var latLng = new google.maps.LatLng(positions[item].lat, positions[item].lng);
+            path = poly.getPath();
+            path.push(latLng);
+            var marker = new google.maps.Marker({
+                icon: '{{ asset('img/marker.png') }}',
+                position: latLng,
+                title: '#' + path.getLength(),
+                map: map
+            });
+            latlngbounds.extend(latLng);
+        }
+    }
+
+    function initPoly() {
+        var lineSymbol = {
+            path: 'M 0,-1 0,1',
+            strokeOpacity: 1,
+            scale: 2
+        };
+        poly = new google.maps.Polyline({
+            icons: [{
+                icon: lineSymbol,
+                offset: '0',
+                repeat: '10px'
+            }],
+            strokeColor: '#1F517F',
+            strokeOpacity: 1.0,
+            strokeWeight: 0
+        });
+        poly.setMap(map);
+    }
+</script>
+<div id="map" class="img-responsive" style="height: 388px"></div>

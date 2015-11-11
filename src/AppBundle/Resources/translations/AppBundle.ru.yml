@@ -26,6 +26,10 @@ travel:
     nearest_airpot: Ближаийший аэропорт к месту сбора участников
     transfer_from_airport: Трансфер
     place: место
+    tabs:
+        travel_map: Карта путешествий
+        reviews: Отзывы о путешествии
+        features: Особенности
 yacht:
     short_description: Краткое описание
     ship_type_label: Тип судна
