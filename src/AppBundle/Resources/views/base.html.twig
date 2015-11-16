@@ -66,7 +66,15 @@
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="#"><i class="fa fa-anchor"></i>Шкиперам</a></li>
                     <li><a href="#"><i class="fa fa-life-ring"></i>Помощь</a><div class="visible-lg"></div></li>
-                    <li><a href="#" data-toggle="modal" data-target="#modal-login"><i class="fa fa-lock"></i>Личный кабинет</a></li>
+                    <li>
+                        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                            <a href="{{ path('fos_user_profile_show') }}">
+                                <i class="fa fa-lock"></i>{{ app.user.username }}
+                            </a>
+                        {% else %}
+                            <a href="#" data-toggle="modal" data-target="#modal-login"><i class="fa fa-lock"></i>Личный кабинет</a>
+                        {% endif %}
+                    </li>
                     <li><a href="#"><i class="fa fa-globe"></i>Ru</a></li>
                 </ul>
             </div>

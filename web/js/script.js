@@ -125,6 +125,13 @@ jQuery(document).ready(function () {
     $('#closeFilterXS').click(function () {
         $('.filter').slideUp("slow");
     });
+    var prev = $('.buttons-gender label.btn.active');
+    $('.buttons-gender label.btn').click(function() {
+        $(this).addClass('active');
+        $(prev).removeClass('active');
+        $('#fos_user_registration_form_gender').val($(this).attr('data-gender'));
+        prev = this;
+    });
     enquire.register('screen and (max-width: 991px)', {
         match: function () {
             $('.banners').addClass('jcarousel');
@@ -184,6 +191,9 @@ jQuery(document).ready(function () {
         autoclose: true,
         disableTouchKeyboard: true,
         todayHighlight: true
+    });
+    $('.fa-calendar').click(function() {
+        $('.datepicker').datepicker('show');
     });
 
     $('.main-select').selectator({

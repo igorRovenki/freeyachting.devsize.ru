@@ -1,26 +1,28 @@
+{% trans_default_domain 'AppBundle' %}
 <!-- Вход в личный кабинет -->
 <div class="modal fade" id="modal-login">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                <h4 class="modal-title">Вход в личный кабинет</h4>
+                <h4 class="modal-title">{{ 'modal.profile.log_in'|trans }}</h4>
             </div>
-            <form action="" method="post" role="form">
+            <form action="{{ path("fos_user_security_check") }}" method="post" role="form">
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('') }}" />
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="inputUserLogin">Логин</label>
-                        <input type="text" class="form-control" name="" id="inputUserLogin">
+                        <label for="inputUserLogin">{{ 'modal.profile.login'|trans }}</label>
+                        <input type="text" class="form-control" name="_username" id="inputUserLogin">
                     </div>
                     <div class="form-group">
-                        <label for="inputPasswordLogin">Пароль</label>
+                        <label for="inputPasswordLogin">{{ 'modal.profile.password'|trans }}</label>
                         <div class="input-group">
-                            <input type="password" class="form-control" name="" id="inputPasswordLogin"
+                            <input type="password" class="form-control" name="_password" id="inputPasswordLogin"
                                    aria-describedby="addonPasswordLogin">
                             <span class="input-group-addon" id="addonPasswordLogin">
                                 <a href="#"  data-toggle="modal" data-target="#modal-password"
                                    data-dismiss="modal">
-                                    Забыли пароль?
+                                    {{ 'modal.profile.forgot_password'|trans }}
                                 </a>
                             </span>
                         </div>
@@ -30,18 +32,18 @@
                     <div class="row">
                         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 text-center">
                             <button type="button" class="btn btn-5 facebook" data-dismiss="modal" aria-hidden="true">
-                                Зайти с помощью <span>f</span>
+                                {{ 'modal.profile.login_with'|trans }} <span>f</span>
                             </button>
                         </div>
                         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 text-center">
-                            <button type="submit" class="btn btn-4">Войти</button>
+                            <button type="submit" class="btn btn-4">{{ 'modal.profile.enter'|trans }}</button>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
                             <a href="#" class="no-registration-href" data-toggle="modal"
                                data-target="#modal-login-quality" data-dismiss="modal" aria-hidden="true">
-                                Я еще не зарегистрирован
+                                {{ 'modal.profile.not_registered'|trans }}
                             </a>
                         </div>
                     </div>
@@ -58,10 +60,7 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                 <h4 class="modal-title">
-                    В каком качестве<br>
-                    Вы хотите<br>
-                    зарегистрироваться<br>
-                    на сайте?
+                    {{ 'modal.profile.how_to_be_registered'|trans|raw }}
                 </h4>
             </div>
             <div class="modal-body">
@@ -69,13 +68,13 @@
             <div class="modal-footer">
                 <div class="row">
                     <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 text-center">
-                        <a href="<?=SITE_DIR?>traveller-registration.php" type="button" class="btn btn-5">
-                            Путешественник
+                        <a href="{{ path('fos_user_registration_register') }}" type="button" class="btn btn-5">
+                            {{ 'modal.profile.traveler'|trans }}
                         </a>
                     </div>
                     <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 text-center">
-                        <a href="<?=SITE_DIR?>skipper-registration.php" type="submit" class="btn btn-4">
-                            Капитан
+                        <a href="{{ path('fos_user_registration_register') }}" type="submit" class="btn btn-4">
+                            {{ 'modal.profile.skipper'|trans }}
                         </a>
                     </div>
                 </div>

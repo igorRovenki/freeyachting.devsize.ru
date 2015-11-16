@@ -25,6 +25,8 @@ class AppKernel extends Kernel
             new Sonata\EasyExtendsBundle\SonataEasyExtendsBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle(),
             new Application\Sonata\MediaBundle\ApplicationSonataMediaBundle(),
+            new FOS\UserBundle\FOSUserBundle(),
+            new UserBundle\UserBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'])) {

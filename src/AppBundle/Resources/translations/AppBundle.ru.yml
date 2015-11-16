@@ -56,6 +56,7 @@ interface:
 breadcrumbs:
     homepage: Главная
     search_results: Результаты поиска
+    user_registration: Регистрация путешественника
 search:
     label: Выберете свое путешествие
     sort_label: "Сортировать по:"
@@ -81,3 +82,34 @@ search_form:
     number_2_bed_cabins: Кол-во 2-х мест. кают
     yes: Да
     no: Нет
+
+modal:
+    profile:
+        log_in: Вход в личный кабинет
+        login: Логин
+        password: Пароль
+        forgot_password: Забыли пароль?
+        login_with: Зайти с помощью
+        enter: Войти
+        not_registered: Я еще не зарегистрирован
+        how_to_be_registered: В каком качестве<br>Вы хотите<br>зарегистрироваться<br>на сайте?
+        traveler: Путешественник
+        skipper: Капитан
+registration:
+    title: Регистрация путешественника
+form:
+    lastname: Фамилия
+    name: Имя
+    patronomic: Отчество
+    gender: Пол
+    gender_choices:
+        m: Мужской
+        w: Женский
+    email: Email
+    username: Логин
+    password: Пароль
+    password_confirmation: Повторите пароль
+    upload_photo: Загрузить фото
+    birthday: Дата рождения
+    phone: Телефон
+    interests: Интересы

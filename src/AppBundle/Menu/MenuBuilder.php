@@ -35,6 +35,10 @@ class MenuBuilder
                 $menu->addChild('breadcrumbs.search_results', ['route' => 'search_travel']);
                 $menu['breadcrumbs.search_results']->setCurrent(true);
                 break;
+            case 'fos_user_registration_register':
+                $menu->addChild('breadcrumbs.user_registration', ['route' => 'fos_user_registration_register']);
+                $menu['breadcrumbs.user_registration']->setCurrent(true);
+                break;
         }
 
         return $menu;

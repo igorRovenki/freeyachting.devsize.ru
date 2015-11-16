@@ -110,6 +110,10 @@ label {
   font-weight: normal;
   span {color: #ff7f7c;}
 }
+label.required:after {
+  content: " *";
+  color: #ff7f7c;
+}
 input, .form-control {
   height: 38px;
   .box-shadow(none);
