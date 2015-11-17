@@ -16,7 +16,11 @@ services:
             tags:
                 - { name: twig.extension }
     app.form.registration:
-        class: AppBundle\Form\RegistrationFormType
+        class: UserBundle\Form\RegistrationFormType
         tags:
             - { name: form.type, alias: app_user_registration }
         arguments: [@?]
+    app.form.profile:
+        class: UserBundle\Form\ProfileFormType
+        tags:
+            - { name: form.type, alias: app_user_profile }

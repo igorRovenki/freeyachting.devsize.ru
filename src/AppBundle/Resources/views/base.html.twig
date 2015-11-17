@@ -68,7 +68,7 @@
                     <li><a href="#"><i class="fa fa-life-ring"></i>Помощь</a><div class="visible-lg"></div></li>
                     <li>
                         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                            <a href="{{ path('fos_user_profile_show') }}">
+                            <a href="{{ path('fos_user_profile_edit') }}">
                                 <i class="fa fa-lock"></i>{{ app.user.username }}
                             </a>
                         {% else %}
@@ -81,6 +81,10 @@
         </div>
     </div>
 </header>
+
+{% block breadcrumbs %}
+    {% include 'AppBundle::breadcrumbs.html.twig' %}
+{% endblock breadcrumbs %}
 
 {% block content %}
 {% endblock %}

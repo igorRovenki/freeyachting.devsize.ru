@@ -55,8 +55,10 @@ interface:
         more: 'Подробнее'
 breadcrumbs:
     homepage: Главная
-    search_results: Результаты поиска
-    user_registration: Регистрация путешественника
+    search_travel: Результаты поиска
+    travel_show: Обзор путешествия
+    fos_user_registration_register: Регистрация путешественника
+    fos_user_profile_edit: Профиль путешественника
 search:
     label: Выберете свое путешествие
     sort_label: "Сортировать по:"
@@ -97,6 +99,8 @@ modal:
         skipper: Капитан
 registration:
     title: Регистрация путешественника
+profile:
+    title: Профиль путешественника
 form:
     lastname: Фамилия
     name: Имя
@@ -108,8 +112,12 @@ form:
     email: Email
     username: Логин
     password: Пароль
+    current_password: Текущий пароль
     password_confirmation: Повторите пароль
     upload_photo: Загрузить фото
     birthday: Дата рождения
     phone: Телефон
     interests: Интересы
+    required_fileds: Поля, отмеченные <span>*</span>, обязательны к заполнению
+    register_submit: Сохранить
+    change_photo: Заменить фото

@@ -29,15 +29,14 @@ class MenuBuilder
         $menu = $this->factory->createItem('root');
         $menu->setChildrenAttribute('class', 'breadcrumb');
         $menu->addChild('breadcrumbs.homepage', ['route' => 'homepage']);
+        $route = $this->request->get('_route');
 
-        switch ($this->request->get('_route')) {
+        switch ($route) {
             case 'search_travel':
-                $menu->addChild('breadcrumbs.search_results', ['route' => 'search_travel']);
-                $menu['breadcrumbs.search_results']->setCurrent(true);
-                break;
+            case 'travel_show':
             case 'fos_user_registration_register':
-                $menu->addChild('breadcrumbs.user_registration', ['route' => 'fos_user_registration_register']);
-                $menu['breadcrumbs.user_registration']->setCurrent(true);
+            case 'fos_user_profile_edit':
+                $menu->addChild('breadcrumbs.' . $route)->setCurrent(true);
                 break;
         }
 
