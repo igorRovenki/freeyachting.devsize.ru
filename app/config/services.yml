@@ -16,11 +16,16 @@ services:
             tags:
                 - { name: twig.extension }
     app.form.registration:
-        class: UserBundle\Form\RegistrationFormType
+        class: AppBundle\Form\RegistrationFormType
         tags:
             - { name: form.type, alias: app_user_registration }
         arguments: [@?]
     app.form.profile:
-        class: UserBundle\Form\ProfileFormType
+        class: AppBundle\Form\ProfileFormType
         tags:
             - { name: form.type, alias: app_user_profile }
+    app.event.uploaded_file_subscriber:
+        class: AppBundle\Event\UploadedFileEventSubscriber
+        arguments: ["@sonata.media.provider.image"]
+        tags:
+            - { name: doctrine.event_subscriber, connection: default }

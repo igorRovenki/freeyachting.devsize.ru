@@ -13,7 +13,7 @@
                     <h4 class="modal-title">{{ 'modal.profile.log_in'|trans }}</h4>
                 </div>
                 <form action="{{ path("fos_user_security_check") }}" method="post" role="form">
-                    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" />
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="inputUserLogin">{{ 'modal.profile.login'|trans }}</label>

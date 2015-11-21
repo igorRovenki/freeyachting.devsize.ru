@@ -24,16 +24,17 @@
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="{{ asset('favicon/ms-icon-144x144.png') }}">
     <meta name="theme-color" content="#ffffff">
-    <!-- jQuery -->
-    <script src="{{ asset('js/jquery.min.js') }}"></script>
-    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('js/media.match.min.js') }}"></script>
-    <script src="{{ asset('js/enquire.min.js') }}"></script>
-    <script src="{{ asset('js/jquery.jcarousel.min.js') }}"></script>
-    <script src="{{ asset('js/scrollator.js') }}"></script>
-    <script src="{{ asset('js/script.js') }}"></script>
-    <script src="{{ asset('js/bootstrap-datepicker-1.5.0/js/bootstrap-datepicker.min.js') }}"></script>
-    <script src="{{ asset('js/bootstrap-datepicker-1.5.0/locales/bootstrap-datepicker.ru.min.js') }}"></script>
+    {% block js %}
+        <script src="{{ asset('js/jquery.min.js') }}"></script>
+        <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('js/media.match.min.js') }}"></script>
+        <script src="{{ asset('js/enquire.min.js') }}"></script>
+        <script src="{{ asset('js/jquery.jcarousel.min.js') }}"></script>
+        <script src="{{ asset('js/scrollator.js') }}"></script>
+        <script src="{{ asset('js/script.js') }}"></script>
+        <script src="{{ asset('js/bootstrap-datepicker-1.5.0/js/bootstrap-datepicker.min.js') }}"></script>
+        <script src="{{ asset('js/bootstrap-datepicker-1.5.0/locales/bootstrap-datepicker.ru.min.js') }}"></script>
+    {% endblock js %}
     <!--[if lt IE 9]>
     <script src="{{ asset('js/ie9/html5shiv.min.js') }}"></script>
     <script src="{{ asset('js/ie9/html5shiv-printshiv.min.js') }}"></script>
@@ -41,6 +42,7 @@
     <![endif]-->
     <link href="{{ asset('css/style.min.css') }}" rel="stylesheet">
     <link href="{{ asset('js/bootstrap-datepicker-1.5.0/css/bootstrap-datepicker3.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/fileinput.css') }}" rel="stylesheet">
 </head>
 <body>
 
@@ -85,6 +87,16 @@
 {% block breadcrumbs %}
     {% include 'AppBundle::breadcrumbs.html.twig' %}
 {% endblock breadcrumbs %}
+
+{% if app.request.hasPreviousSession %}
+    <div class="container">
+    {% for type, messages in app.session.flashbag.all() %}
+        {% for message in messages %}
+            <div class="alert alert-{{ type }}" role="alert">{{ message }}</div>
+        {% endfor %}
+    {% endfor %}
+    </div>
+{% endif %}
 
 {% block content %}
 {% endblock %}

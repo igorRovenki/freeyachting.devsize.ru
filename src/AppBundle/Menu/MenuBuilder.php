@@ -36,6 +36,7 @@ class MenuBuilder
             case 'travel_show':
             case 'fos_user_registration_register':
             case 'fos_user_profile_edit':
+            case 'fos_user_profile_show':
                 $menu->addChild('breadcrumbs.' . $route)->setCurrent(true);
                 break;
         }

@@ -36,8 +36,10 @@ class LoadUsers implements FixtureInterface, ContainerAwareInterface
         $userManager = $this->container->get('fos_user.user_manager');
         $user = $userManager->createUser();
         $user->setUsername('traveler');
+        $user->setName('traveler name');
+        $user->setLastName('traveler last name');
         $user->setEmail('onachenko@gmail.com');
-        $user->setPlainPassword('password');
+        $user->setPlainPassword('traveler');
         $user->setEnabled(true);
         $userManager->updateUser($user);
     }

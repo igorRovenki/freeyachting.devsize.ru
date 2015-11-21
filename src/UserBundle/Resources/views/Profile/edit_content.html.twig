@@ -10,9 +10,10 @@
             </div>
             {{ form_start(form, {'method': 'post', 'action': path('fos_user_profile_edit'), 'attr': {'role': 'form'}}) }}
             <div class="row profile-top">
-                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 text-center foto">
-                    <img src="{{ asset('images/avatar.png') }}" alt="{{ 'form.change_photo'|trans }}"><br>
-                    <button type="button" name="fileImg" accept="image/jpeg,image/png" class="btn btn-2">{{ 'form.upload_photo'|trans }}</button>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 text-center foto fileinput">
+                    {% include 'AppBundle:Media:bootstrap_file_input.html.twig' with {
+                        browseLabel: 'form.change_photo'|trans
+                    } %}
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                     <div class="form-group">
@@ -81,9 +82,6 @@
                     {{ form_errors(form.interests) }}
                     {{ form_widget(form.interests, { attr: {class: 'form-control', rows: 10} }) }}
                 </div>
-            </div>
-            <div class="row captcha-block">
-                <p class="text-center">Тут будет captcha</p>
             </div>
             <div class="row bottom-form">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">

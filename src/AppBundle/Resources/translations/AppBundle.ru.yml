@@ -59,6 +59,7 @@ breadcrumbs:
     travel_show: Обзор путешествия
     fos_user_registration_register: Регистрация путешественника
     fos_user_profile_edit: Профиль путешественника
+    fos_user_profile_show: Профиль путешественника
 search:
     label: Выберете свое путешествие
     sort_label: "Сортировать по:"

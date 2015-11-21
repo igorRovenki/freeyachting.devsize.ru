@@ -196,7 +196,11 @@ jQuery(document).ready(function () {
         $('.datepicker').datepicker('show');
     });
 
-    $('.main-select').selectator({
-        useSearch: false
-    });
+    try {
+        $('.main-select').selectator({
+            useSearch: false
+        });
+    } catch (e) {
+        console.log(e)
+    }
 });

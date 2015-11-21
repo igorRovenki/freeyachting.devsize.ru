@@ -5,18 +5,15 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\FormBuilderInterface;
 use FOS\UserBundle\Form\Type\RegistrationFormType as RegistrationFormTypeBase;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use AppBundle\Form\DataTransformer\MediaToUploadedFileTransformer;
 
 class RegistrationFormType extends RegistrationFormTypeBase
 {
-    public function __construct($class)
-    {
-        parent::__construct($class);
-    }
-
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('lastName', null, ['label' => 'form.lastname'])
+            ->add('photo', 'file', ['required' => false])
             ->add('name', null, ['label' => 'form.name'])
             ->add('patronomic', null, ['label' => 'form.patronomic'])
             ->add('gender', 'hidden', ['label' => 'form.gender'])
@@ -31,11 +28,12 @@ class RegistrationFormType extends RegistrationFormTypeBase
                     'invalid_message' => 'fos_user.password.mismatch',
                 ]
             )
-            ->add('birthday', 'text', ['label' => 'form.birthday'])
+            ->add('birthday', 'text', ['label' => 'form.birthday', 'required' => false])
             ->add('email', 'email', ['label' => 'form.email'])
             ->add('phone', 'email', ['label' => 'form.phone', 'required' => false])
             ->add('interests', 'textarea', ['label' => 'form.interests', 'required' => false])
         ;
+        $builder->get('photo')->addModelTransformer(new MediaToUploadedFileTransformer());
     }
 
     public function configureOptions(OptionsResolver $resolver)

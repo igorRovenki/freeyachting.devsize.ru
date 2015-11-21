@@ -66,7 +66,7 @@ class User extends BaseUser
 
     /**
      * @var Media
-     * @ORM\OneToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media")
+     * @ORM\OneToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media", cascade={"persist", "remove"})
      * @ORM\JoinColumn(name="photo_id")
      */
     protected $photo;
@@ -74,6 +74,7 @@ class User extends BaseUser
 
     public function __construct()
     {
+        $this->gender = self::GENDER_M;
         parent::__construct();
     }
 
@@ -203,9 +204,12 @@ class User extends BaseUser
 
     /**
      * @param Media $photo
+     * @return $this
      */
     public function setPhoto($photo)
     {
         $this->photo = $photo;
+
+        return $this;
     }
 }

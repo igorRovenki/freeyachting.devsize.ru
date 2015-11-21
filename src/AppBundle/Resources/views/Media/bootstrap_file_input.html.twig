@@ -1,0 +1,30 @@
+<button class="hidden"></button>
+<!-- the avatar markup -->
+<div id="kv-avatar-errors" class="center-block" style="width:360px;display:none"></div>
+{{ form_widget(form.photo, { attr: {class: 'file-loading', multiple: 'false'} }) }}
+<!-- the fileinput plugin initialization -->
+<script>
+    $("#{{ form.photo.vars.id }}").fileinput({
+        language: 'ru',
+        overwriteInitial: true,
+        maxFileSize: 2000,
+        showClose: false,
+        showCaption: false,
+        browseLabel: '{{ browseLabel }}',
+        browseClass: 'btn btn-file btn-2',
+        removeLabel: '',
+        browseIcon: '',
+        removeIcon: '<i class="glyphicon glyphicon-remove"></i>',
+        removeTitle: 'Cancel or reset changes',
+        elErrorContainer: '#kv-avatar-errors',
+        msgErrorClass: 'alert alert-block alert-danger',
+        {% if app.user and app.user.photo %}
+            defaultPreviewContent: '<img src="{% path app.user.photo, 'middle' %}" alt="Your Avatar">',
+        {% else %}
+            defaultPreviewContent: '<img src="{{ asset('images/avatar.png') }}" alt="Your Avatar">',
+        {% endif %}
+        layoutTemplates: {main2: '{preview} {browse}', preview: '<div class="file-preview-thumbnails"></div>'},
+        previewSettings: { image: { width: "180px", height: "180px" } },
+        allowedFileExtensions: ["jpg", "jpeg", "png", "gif"]
+    });
+</script>
