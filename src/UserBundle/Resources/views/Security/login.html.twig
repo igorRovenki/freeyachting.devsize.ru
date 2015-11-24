@@ -2,59 +2,69 @@
 {% trans_default_domain 'AppBundle' %}
 
 {% block content %}
-    {% if error %}
-        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
-    <div class="" id="modal-login">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                    <h4 class="modal-title">{{ 'modal.profile.log_in'|trans }}</h4>
-                </div>
-                <form action="{{ path("fos_user_security_check") }}" method="post" role="form">
-                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" />
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="inputUserLogin">{{ 'modal.profile.login'|trans }}</label>
-                            <input type="text" class="form-control" name="_username" id="inputUserLogin">
-                        </div>
-                        <div class="form-group">
-                            <label for="inputPasswordLogin">{{ 'modal.profile.password'|trans }}</label>
-                            <div class="input-group">
-                                <input type="password" class="form-control" name="_password" id="inputPasswordLogin"
-                                       aria-describedby="addonPasswordLogin">
+    <div class="container content">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <h1>{{ 'modal.profile.log_in'|trans }}</h1>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="" id="modal-login">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                <h4 class="modal-title">{{ 'modal.profile.log_in'|trans }}</h4>
+                            </div>
+                            <form action="{{ path("fos_user_security_check") }}" method="post" role="form">
+                                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" />
+                                <div class="modal-body">
+                                    {% if error %}
+                                        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                                    {% endif %}
+                                    <div class="form-group">
+                                        <label for="inputUserLogin">{{ 'modal.profile.login'|trans }}</label>
+                                        <input type="text" class="form-control" name="_username" id="inputUserLogin">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputPasswordLogin">{{ 'modal.profile.password'|trans }}</label>
+                                        <div class="input-group">
+                                            <input type="password" class="form-control" name="_password" id="inputPasswordLogin"
+                                                   aria-describedby="addonPasswordLogin">
                                 <span class="input-group-addon" id="addonPasswordLogin">
                                     <a href="#"  data-toggle="modal" data-target="#modal-password"
                                        data-dismiss="modal">
                                         {{ 'modal.profile.forgot_password'|trans }}
                                     </a>
                                 </span>
-                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 text-center">
+                                            <button type="button" class="btn btn-5 facebook" data-dismiss="modal" aria-hidden="true">
+                                                {{ 'modal.profile.login_with'|trans }} <span>f</span>
+                                            </button>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 text-center">
+                                            <input type="submit" id="_submit" class="btn btn-4" name="_submit" value="{{ 'modal.profile.enter'|trans }}" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+                                            <a href="#" class="no-registration-href" data-toggle="modal"
+                                               data-target="#modal-login-quality" data-dismiss="modal" aria-hidden="true">
+                                                {{ 'modal.profile.not_registered'|trans }}
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 text-center">
-                                <button type="button" class="btn btn-5 facebook" data-dismiss="modal" aria-hidden="true">
-                                    {{ 'modal.profile.login_with'|trans }} <span>f</span>
-                                </button>
-                            </div>
-                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 text-center">
-                                <input type="submit" id="_submit" class="btn btn-4" name="_submit" value="{{ 'modal.profile.enter'|trans }}" />
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
-                                <a href="#" class="no-registration-href" data-toggle="modal"
-                                   data-target="#modal-login-quality" data-dismiss="modal" aria-hidden="true">
-                                    {{ 'modal.profile.not_registered'|trans }}
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </form>
+                </div>
             </div>
         </div>
     </div>
+
 {% endblock %}

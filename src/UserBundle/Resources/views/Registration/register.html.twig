@@ -1,12 +1,12 @@
 {% extends "AppBundle::base.html.twig" %}
 {% trans_default_domain 'AppBundle' %}
 
+{% block js %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('js/bootstrap-file-input/fileinput.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/bootstrap-file-input/plugins/canvas-to-blob.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/bootstrap-file-input/fileinput_locale_ru.js') }}"></script>
+{% endblock js %}
 {% block content %}
-    {% block js %}
-        {{ parent() }}
-        <script type="text/javascript" src="{{ asset('js/bootstrap-file-input/fileinput.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('js/bootstrap-file-input/plugins/canvas-to-blob.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('js/bootstrap-file-input/fileinput_locale_ru.js') }}"></script>
-    {% endblock js %}
     {% include 'UserBundle:Registration:register_content.html.twig' %}
 {% endblock content %}

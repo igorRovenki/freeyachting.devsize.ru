@@ -60,6 +60,7 @@ breadcrumbs:
     fos_user_registration_register: Регистрация путешественника
     fos_user_profile_edit: Профиль путешественника
     fos_user_profile_show: Профиль путешественника
+    fos_user_security_login: Вход
 search:
     label: Выберете свое путешествие
     sort_label: "Сортировать по:"
@@ -102,6 +103,8 @@ registration:
     title: Регистрация путешественника
 profile:
     title: Профиль путешественника
+    cabinet: Личный кабинет
+    logout: Выйти
 form:
     lastname: Фамилия
     name: Имя
