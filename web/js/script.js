@@ -129,7 +129,7 @@ jQuery(document).ready(function () {
     $('.buttons-gender label.btn').click(function() {
         $(this).addClass('active');
         $(prev).removeClass('active');
-        $('#fos_user_registration_form_gender').val($(this).attr('data-gender'));
+        $('.gender').val($(this).attr('data-gender'));
         prev = this;
     });
     enquire.register('screen and (max-width: 991px)', {

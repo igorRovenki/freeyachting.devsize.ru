@@ -33,13 +33,13 @@
                     </div>
                     <div class="btn-group buttons-gender" data-toggle="buttons">
                         <label>{{ 'form.gender'|trans }}</label><br>
-                        <label class="btn btn-9 active" data-gender="{{ constant('AppBundle\\Entity\\User::GENDER_M') }}">
+                        <label class="btn btn-9 {% if form.vars.value.gender == constant('AppBundle\\Entity\\User::GENDER_M') %}active{% endif %}" data-gender="{{ constant('AppBundle\\Entity\\User::GENDER_M') }}">
                             {{ 'form.gender_choices.m'|trans }}
                         </label>
-                        <label class="btn btn-9" data-gender="{{ constant('AppBundle\\Entity\\User::GENDER_W') }}">
+                        <label class="btn btn-9 {% if form.vars.value.gender == constant('AppBundle\\Entity\\User::GENDER_W') %}active{% endif %}" data-gender="{{ constant('AppBundle\\Entity\\User::GENDER_W') }}">
                             {{ 'form.gender_choices.w'|trans }}
                         </label>
-                        {{ form_widget(form.gender, { attr: { value: 'M' } }) }}
+                        {{ form_widget(form.gender, { attr: { value: form.vars.value.gender, class: 'gender' } }) }}
                     </div>
                 </div>
             </div>
@@ -86,7 +86,7 @@
             <div class="row bottom-form">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
                     <p>{{ 'form.required_fileds'|trans|raw }}</p>
-                    <button type="submit" class="btn btn-1">{{ 'form.register_submit'|trans }}</button>
+                    <button type="submit" class="btn btn-1">{{ 'form.edit_submit'|trans }}</button>
                 </div>
             </div>
             {{ form_end(form) }}

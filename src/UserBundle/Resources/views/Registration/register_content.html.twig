@@ -90,7 +90,11 @@
                 </div>
             </div>
             <div class="row captcha-block">
-                <p class="text-center">Тут будет captcha</p>
+                {% for error in captchaErrors %}
+                    <div class="text-center text-danger">{{ ('security.captcha.errors.' ~ error)|trans }}</div><br>
+                {% else %}
+                {% endfor %}
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center g-recaptcha" data-sitekey="6Lee8BETAAAAANpzgNZtkrMTboSG_tBeiIdy9UhT"></div>
             </div>
             <div class="row bottom-form">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">

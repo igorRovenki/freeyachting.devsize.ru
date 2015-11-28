@@ -12,14 +12,15 @@
         showCaption: false,
         browseLabel: '{{ browseLabel }}',
         browseClass: 'btn btn-file btn-2',
+        buttonLabelClass: '',
         removeLabel: '',
         browseIcon: '',
         removeIcon: '<i class="glyphicon glyphicon-remove"></i>',
         removeTitle: 'Cancel or reset changes',
         elErrorContainer: '#kv-avatar-errors',
         msgErrorClass: 'alert alert-block alert-danger',
-        {% if app.user and app.user.photo %}
-            defaultPreviewContent: '<img src="{% path app.user.photo, 'middle' %}" alt="Your Avatar">',
+        {% if form.vars.value.photo %}
+            defaultPreviewContent: '<img src="{% path form.vars.value.photo, 'middle' %}" alt="Your Avatar">',
         {% else %}
             defaultPreviewContent: '<img src="{{ asset('images/avatar.png') }}" alt="Your Avatar">',
         {% endif %}

@@ -24,7 +24,8 @@
         "knplabs/knp-menu-bundle": "~2",
         "sonata-project/media-bundle": "^2.3",
         "twig/extensions": "1.0.*",
-        "ircmaxell/password-compat": "^1.0"
+        "ircmaxell/password-compat": "^1.0",
+        "google/recaptcha": "~1.1"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

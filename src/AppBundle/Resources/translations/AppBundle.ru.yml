@@ -105,6 +105,10 @@ profile:
     title: Профиль путешественника
     cabinet: Личный кабинет
     logout: Выйти
+security:
+    captcha:
+        errors:
+            missing-input-response: 'Пожалуйста, подвердите, что Вы не робот'
 form:
     lastname: Фамилия
     name: Имя
@@ -123,5 +127,6 @@ form:
     phone: Телефон
     interests: Интересы
     required_fileds: Поля, отмеченные <span>*</span>, обязательны к заполнению
-    register_submit: Сохранить
+    register_submit: Регистрация
+    edit_submit: Сохранить
     change_photo: Заменить фото
