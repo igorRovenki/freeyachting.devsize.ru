@@ -38,6 +38,7 @@ class MenuBuilder
             case 'fos_user_profile_edit':
             case 'fos_user_profile_show':
             case 'fos_user_security_login':
+            case 'fos_user_change_password':
                 $menu->addChild('breadcrumbs.' . $route)->setCurrent(true);
                 break;
         }

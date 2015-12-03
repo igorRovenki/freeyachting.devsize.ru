@@ -61,6 +61,7 @@ breadcrumbs:
     fos_user_profile_edit: Профиль путешественника
     fos_user_profile_show: Профиль путешественника
     fos_user_security_login: Вход
+    fos_user_change_password: Изменить пароль
 search:
     label: Выберете свое путешествие
     sort_label: "Сортировать по:"
@@ -105,6 +106,7 @@ profile:
     title: Профиль путешественника
     cabinet: Личный кабинет
     logout: Выйти
+    change_password: Изменить пароль
 security:
     captcha:
         errors:
@@ -130,3 +132,5 @@ form:
     register_submit: Регистрация
     edit_submit: Сохранить
     change_photo: Заменить фото
+    captcha: Введите код
+    change_password: Изменить пароль

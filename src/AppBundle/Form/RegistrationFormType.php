@@ -2,10 +2,10 @@
 
 namespace AppBundle\Form;
 
-use Symfony\Component\Form\FormBuilderInterface;
-use FOS\UserBundle\Form\Type\RegistrationFormType as RegistrationFormTypeBase;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 use AppBundle\Form\DataTransformer\MediaToUploadedFileTransformer;
+use FOS\UserBundle\Form\Type\RegistrationFormType as RegistrationFormTypeBase;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class RegistrationFormType extends RegistrationFormTypeBase
 {
@@ -32,6 +32,18 @@ class RegistrationFormType extends RegistrationFormTypeBase
             ->add('email', 'email', ['label' => 'form.email'])
             ->add('phone', 'email', ['label' => 'form.phone', 'required' => false])
             ->add('interests', 'textarea', ['label' => 'form.interests', 'required' => false])
+            ->add(
+                'captcha',
+                'captcha',
+                [
+                    'label' => 'form.captcha',
+                    'as_url' => true,
+                    'reload' => 'reload',
+                    'height' => 40,
+                    'width' => 130,
+                    'length' => 4,
+                ]
+            )
         ;
         $builder->get('photo')->addModelTransformer(new MediaToUploadedFileTransformer());
     }

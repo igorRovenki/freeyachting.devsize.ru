@@ -1,4 +1,5 @@
 {% trans_default_domain 'AppBundle' %}
+{% form_theme form 'AppBundle:form:captcha_widget.html.twig' %}
 <div class="container content traveller-registration">
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
@@ -38,7 +39,7 @@
                         <label class="btn btn-9" data-gender="{{ constant('AppBundle\\Entity\\User::GENDER_W') }}">
                             {{ 'form.gender_choices.w'|trans }}
                         </label>
-                        {{ form_widget(form.gender, { attr: { value: 'M' } }) }}
+                        {{ form_widget(form.gender, { attr: { value: constant('AppBundle\\Entity\\User::GENDER_M'), class: 'gender' } }) }}
                     </div>
                 </div>
             </div>
@@ -90,11 +91,7 @@
                 </div>
             </div>
             <div class="row captcha-block">
-                {% for error in captchaErrors %}
-                    <div class="text-center text-danger">{{ ('security.captcha.errors.' ~ error)|trans }}</div><br>
-                {% else %}
-                {% endfor %}
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center g-recaptcha" data-sitekey="6Lee8BETAAAAANpzgNZtkrMTboSG_tBeiIdy9UhT"></div>
+                {{ form_widget(form.captcha) }}
             </div>
             <div class="row bottom-form">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
