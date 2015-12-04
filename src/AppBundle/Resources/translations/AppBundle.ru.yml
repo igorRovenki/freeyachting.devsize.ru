@@ -62,6 +62,9 @@ breadcrumbs:
     fos_user_profile_show: Профиль путешественника
     fos_user_security_login: Вход
     fos_user_change_password: Изменить пароль
+    fos_user_resetting_check_email: Проверка Email
+    fos_user_resetting_send_email: Сброс пароля
+    fos_user_resetting_reset: Сброс пароля
 search:
     label: Выберете свое путешествие
     sort_label: "Сортировать по:"
@@ -134,3 +137,8 @@ form:
     change_photo: Заменить фото
     captcha: Введите код
     change_password: Изменить пароль
+
+resetting:
+    resetting_password: Восстановление пароля
+    login_or_email: Логин или Email
+    send: Выслать

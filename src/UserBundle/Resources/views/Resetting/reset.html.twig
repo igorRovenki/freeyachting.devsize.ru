@@ -1,0 +1,41 @@
+{% extends "AppBundle::base.html.twig" %}
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block content %}
+    <div class="container content traveller-registration">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <h1>{{ 'resetting.email.subject'|trans }}</h1>
+                    </div>
+                </div>
+                <form action="{{ path('fos_user_resetting_reset', {'token': token}) }}" {{ form_enctype(form) }} method="POST" class="fos_user_resetting_reset">
+                    <div class="row profile-bottom">
+                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                            <div class="form-group">
+                                {{ form_label(form.plainPassword.first) }}
+                                {{ form_errors(form.plainPassword.first) }}
+                                {{ form_widget(form.plainPassword.first, { attr: {class: 'form-control'} }) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.plainPassword.second) }}
+                                {{ form_errors(form.plainPassword.second) }}
+                                {{ form_widget(form.plainPassword.second, { attr: {class: 'form-control'} }) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row bottom-form">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+                            <button type="submit" class="btn btn-1">{{ 'resetting.reset.submit'|trans }}</button>
+                        </div>
+                    </div>
+                    {{ form_widget(form) }}
+                </form>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 banner-xs">
+                {% include 'AppBundle:blocks:banners.html.twig' %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
