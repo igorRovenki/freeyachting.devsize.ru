@@ -30,6 +30,7 @@ travel:
         travel_map: Карта путешествий
         reviews: Отзывы о путешествии
         features: Особенности
+    members: Участники путешествия
 yacht:
     short_description: Краткое описание
     ship_type_label: Тип судна
@@ -142,3 +143,11 @@ resetting:
     resetting_password: Восстановление пароля
     login_or_email: Логин или Email
     send: Выслать
+traveller:
+    opposite_gender_living: Согласен жить с противоположным полом
+    opposite_gender_living_not: Не согласен жить с противоположным полом
+    be_first: Станьте первым участником путешествия!
+    gender:
+        m: Мужчина
+        w: Женщина
+    place: место

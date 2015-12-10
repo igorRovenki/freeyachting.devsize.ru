@@ -33,7 +33,6 @@ class MenuBuilder
 
         switch ($route) {
             case 'search_travel':
-            case 'travel_show':
             case 'fos_user_registration_register':
             case 'fos_user_profile_edit':
             case 'fos_user_profile_show':
@@ -42,6 +41,10 @@ class MenuBuilder
             case 'fos_user_resetting_check_email':
             case 'fos_user_resetting_reset':
             case 'fos_user_resetting_send_email':
+                $menu->addChild('breadcrumbs.' . $route)->setCurrent(true);
+                break;
+            case 'travel_show':
+                $menu->addChild('breadcrumbs.search_travel', ['route' => 'search_travel']);
                 $menu->addChild('breadcrumbs.' . $route)->setCurrent(true);
                 break;
         }

@@ -192,7 +192,7 @@ jQuery(document).ready(function () {
         disableTouchKeyboard: true,
         todayHighlight: true
     });
-    $('.fa-calendar').click(function() {
+    $('.fa-calendar, .datepicker-select button').click(function() {
         $('.datepicker').datepicker('show');
     });
 

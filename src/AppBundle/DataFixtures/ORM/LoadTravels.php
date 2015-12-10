@@ -3,9 +3,11 @@
 namespace AppBundle\DataFixtures\ORM;
 
 use AppBundle\Entity\Aquatory;
+use AppBundle\Entity\Booking;
 use AppBundle\Entity\Country;
 use AppBundle\Entity\Day;
 use AppBundle\Entity\Travel;
+use AppBundle\Entity\Traveller;
 use AppBundle\Entity\Yacht;
 use Application\Sonata\MediaBundle\Entity\Media;
 use Doctrine\Common\DataFixtures\FixtureInterface;
@@ -28,11 +30,7 @@ class LoadTravels implements FixtureInterface, ContainerAwareInterface
      */
     public function load(ObjectManager $manager)
     {
-        $fs = new Filesystem();
-        $dirs = [__DIR__ . '/../../../../web/uploads/media/travel', __DIR__ . '/../../../../web/uploads/media/yacht'];
-        if ($fs->exists($dirs)) {
-            $fs->remove($dirs);
-        }
+        $this->prepareFilesystem();
 
         foreach ($this->getCountries() as $key => $country) {
             $dayPrice = rand(300, 500);
@@ -80,6 +78,7 @@ class LoadTravels implements FixtureInterface, ContainerAwareInterface
             $this->loadPhotos($travel, $key);
             $this->loadDays($travel);
             $this->loadYacht($travel);
+            $this->loadBookings($travel);
 
             $manager->persist($travel);
         }
@@ -221,5 +220,94 @@ class LoadTravels implements FixtureInterface, ContainerAwareInterface
         }
         $yacht->setSchemaImage($schemaImage);
         $travel->setYacht($yacht);
+    }
+
+    private function loadBookings(Travel $travel)
+    {
+        $booking = new Booking();
+
+        for ($i = 0; $i < rand(0, 5); $i++) {
+            $traveller = new Traveller();
+            $traveller->setFullName($this->getTravellers()[$i]['full_name']);
+            $traveller->setAge($this->getTravellers()[$i]['age']);
+            $traveller->setGender($this->getTravellers()[$i]['gender']);
+            $traveller->setEmail('traveller@gmail.com');
+            $traveller->setPlaceNumber($i + 1);
+            $traveller->setType(Traveller::TYPE_ADULT);
+
+            if (rand(0, 1) == 0) {
+                $traveller->setLivingWithParents(true);
+                $traveller->setOppositeGenderLiving(false);
+                $traveller->setChildren(true);
+                $traveller->setChildMinAge(2);
+                $traveller->setChildNumber(rand(1, 2));
+            } else {
+                $traveller->setLivingWithParents(false);
+                $traveller->setOppositeGenderLiving(true);
+                $traveller->setChildren(false);
+            }
+            $photo = new Media();
+            $photo->setBinaryContent($this->getTravellers()[$i]['photo']);
+            $photo->setContext('traveller');
+            $photo->setProviderName('sonata.media.provider.image');
+            $traveller->setPhoto($photo);
+
+            $booking->addTraveller($traveller);
+            $booking->setTravel($travel);
+        }
+        $travel->addBooking($booking);
+    }
+
+    private function prepareFilesystem()
+    {
+        $fs = new Filesystem();
+        $dirs = [
+            __DIR__ . '/../../../../web/uploads/media/travel',
+            __DIR__ . '/../../../../web/uploads/media/traveller',
+            __DIR__ . '/../../../../web/uploads/media/yacht',
+            __DIR__ . '/../../../../web/uploads/media/user',
+        ];
+        if ($fs->exists($dirs)) {
+            $fs->remove($dirs);
+        }
+    }
+
+    /**
+     * @return array
+     */
+    private function getTravellers()
+    {
+        return [
+            [
+                'full_name' => 'Иванов Александр Сергеевич',
+                'gender' => Traveller::GENDER_M,
+                'photo' => __DIR__ . '/../images/travellers/1.jpg',
+                'age' => '25 лет',
+            ],
+            [
+                'full_name' => 'Иванова Наталья Андреевна',
+                'gender' => Traveller::GENDER_W,
+                'photo' => __DIR__ . '/../images/travellers/2.jpg',
+                'age' => '25 лет',
+            ],
+            [
+                'full_name' => 'Белый Иван Алексеевич',
+                'gender' => Traveller::GENDER_M,
+                'photo' => __DIR__ . '/../images/travellers/3.jpg',
+                'age' => '25 лет',
+            ],
+            [
+                'full_name' => 'Сидорова Елена Михайловна',
+                'gender' => Traveller::GENDER_W,
+                'photo' => __DIR__ . '/../images/travellers/4.jpg',
+                'age' => '25 лет',
+            ],
+            [
+                'full_name' => 'Зеньков Миша',
+                'gender' => Traveller::GENDER_M,
+                'photo' => __DIR__ . '/../images/travellers/5.jpg',
+                'age' => '4 года',
+            ],
+        ];
     }
 }

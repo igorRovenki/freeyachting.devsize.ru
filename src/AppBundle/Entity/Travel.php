@@ -283,6 +283,12 @@ class Travel
      */
     private $days;
 
+    /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="Booking", mappedBy="travel", cascade={"persist", "remove"}, fetch="EXTRA_LAZY")
+     */
+    private $bookings;
+
     public function __construct()
     {
         $this->hotOffers = false;
@@ -292,6 +298,7 @@ class Travel
         $this->percentOfDiscount = 0;
         $this->photos = new ArrayCollection();
         $this->days = new ArrayCollection();
+        $this->bookings = new ArrayCollection();
     }
 
     /**
@@ -1111,5 +1118,29 @@ class Travel
     public function addDay(Day $day)
     {
         $this->days->add($day);
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getBookings()
+    {
+        return $this->bookings;
+    }
+
+    /**
+     * @param ArrayCollection $bookings
+     */
+    public function setBookings($bookings)
+    {
+        $this->bookings = $bookings;
+    }
+
+    /**
+     * @param Booking $booking
+     */
+    public function addBooking(Booking $booking)
+    {
+        $this->bookings->add($booking);
     }
 }

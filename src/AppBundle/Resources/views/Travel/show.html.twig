@@ -164,97 +164,38 @@
                         <div class="col-xs-12 col-md-5">
                             <div class="row">
                                 <div class="col-xs-12">
-                                    <h4>Участники путешествия:</h4>
+                                    <h4>{{ 'travel.members'|trans }}:</h4>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-xs-12 col-sm-6 col-md-12">
-                                    <div class="spisok">
-                                        <ul class="list-unstyled">
-                                            <li>
-                                                <div class="row">
-                                                    <div class="col-xs-3 col-sm-3">
-                                                        <a href="#" data-toggle="modal" data-target="#modal-thirdPlace">
-                                                            <img src="{{ asset('images/foto/foto1.jpg') }}" alt="Александр Сергеевич">
-                                                        </a>
-                                                    </div>
-                                                    <div class="col-xs-9 col-sm-9 text-block">
-                                                        <p><b>1 место</b></p>
-                                                        <p>Мужчина, 32 года</p>
-                                                        <h4>Александр Сергеевич</h4>
-                                                        <p>Согласен жить с противоположным полом</p>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="row">
-                                                    <div class="col-xs-3 col-sm-3">
-                                                        <a href="#" data-toggle="modal" data-target="#modal-thirdPlace">
-                                                            <img src="{{ asset('images/foto/foto2.jpg') }}" alt="Александр Сергеевич">
-                                                        </a>
-                                                    </div>
-                                                    <div class="col-xs-9 col-sm-9 text-block">
-                                                        <p><b>1 место</b></p>
-                                                        <p>Мужчина, 32 года</p>
-                                                        <h4>Григорий Семенович</h4>
-                                                        <p>Согласен жить с противоположным полом</p>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="row">
-                                                    <div class="col-xs-3 col-sm-3">
-                                                        <a href="#" data-toggle="modal" data-target="#modal-thirdPlace">
-                                                            <img src="{{ asset('images/foto/foto3.jpg') }}" alt="Александр Сергеевич">
-                                                        </a>
-                                                    </div>
-                                                    <div class="col-xs-9 col-sm-9 text-block">
-                                                        <p><b>1 место</b></p>
-                                                        <p>Женщина, 32 года</p>
-                                                        <h4>Наталья Семеновна</h4>
-                                                        <p>Согласна жить с противоположным полом</p>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </ul>
+                                {% for booking in travel.bookings %}
+                                    <div class="col-xs-12 col-sm-6 col-md-12">
+                                        <div class="spisok">
+                                            <ul class="list-unstyled">
+                                                {% for traveller in booking.travellers %}
+                                                    <li>
+                                                        <div class="row">
+                                                            {% include 'AppBundle:Traveller:place.html.twig' with { traveller: traveller } %}
+                                                            <div class="col-xs-3 col-sm-3">
+                                                                <a href="#" data-toggle="modal" data-target="#modal-travellerPlace{{ traveller.id }}">
+                                                                    <img src="{% path traveller.photo, 'middle' %}" alt="{{ traveller.fullName }}">
+                                                                </a>
+                                                            </div>
+                                                            <div class="col-xs-9 col-sm-9 text-block">
+                                                                <p><b>{{ traveller.placeNumber }} {{ 'traveller.place'|trans }}</b></p>
+                                                                <p>{{ ('traveller.gender.' ~ traveller.gender) |trans }}, {{ traveller.age }}</p>
+                                                                <h4>{{ traveller.fullName }}</h4>
+                                                                <p>{{ (traveller.oppositeGenderLiving ? 'traveller.opposite_gender_living' : 'traveller.opposite_gender_living_not')|trans }}</p>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-xs-12 col-sm-6 col-md-12">
-                                    <div class="spisok">
-                                        <ul class="list-unstyled">
-                                            <li>
-                                                <div class="row">
-                                                    <div class="col-xs-3 col-sm-3">
-                                                        <a href="#" data-toggle="modal" data-target="#modal-thirdPlace">
-                                                            <img src="{{ asset('images/foto/foto1.jpg') }}" alt="Александр Сергеевич">
-                                                        </a>
-                                                    </div>
-                                                    <div class="col-xs-9 col-sm-9 text-block">
-                                                        <p><b>1 место</b></p>
-                                                        <p>Мужчина, 32 года</p>
-                                                        <h4>Александр Сергеевич</h4>
-                                                        <p>Согласен жить с противоположным полом</p>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="row">
-                                                    <div class="col-xs-3 col-sm-3">
-                                                        <a href="#" data-toggle="modal" data-target="#modal-thirdPlace">
-                                                            <img src="{{ asset('images/foto/foto2.jpg') }}" alt="Александр Сергеевич">
-                                                        </a>
-                                                    </div>
-                                                    <div class="col-xs-9 col-sm-9 text-block">
-                                                        <p><b>1 место</b></p>
-                                                        <p>Мужчина, 32 года</p>
-                                                        <h4>Григорий Семенович</h4>
-                                                        <p>Согласен жить с противоположным полом</p>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
+                                {% else %}
+                                    <div class="col-xs-12 col-sm-6 col-md-12">{{ 'traveller.be_first'|trans }}</div>
+                                {% endfor %}
                             </div>
                         </div>
                     </div>

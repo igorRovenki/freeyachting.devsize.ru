@@ -1,0 +1,21 @@
+{% trans_default_domain 'AppBundle' %}
+<div class="modal fade modal-traveller-place" id="modal-travellerPlace{{ traveller.id }}">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <div class="text-center">
+                    <img src="{% path traveller.photo, 'middle' %}" class="img-circle" alt="{{ traveller.fullName }}">
+                    <h4 class="modal-title">{{ traveller.placeNumber }} {{ 'traveller.place'|trans|capitalize }}</h4>
+                </div>
+            </div>
+            <div class="modal-body text-center">
+                <p>
+                    {{ ('traveller.gender.' ~ traveller.gender) |trans }} {{ traveller.age }}<br>
+                    <span class="fio">{{ traveller.fullName }}</span><br>
+                    {{ (traveller.oppositeGenderLiving ? 'traveller.opposite_gender_living' : 'traveller.opposite_gender_living_not')|trans }}
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
