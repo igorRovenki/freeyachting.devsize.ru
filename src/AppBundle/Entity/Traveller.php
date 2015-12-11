@@ -116,6 +116,11 @@ class Traveller
      */
     private $photo;
 
+    /**
+     * @var string
+     */
+    private $photoPublicUrl;
+
 
     /**
      * Get id
@@ -410,5 +415,21 @@ class Traveller
     public function setPlaceNumber($placeNumber)
     {
         $this->placeNumber = $placeNumber;
+    }
+
+    /**
+     * @param $photoPublicUrl
+     */
+    public function setPhotoPublicUrl($photoPublicUrl)
+    {
+        $this->photoPublicUrl = $photoPublicUrl;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPhotoPublicUrl()
+    {
+        return $this->photoPublicUrl;
     }
 }

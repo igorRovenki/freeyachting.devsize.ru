@@ -226,7 +226,10 @@ class LoadTravels implements FixtureInterface, ContainerAwareInterface
     {
         $booking = new Booking();
 
-        for ($i = 0; $i < rand(0, 5); $i++) {
+        for ($i = 0; $i < rand(rand(3, 6), 6); $i++) {
+            if ($i == 0) {
+                continue;
+            }
             $traveller = new Traveller();
             $traveller->setFullName($this->getTravellers()[$i]['full_name']);
             $traveller->setAge($this->getTravellers()[$i]['age']);
@@ -246,11 +249,13 @@ class LoadTravels implements FixtureInterface, ContainerAwareInterface
                 $traveller->setOppositeGenderLiving(true);
                 $traveller->setChildren(false);
             }
-            $photo = new Media();
-            $photo->setBinaryContent($this->getTravellers()[$i]['photo']);
-            $photo->setContext('traveller');
-            $photo->setProviderName('sonata.media.provider.image');
-            $traveller->setPhoto($photo);
+            if ($this->getTravellers()[$i]['photo']) {
+                $photo = new Media();
+                $photo->setBinaryContent($this->getTravellers()[$i]['photo']);
+                $photo->setContext('traveller');
+                $photo->setProviderName('sonata.media.provider.image');
+                $traveller->setPhoto($photo);
+            }
 
             $booking->addTraveller($traveller);
             $booking->setTravel($travel);
@@ -285,10 +290,22 @@ class LoadTravels implements FixtureInterface, ContainerAwareInterface
                 'age' => '25 лет',
             ],
             [
+                'full_name' => 'Новый Аркадий Иванович',
+                'gender' => Traveller::GENDER_M,
+                'photo' => null,
+                'age' => '21 год',
+            ],
+            [
                 'full_name' => 'Иванова Наталья Андреевна',
                 'gender' => Traveller::GENDER_W,
                 'photo' => __DIR__ . '/../images/travellers/2.jpg',
                 'age' => '25 лет',
+            ],
+            [
+                'full_name' => 'Новикова Зинаида Петровна',
+                'gender' => Traveller::GENDER_W,
+                'photo' => null,
+                'age' => '31 год',
             ],
             [
                 'full_name' => 'Белый Иван Алексеевич',

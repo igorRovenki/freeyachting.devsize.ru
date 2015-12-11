@@ -29,3 +29,8 @@ services:
         arguments: ["@sonata.media.provider.image"]
         tags:
             - { name: doctrine.event_subscriber, connection: default }
+    app.event.not_found_image_subscriber:
+        class: AppBundle\Event\AvatorImageEventSubscriber
+        arguments: ["@service_container"]
+        tags:
+            - { name: doctrine.event_subscriber, connection: default }

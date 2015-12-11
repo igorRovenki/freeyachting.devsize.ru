@@ -5,7 +5,7 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                 <div class="text-center">
-                    <img src="{% path traveller.photo, 'middle' %}" class="img-circle" alt="{{ traveller.fullName }}">
+                    <img src="{{ traveller.photoPublicUrl }}" class="img-circle" alt="{{ traveller.fullName }}">
                     <h4 class="modal-title">{{ traveller.placeNumber }} {{ 'traveller.place'|trans|capitalize }}</h4>
                 </div>
             </div>

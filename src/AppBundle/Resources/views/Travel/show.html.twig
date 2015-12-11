@@ -129,7 +129,9 @@
                         </table>
                         <div class="row">
                             <div class="col-xs-12 text-center">
-                                <a href="#" class="btn btn-5">{{ 'travel.share_with_friend'|trans }}</a>
+                                <a href="mailto:yourfriend@gmail.com?subject={{ travel.name }}&body={{ url('travel_show', { id: travel.id }) }}" class="btn btn-5">
+                                    {{ 'travel.share_with_friend'|trans }}
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -178,7 +180,7 @@
                                                             {% include 'AppBundle:Traveller:place.html.twig' with { traveller: traveller } %}
                                                             <div class="col-xs-3 col-sm-3">
                                                                 <a href="#" data-toggle="modal" data-target="#modal-travellerPlace{{ traveller.id }}">
-                                                                    <img src="{% path traveller.photo, 'middle' %}" alt="{{ traveller.fullName }}">
+                                                                    <img src="{{ traveller.photoPublicUrl }}" alt="{{ traveller.fullName }}">
                                                                 </a>
                                                             </div>
                                                             <div class="col-xs-9 col-sm-9 text-block">
