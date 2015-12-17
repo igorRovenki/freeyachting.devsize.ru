@@ -14,6 +14,8 @@ use Doctrine\ORM\Mapping as ORM;
 class Booking
 {
     const STATUS_PENDING = 'pending';
+    const STATUS_APPROVED = 'approved';
+    const STATUS_CANCELED = 'canceled';
 
     /**
      * @var integer

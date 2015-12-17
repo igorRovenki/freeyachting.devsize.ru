@@ -71,6 +71,11 @@ class User extends BaseUser
      */
     protected $photo;
 
+    /**
+     * @var string
+     */
+    private $photoPublicUrl;
+
 
     public function __construct()
     {
@@ -176,6 +181,22 @@ class User extends BaseUser
     public function setPhone($phone)
     {
         $this->phone = $phone;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPhotoPublicUrl()
+    {
+        return $this->photoPublicUrl;
+    }
+
+    /**
+     * @param $photoPublicUrl string
+     */
+    public function setPhotoPublicUrl($photoPublicUrl)
+    {
+        $this->photoPublicUrl = $photoPublicUrl;
     }
 
     /**

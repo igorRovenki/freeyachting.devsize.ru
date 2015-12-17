@@ -17,6 +17,7 @@ class Traveller
     const GENDER_W = 'w';
     const TYPE_ADULT = 'adult';
     const TYPE_CHILD = 'child';
+
     /**
      * @var integer
      *

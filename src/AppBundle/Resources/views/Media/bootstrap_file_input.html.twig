@@ -19,11 +19,9 @@
         removeTitle: 'Cancel or reset changes',
         elErrorContainer: '#kv-avatar-errors',
         msgErrorClass: 'alert alert-block alert-danger',
-        {% if form.vars.value.photo %}
-            defaultPreviewContent: '<img src="{% path form.vars.value.photo, 'middle' %}" alt="Your Avatar">',
-        {% else %}
-            defaultPreviewContent: '<img src="{{ asset('images/avatar.png') }}" alt="Your Avatar">',
-        {% endif %}
+        {% block defaultPreviewContent %}
+            defaultPreviewContent: '<img src="{{ app.user.photoPublicUrl }}" alt="Your Avatar">',
+        {% endblock %}
         layoutTemplates: {main2: '{preview} {browse}', preview: '<div class="file-preview-thumbnails"></div>'},
         previewSettings: { image: { width: "180px", height: "180px" } },
         allowedFileExtensions: ["jpg", "jpeg", "png", "gif"]

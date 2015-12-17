@@ -125,12 +125,20 @@ jQuery(document).ready(function () {
     $('#closeFilterXS').click(function () {
         $('.filter').slideUp("slow");
     });
+
     var prev = $('.buttons-gender label.btn.active');
     $('.buttons-gender label.btn').click(function() {
         $(this).addClass('active');
         $(prev).removeClass('active');
-        $('.gender').val($(this).attr('data-gender'));
+        var gender = $(this).attr('data-gender');
+        $('.gender').val(gender);
         prev = this;
+
+        /* Change avatar when changing "gender" */
+        var avatar = $('.file-default-preview img');
+        if (avatar.attr('src').match(/avatar/)) {
+            avatar.attr('src', gender == 'm' ? '/images/avatar.png' : '/images/avatar2.png')
+        }
     });
     enquire.register('screen and (max-width: 991px)', {
         match: function () {

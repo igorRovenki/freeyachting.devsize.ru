@@ -3,6 +3,7 @@
 namespace AppBundle\Event;
 
 use AppBundle\Entity\Traveller;
+use AppBundle\Entity\User;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Events;
@@ -39,6 +40,18 @@ class AvatorImageEventSubscriber implements EventSubscriber
         if ($entity instanceof Traveller) {
             if (!$entity->getPhoto()) {
                 if ($entity->getGender() == Traveller::GENDER_M) {
+                    $entity->setPhotoPublicUrl('/images/avatar.png');
+                } else {
+                    $entity->setPhotoPublicUrl('/images/avatar2.png');
+                }
+            } else {
+                $path = $this->container->get('sonata.media.twig.extension')->path($entity->getPhoto(), 'middle');
+                $entity->setPhotoPublicUrl($path);
+            }
+        }
+        if ($entity instanceof User) {
+            if (!$entity->getPhoto()) {
+                if ($entity->getGender() == User::GENDER_M) {
                     $entity->setPhotoPublicUrl('/images/avatar.png');
                 } else {
                     $entity->setPhotoPublicUrl('/images/avatar2.png');

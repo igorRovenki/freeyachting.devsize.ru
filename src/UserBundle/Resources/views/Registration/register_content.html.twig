@@ -11,7 +11,7 @@
             {% block form_start %}{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'role': 'form'}}) }}{% endblock form_start %}
             <div class="row profile-top">
                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 text-center foto fileinput">
-                    {% include 'AppBundle:Media:bootstrap_file_input.html.twig' with {
+                    {% include 'AppBundle:Media:bootstrap_file_input_register.html.twig' with {
                         browseLabel: 'form.upload_photo'|trans
                     } %}
                 </div>
