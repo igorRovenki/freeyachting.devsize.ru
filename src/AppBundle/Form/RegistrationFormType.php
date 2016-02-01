@@ -2,6 +2,7 @@
 
 namespace AppBundle\Form;
 
+use AppBundle\Entity\User;
 use AppBundle\Form\DataTransformer\MediaToUploadedFileTransformer;
 use FOS\UserBundle\Form\Type\RegistrationFormType as RegistrationFormTypeBase;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -16,7 +17,10 @@ class RegistrationFormType extends RegistrationFormTypeBase
             ->add('photo', 'file', ['required' => false])
             ->add('name', null, ['label' => 'form.name'])
             ->add('patronomic', null, ['label' => 'form.patronomic'])
-            ->add('gender', 'hidden', ['label' => 'form.gender'])
+            ->add('gender', 'hidden', [
+                'label' => 'form.gender',
+                'attr' => ['value' => User::GENDER_M, 'class' => 'gender']
+            ])
             ->add('username', null, ['label' => 'form.username'])
             ->add(
                 'plainPassword',

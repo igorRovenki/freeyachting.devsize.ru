@@ -1,0 +1,111 @@
+{% trans_default_domain 'AppBundle' %}
+<div class="col-xs-12 hidden-sm col-md-3">
+    <div class="deliver-small">
+        <p>{{ 'travel.date'|trans }}:</p>
+        <p class="h4">
+            {{ travel.dateStart|localizeddate('none', 'none', null, null, 'd MMMM') }} -
+            {{ travel.dateEnd|localizeddate('none', 'none', null, null, 'd MMMM') }}
+            {{ travel.dateEnd|localizeddate('none', 'none', null, null, 'YYYY') }}
+        </p>
+    </div>
+    <div class="deliver-small">
+        <p>{{ 'travel.country'|trans }}:</p>
+        <p class="h4">{{ travel.country }}</p>
+    </div>
+    <div class="deliver-small">
+        <p>{{ 'travel.aquatory'|trans }}:</p>
+        <p class="h4">{{ travel.aquatory }}</p>
+    </div>
+    <div class="deliver-small">
+        <p>{{ 'travel.type_label'|trans }}:</p>
+        {% set type = 'travel.type.' ~ travel.type %}
+        <p class="h4">{{ type|trans }}</p>
+    </div>
+</div>
+<div class="col-xs-12 hidden-sm col-md-3">
+    <div class="deliver-small">
+        <p>{{ 'travel.skipper_rating'|trans }}:</p>
+        <p class="h4">5</p>
+    </div>
+    <div class="deliver-small">
+        <p>{{ 'travel.dayPrice'|trans }}:</p>
+        <p class="h4">{{ travel.dayPrice }} {{ travel.dayPriceCurrency }}</p>
+    </div>
+    <div class="deliver-small">
+        <p>{{ 'travel.price_for_all'|trans }}:</p>
+        <p class="h4">{{ travel.dayPrice * travel.daysCount * travel.yacht.totalCabinsNumber }}</p>
+    </div>
+</div>
+<div class="col-sm-4 visible-sm">
+    <div class="deliver-small">
+        <p>{{ 'travel.date'|trans }}:</p>
+        <p class="h4">
+            {{ travel.dateStart|localizeddate('none', 'none', null, null, 'd MMMM') }} -
+            {{ travel.dateEnd|localizeddate('none', 'none', null, null, 'd MMMM') }}
+            {{ travel.dateEnd|localizeddate('none', 'none', null, null, 'YYYY') }}
+        </p>
+    </div>
+    <div class="deliver-small">
+        <p>{{ 'travel.country'|trans }}:</p>
+        <p class="h4">{{ travel.country }}</p>
+    </div>
+    <div class="deliver-small">
+        <p>{{ 'travel.aquatory'|trans }}:</p>
+        <p class="h4">{{ travel.aquatory }}</p>
+    </div>
+</div>
+<div class="col-sm-4 visible-sm">
+    <div class="deliver-small">
+        <p>{{ 'travel.type_label'|trans }}:</p>
+        <p class="h4">{{ type|trans }}</p>
+    </div>
+    <div class="deliver-small">
+        <p>{{ 'travel.skipper_rating'|trans }}:</p>
+        <p class="h4">5</p>
+    </div>
+</div>
+<div class="col-sm-4 visible-sm">
+    <div class="deliver-small">
+        <p>{{ 'travel.dayPrice'|trans }}:</p>
+        <p class="h4">{{ travel.dayPrice }} {{ travel.dayPriceCurrency }}</p>
+    </div>
+    <div class="deliver-small">
+        <p>{{ 'travel.price_for_all'|trans }}:</p>
+        <p class="h4">{{ travel.dayPrice * 10 }}</p>
+    </div>
+</div>
+<div class="col-xs-12 col-md-6 table-block">
+    <div class="deliver hidden-md hidden-lg"></div>
+    {% for day in travel.days %}
+        {% include 'AppBundle:Travel:day.html.twig' with { 'day': day } %}
+    {% endfor %}
+    <h4>{{ 'travel.schedule'|trans }}</h4>
+    <table class="table table-striped">
+        <tbody>
+        {% for day in travel.days %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ day.date|localizeddate('medium', 'none', null, null, 'd MMMM') }}</td>
+                <td>{{ day.cityArrival }} - {{ day.cityDeparture }}</td>
+                <td>{{ day.routeLength }} {{ 'day.miles'|trans }}</td>
+                <td>
+                    <a href="#" data-toggle="modal" data-target="#modal-info{{ day.id }}">
+                        <span class="glyphicon glyphicon-question-sign"></span>
+                    </a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td>{{ 'day.days_not_fount'|trans }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="row">
+        <div class="col-xs-12 text-center">
+            <a href="mailto:yourfriend@gmail.com?subject={{ travel.name }}&body={{ url('travel_show', { id: travel.id }) }}" class="btn btn-5">
+                {{ 'travel.share_with_friend'|trans }}
+            </a>
+        </div>
+    </div>
+</div>

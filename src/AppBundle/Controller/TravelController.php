@@ -2,6 +2,9 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Booking;
+use AppBundle\Form\BookingType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -40,5 +43,49 @@ class TravelController extends Controller
     public function showAction(Travel $travel)
     {
         return ['travel' => $travel];
+    }
+
+    /**
+     * @Route("/travel/{id}/booking", name="travel_booking")
+     * @Template()
+     */
+    public function bookTravelAction(Travel $travel, Request $request)
+    {
+        $booking = new Booking();
+        $form = $this->createForm(new BookingType(), $booking);
+
+        return ['travel' => $travel, 'form' => $form->createView()];
+    }
+
+    /**
+     * @Route("/travel/{id}/booking/new", name="booking_create")
+     * @Method(methods={"POST"})
+     */
+    public function createAction(Travel $travel, Request $request)
+    {
+        $booking = new Booking();
+        $booking->setStatus(Booking::STATUS_PENDING);
+        $booking->setTravel($travel);
+
+        $form = $this->createForm(new BookingType(), $booking);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($booking);
+            $em->flush();
+
+            $this->get('session')->getFlashBag()->add(
+                'success',
+                $this->get('translator')->trans('travel.success_booked', [], 'AppBundle')
+            );
+
+            return $this->redirect($this->generateUrl('travel_show', ['id' => $travel->getId()]));
+        }
+
+        return $this->render('AppBundle:Travel:bookTravel.html.twig', [
+            'travel' => $travel,
+            'form' => $form->createView()
+        ]);
     }
 }

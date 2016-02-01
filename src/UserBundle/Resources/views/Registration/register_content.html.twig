@@ -12,7 +12,8 @@
             <div class="row profile-top">
                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 text-center foto fileinput">
                     {% include 'AppBundle:Media:bootstrap_file_input_register.html.twig' with {
-                        browseLabel: 'form.upload_photo'|trans
+                        browseLabel: 'form.upload_photo'|trans,
+                        formImage: form.photo
                     } %}
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
@@ -33,13 +34,13 @@
                     </div>
                     <div class="btn-group buttons-gender" data-toggle="buttons">
                         <label>{{ 'form.gender'|trans }}</label><br>
-                        <label class="btn btn-9 active" data-gender="{{ constant('AppBundle\\Entity\\User::GENDER_M') }}">
+                        <label class="btn btn-9 radio-item active" data-radio-hidden-id="{{ form.gender.vars.id }}" data-radio-value="{{ constant('AppBundle\\Entity\\User::GENDER_M') }}">
                             {{ 'form.gender_choices.m'|trans }}
                         </label>
-                        <label class="btn btn-9" data-gender="{{ constant('AppBundle\\Entity\\User::GENDER_W') }}">
+                        <label class="btn btn-9 radio-item" data-radio-hidden-id="{{ form.gender.vars.id }}" data-radio-value="{{ constant('AppBundle\\Entity\\User::GENDER_W') }}">
                             {{ 'form.gender_choices.w'|trans }}
                         </label>
-                        {{ form_widget(form.gender, { attr: { value: constant('AppBundle\\Entity\\User::GENDER_M'), class: 'gender' } }) }}
+                        {{ form_widget(form.gender) }}
                     </div>
                 </div>
             </div>

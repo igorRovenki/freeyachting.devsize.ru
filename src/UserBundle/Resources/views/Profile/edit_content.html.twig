@@ -12,7 +12,8 @@
             <div class="row profile-top">
                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 text-center foto fileinput">
                     {% include 'AppBundle:Media:bootstrap_file_input.html.twig' with {
-                        browseLabel: 'form.change_photo'|trans
+                        browseLabel: 'form.change_photo'|trans,
+                        formImage: form.photo
                     } %}
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
@@ -33,10 +34,12 @@
                     </div>
                     <div class="btn-group buttons-gender" data-toggle="buttons">
                         <label>{{ 'form.gender'|trans }}</label><br>
-                        <label class="btn btn-9 {% if form.vars.value.gender == constant('AppBundle\\Entity\\User::GENDER_M') %}active{% endif %}" data-gender="{{ constant('AppBundle\\Entity\\User::GENDER_M') }}">
+                        {% set man = constant('AppBundle\\Entity\\User::GENDER_M') %}
+                        {% set woman = constant('AppBundle\\Entity\\User::GENDER_W') %}
+                        <label class="btn radio-item btn-9 {% if form.vars.value.gender == man %}active{% endif %}" data-radio-hidden-id="{{ form.gender.vars.id }}" data-radio-value="{{ man }}">
                             {{ 'form.gender_choices.m'|trans }}
                         </label>
-                        <label class="btn btn-9 {% if form.vars.value.gender == constant('AppBundle\\Entity\\User::GENDER_W') %}active{% endif %}" data-gender="{{ constant('AppBundle\\Entity\\User::GENDER_W') }}">
+                        <label class="btn radio-item btn-9 {% if form.vars.value.gender == woman %}active{% endif %}" data-radio-hidden-id="{{ form.gender.vars.id }}" data-radio-value="{{ woman }}">
                             {{ 'form.gender_choices.w'|trans }}
                         </label>
                         {{ form_widget(form.gender, { attr: { value: form.vars.value.gender, class: 'gender' } }) }}

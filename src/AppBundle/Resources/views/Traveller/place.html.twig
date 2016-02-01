@@ -13,7 +13,7 @@
                 <p>
                     {{ ('traveller.gender.' ~ traveller.gender) |trans }} {{ traveller.age }}<br>
                     <span class="fio">{{ traveller.fullName }}</span><br>
-                    {{ (traveller.oppositeGenderLiving ? 'traveller.opposite_gender_living' : 'traveller.opposite_gender_living_not')|trans }}
+                    {{ (traveller.oppositeGenderLiving ? ('traveller.opposite_gender_living.' ~ traveller.gender) : ('traveller.opposite_gender_living_not.' ~ traveller.gender))|trans }}
                 </p>
             </div>
         </div>

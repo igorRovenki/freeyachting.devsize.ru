@@ -33,14 +33,14 @@ class Yacht
     /**
      * @var string
      *
-     * @ORM\Column(name="shipType", type="string", length=64)
+     * @ORM\Column(name="ship_type", type="string", length=64)
      */
     private $shipType;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="yachtType", type="string", length=64)
+     * @ORM\Column(name="yacht_type", type="string", length=64)
      */
     private $yachtType;
 
@@ -54,42 +54,42 @@ class Yacht
     /**
      * @var string
      *
-     * @ORM\Column(name="yearOfProduction", type="string", length=64, nullable=true)
+     * @ORM\Column(name="year_of_production", type="string", length=64, nullable=true)
      */
     private $yearOfProduction;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="yachtLengthFt", type="string", length=64)
+     * @ORM\Column(name="yacht_length_ft", type="string", length=64)
      */
     private $yachtLengthFt;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="yachtLengthM", type="string", length=64)
+     * @ORM\Column(name="yacht_length_m", type="string", length=64)
      */
     private $yachtLengthM;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="bathroomsNumber", type="string", length=64, nullable=true)
+     * @ORM\Column(name="bathrooms_number", type="string", length=64, nullable=true)
      */
     private $bathroomsNumber;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="doubleCabinsNumber", type="string", length=64)
+     * @ORM\Column(name="double_cabins_number", type="integer", length=64)
      */
     private $doubleCabinsNumber;
 
     /**
-     * @var string
+     * @var int
      *
-     * @ORM\Column(name="singleCabinsNumber", type="string", length=64)
+     * @ORM\Column(name="single_cabins_number", type="integer", length=64)
      */
     private $singleCabinsNumber;
 
@@ -278,7 +278,7 @@ class Yacht
     /**
      * Get bathroomsNumber
      *
-     * @return string
+     * @return int
      */
     public function getBathroomsNumber()
     {
@@ -288,7 +288,7 @@ class Yacht
     /**
      * Set doubleCabinsNumber
      *
-     * @param string $doubleCabinsNumber
+     * @param int $doubleCabinsNumber
      * @return Yacht
      */
     public function setDoubleCabinsNumber($doubleCabinsNumber)
@@ -301,7 +301,7 @@ class Yacht
     /**
      * Get doubleCabinsNumber
      *
-     * @return string
+     * @return int
      */
     public function getDoubleCabinsNumber()
     {
@@ -311,7 +311,7 @@ class Yacht
     /**
      * Set singleCabinsNumber
      *
-     * @param string $singleCabinsNumber
+     * @param int $singleCabinsNumber
      * @return Yacht
      */
     public function setSingleCabinsNumber($singleCabinsNumber)
@@ -324,11 +324,19 @@ class Yacht
     /**
      * Get singleCabinsNumber
      *
-     * @return string
+     * @return int
      */
     public function getSingleCabinsNumber()
     {
         return $this->singleCabinsNumber;
+    }
+
+    /**
+     * @return int
+     */
+    public function getTotalCabinsNumber()
+    {
+        return (int)$this->singleCabinsNumber + ((int)$this->doubleCabinsNumber * 2);
     }
 
     /**

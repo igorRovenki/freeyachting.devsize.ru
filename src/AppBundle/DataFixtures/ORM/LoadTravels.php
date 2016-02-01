@@ -197,8 +197,8 @@ class LoadTravels implements FixtureInterface, ContainerAwareInterface
         $ft = rand(25, 50);
         $yacht->setYachtLengthFt($ft);
         $yacht->setYachtLengthM($ft * 0.30);
-        $yacht->setDoubleCabinsNumber(8);
-        $yacht->setSingleCabinsNumber(4);
+        $yacht->setDoubleCabinsNumber(4);
+        $yacht->setSingleCabinsNumber(0);
         $yacht->setBathroomsNumber(2);
         $yacht->setDescription('Это особенная яхта!');
         $yacht->setFeatures(

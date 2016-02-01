@@ -1,7 +1,7 @@
 {% extends 'AppBundle:Media:bootstrap_file_input.html.twig' %}
 
 {% block defaultPreviewContent %}
-    {% if form.vars.value.photo %}
+    {% if form.vars.value.photo is defined %}
         defaultPreviewContent: '<img src="{% path form.vars.value.photo, 'middle' %}" alt="Your Avatar">',
     {% else %}
         defaultPreviewContent: '<img src="{{ asset('images/avatar.png') }}" alt="Your Avatar">',
