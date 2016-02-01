@@ -1,10 +1,10 @@
 <button class="hidden"></button>
 <!-- the avatar markup -->
 <div id="kv-avatar-errors" class="center-block" style="width:360px;display:none"></div>
-{{ form_widget(form.photo, { attr: {class: 'file-loading', multiple: 'false'} }) }}
+{{ form_widget(formImage, { attr: {class: 'file-loading', multiple: 'false'} }) }}
 <!-- the fileinput plugin initialization -->
 <script>
-    $("#{{ form.photo.vars.id }}").fileinput({
+    $("#{{ formImage.vars.id }}").fileinput({
         language: 'ru',
         overwriteInitial: true,
         maxFileSize: 2000,

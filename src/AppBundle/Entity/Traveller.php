@@ -122,6 +122,21 @@ class Traveller
      */
     private $photoPublicUrl;
 
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="initiator", type="boolean")
+     */
+    private $initiator;
+
+
+    public function __construct()
+    {
+        $this->oppositeGenderLiving = true;
+        $this->children = false;
+        $this->livingWithParents = false;
+        $this->initiator = true;
+    }
 
     /**
      * Get id
@@ -432,5 +447,26 @@ class Traveller
     public function getPhotoPublicUrl()
     {
         return $this->photoPublicUrl;
+    }
+
+    public function __toString()
+    {
+        return $this->getFullName();
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isInitiator()
+    {
+        return $this->initiator;
+    }
+
+    /**
+     * @param boolean $initiator
+     */
+    public function setInitiator($initiator)
+    {
+        $this->initiator = $initiator;
     }
 }

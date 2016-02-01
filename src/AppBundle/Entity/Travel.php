@@ -1143,4 +1143,30 @@ class Travel
     {
         $this->bookings->add($booking);
     }
+
+    public function getAllTravellers()
+    {
+        $travellers = new ArrayCollection();
+
+        /** @var Booking $booking */
+        foreach ($this->bookings as $booking) {
+            foreach ($booking->getTravellers() as $traveller) {
+                $travellers->add($traveller);
+            }
+        }
+
+        return $travellers;
+    }
+
+    public function getBusyPlaces()
+    {
+        return $this->getAllTravellers()->map(function (Traveller $traveller) {
+            return $traveller->getPlaceNumber();
+        });
+    }
+
+    public function __toString()
+    {
+        return $this->getName();
+    }
 }

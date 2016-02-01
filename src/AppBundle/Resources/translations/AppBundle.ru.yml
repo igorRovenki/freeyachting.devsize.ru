@@ -31,6 +31,17 @@ travel:
         reviews: Отзывы о путешествии
         features: Особенности
     members: Участники путешествия
+    free_places_short: Свободно мест
+    busy_places: Занято мест
+    you_choosed: Вами выбрано
+    total_sum: Общая сумма
+    booking_button: Забронировать
+    menu:
+        overview: 1. Обзор путешествия
+        booking: 2. Бронирование мест
+        payment: 3. Оплата
+    enter_register_data: Введите регистрационные <br> данные путешественников
+    success_booked: Путешествие успешно забронировано!
 yacht:
     short_description: Краткое описание
     ship_type_label: Тип судна
@@ -66,6 +77,7 @@ breadcrumbs:
     fos_user_resetting_check_email: Проверка Email
     fos_user_resetting_send_email: Сброс пароля
     fos_user_resetting_reset: Сброс пароля
+    travel_booking: Бронирование мест
 search:
     label: Выберете свое путешествие
     sort_label: "Сортировать по:"
@@ -138,16 +150,33 @@ form:
     change_photo: Заменить фото
     captcha: Введите код
     change_password: Изменить пароль
-
+    yes: Да
+    no: Нет
 resetting:
     resetting_password: Восстановление пароля
     login_or_email: Логин или Email
     send: Выслать
 traveller:
-    opposite_gender_living: Согласен жить с противоположным полом
-    opposite_gender_living_not: Не согласен жить с противоположным полом
+    full_name: ФИО
+    email: Email
+    phone: Телефон
+    age: Возраст
+    opposite_gender_living:
+        m: Согласен жить с противоположным полом
+        w: Согласна жить с противоположным полом
+        title: Проживание с противополжным полом
+    opposite_gender_living_not:
+        m: Не согласен жить с противоположным полом
+        w: Не согласна жить с противоположным полом
     be_first: Станьте первым участником путешествия!
     gender:
         m: Мужчина
         w: Женщина
     place: место
+    place_number: Номер места
+    travel_initiator: Инициатр путешествия
+    children: Участие детей
+    child_number: Количество детей
+    min_child_age: Минимальный возраст детей
+    living_with_parents: Проживание в каюте с родителями?
+    title: Путешественник

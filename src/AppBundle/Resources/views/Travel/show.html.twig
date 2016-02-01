@@ -13,9 +13,9 @@
                 <div class="row btn-block">
                     <div class="col-xs-12">
                         <div class="search-filter">
-                            <button class="btn btn-9 active">1. Обзор путешествия</button><br class="visible-xs">
-                            <button class="btn btn-9">2. Бронирование мест</button><br class="visible-xs">
-                            <button  class="btn btn-9">3. Оплата</button>
+                            <button class="btn btn-9 active">{{ 'travel.menu.overview'|trans }}</button><br class="visible-xs">
+                            <button class="btn btn-9">{{ 'travel.menu.booking'|trans }}</button><br class="visible-xs">
+                            <button  class="btn btn-9">{{ 'travel.menu.payment'|trans }}</button>
                         </div>
                     </div>
                 </div>
@@ -25,116 +25,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-xs-12 hidden-sm col-md-3">
-                        <div class="deliver-small">
-                            <p>{{ 'travel.date'|trans }}:</p>
-                            <p class="h4">
-                                {{ travel.dateStart|localizeddate('none', 'none', null, null, 'd MMMM') }} -
-                                {{ travel.dateEnd|localizeddate('none', 'none', null, null, 'd MMMM') }}
-                                {{ travel.dateEnd|localizeddate('none', 'none', null, null, 'YYYY') }}
-                            </p>
-                        </div>
-                        <div class="deliver-small">
-                            <p>{{ 'travel.country'|trans }}:</p>
-                            <p class="h4">{{ travel.country }}</p>
-                        </div>
-                        <div class="deliver-small">
-                            <p>{{ 'travel.aquatory'|trans }}:</p>
-                            <p class="h4">{{ travel.aquatory }}</p>
-                        </div>
-                        <div class="deliver-small">
-                            <p>{{ 'travel.type_label'|trans }}:</p>
-                            {% set type = 'travel.type.' ~ travel.type %}
-                            <p class="h4">{{ type|trans }}</p>
-                        </div>
-                    </div>
-                    <div class="col-xs-12 hidden-sm col-md-3">
-                        <div class="deliver-small">
-                            <p>{{ 'travel.skipper_rating'|trans }}:</p>
-                            <p class="h4">5</p>
-                        </div>
-                        <div class="deliver-small">
-                            <p>{{ 'travel.dayPrice'|trans }}:</p>
-                            <p class="h4">{{ travel.dayPrice }} {{ travel.dayPriceCurrency }}</p>
-                        </div>
-                        <div class="deliver-small">
-                            <p>{{ 'travel.price_for_all'|trans }}:</p>
-                            <p class="h4">{{ travel.dayPrice * 10 }}</p>
-                        </div>
-                    </div>
-                    <div class="col-sm-4 visible-sm">
-                        <div class="deliver-small">
-                            <p>{{ 'travel.date'|trans }}:</p>
-                            <p class="h4">
-                                {{ travel.dateStart|localizeddate('none', 'none', null, null, 'd MMMM') }} -
-                                {{ travel.dateEnd|localizeddate('none', 'none', null, null, 'd MMMM') }}
-                                {{ travel.dateEnd|localizeddate('none', 'none', null, null, 'YYYY') }}
-                            </p>
-                        </div>
-                        <div class="deliver-small">
-                            <p>{{ 'travel.country'|trans }}:</p>
-                            <p class="h4">{{ travel.country }}</p>
-                        </div>
-                        <div class="deliver-small">
-                            <p>{{ 'travel.aquatory'|trans }}:</p>
-                            <p class="h4">{{ travel.aquatory }}</p>
-                        </div>
-                    </div>
-                    <div class="col-sm-4 visible-sm">
-                        <div class="deliver-small">
-                            <p>{{ 'travel.type_label'|trans }}:</p>
-                            <p class="h4">{{ type|trans }}</p>
-                        </div>
-                        <div class="deliver-small">
-                            <p>{{ 'travel.skipper_rating'|trans }}:</p>
-                            <p class="h4">5</p>
-                        </div>
-                    </div>
-                    <div class="col-sm-4 visible-sm">
-                        <div class="deliver-small">
-                            <p>{{ 'travel.dayPrice'|trans }}:</p>
-                            <p class="h4">{{ travel.dayPrice }} {{ travel.dayPriceCurrency }}</p>
-                        </div>
-                        <div class="deliver-small">
-                            <p>{{ 'travel.price_for_all'|trans }}:</p>
-                            <p class="h4">{{ travel.dayPrice * 10 }}</p>
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-md-6 table-block">
-                        <div class="deliver hidden-md hidden-lg"></div>
-                        {% for day in travel.days %}
-                            {% include 'AppBundle:Travel:day.html.twig' with { 'day': day } %}
-                        {% endfor %}
-                        <h4>{{ 'travel.schedule'|trans }}</h4>
-                        <table class="table table-striped">
-                            <tbody>
-                            {% for day in travel.days %}
-                                <tr>
-                                    <td>{{ loop.index }}</td>
-                                    <td>{{ day.date|localizeddate('medium', 'none', null, null, 'd MMMM') }}</td>
-                                    <td>{{ day.cityArrival }} - {{ day.cityDeparture }}</td>
-                                    <td>{{ day.routeLength }} {{ 'day.miles'|trans }}</td>
-                                    <td>
-                                        <a href="#" data-toggle="modal" data-target="#modal-info{{ day.id }}">
-                                            <span class="glyphicon glyphicon-question-sign"></span>
-                                        </a>
-                                    </td>
-                                </tr>
-                            {% else %}
-                                <tr>
-                                    <td>{{ 'day.days_not_fount'|trans }}</td>
-                                </tr>
-                            {% endfor %}
-                            </tbody>
-                        </table>
-                        <div class="row">
-                            <div class="col-xs-12 text-center">
-                                <a href="mailto:yourfriend@gmail.com?subject={{ travel.name }}&body={{ url('travel_show', { id: travel.id }) }}" class="btn btn-5">
-                                    {{ 'travel.share_with_friend'|trans }}
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                    {% include 'AppBundle:Travel:_info.html.twig' %}
                 </div>
                 <div class="choice-place">
                     <div class="row">
@@ -143,62 +34,9 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-xs-12 col-md-7 yachta-block">
-                            <ul class="list-unstyled list-inline">
-                                <li><div class="round-green"></div> Свободно мест: <b>3</b></li>
-                                <li><div class="round-red"></div> Занято мест: <b>5</b></li>
-                            </ul>
-                            <img src="{% path travel.yacht.schemaImage, 'middle' %}" alt="Яхта" class="img-responsive">
-                            <div class="row">
-                                <div class="col-xs-12 col-sm-offset-1 col-sm-5 col-md-offset-0 col-md-5 text-center">
-                                    <p>Вами выбрано: <span class="h4">3 места</span></p>
-                                </div>
-                                <div class="col-xs-12 col-sm-5 col-md-5 text-center">
-                                    <p>Общая сумма: <span class="h4">960 Euro</span></p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xs-12 col-md-10 text-center">
-                                    <button  class="btn btn-1">Забронировать</button>
-                                </div>
-                            </div>
-                        </div>
+                        {% include 'AppBundle:Travel:_bookingForm.html.twig' with { bookingButton: true } %}
                         <div class="col-xs-12 col-md-5">
-                            <div class="row">
-                                <div class="col-xs-12">
-                                    <h4>{{ 'travel.members'|trans }}:</h4>
-                                </div>
-                            </div>
-                            <div class="row">
-                                {% for booking in travel.bookings %}
-                                    <div class="col-xs-12 col-sm-6 col-md-12">
-                                        <div class="spisok">
-                                            <ul class="list-unstyled">
-                                                {% for traveller in booking.travellers %}
-                                                    <li>
-                                                        <div class="row">
-                                                            {% include 'AppBundle:Traveller:place.html.twig' with { traveller: traveller } %}
-                                                            <div class="col-xs-3 col-sm-3">
-                                                                <a href="#" data-toggle="modal" data-target="#modal-travellerPlace{{ traveller.id }}">
-                                                                    <img src="{{ traveller.photoPublicUrl }}" alt="{{ traveller.fullName }}">
-                                                                </a>
-                                                            </div>
-                                                            <div class="col-xs-9 col-sm-9 text-block">
-                                                                <p><b>{{ traveller.placeNumber }} {{ 'traveller.place'|trans }}</b></p>
-                                                                <p>{{ ('traveller.gender.' ~ traveller.gender) |trans }}, {{ traveller.age }}</p>
-                                                                <h4>{{ traveller.fullName }}</h4>
-                                                                <p>{{ (traveller.oppositeGenderLiving ? 'traveller.opposite_gender_living' : 'traveller.opposite_gender_living_not')|trans }}</p>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                {% endfor %}
-                                            </ul>
-                                        </div>
-                                    </div>
-                                {% else %}
-                                    <div class="col-xs-12 col-sm-6 col-md-12">{{ 'traveller.be_first'|trans }}</div>
-                                {% endfor %}
-                            </div>
+                            {% include 'AppBundle:Travel:_travelMembers.html.twig' %}
                         </div>
                     </div>
                 </div>

@@ -1,0 +1,66 @@
+{% trans_default_domain 'AppBundle' %}
+<form action="{{ path('travel_booking', { id: travel.id }) }}">
+    <div id="places_form">
+        {% for place in app.request.get('places') %}
+            <input type="hidden" name="places[]" id="place{{ place }}" value="{{ place }}">
+        {% endfor %}
+    </div>
+    <div class="col-xs-12 col-md-7 yachta-block">
+        <script>var price = {{ travel.dayPrice * travel.daysCount }};</script>
+        <ul class="list-unstyled list-inline">
+            <li><div class="round-green"></div> {{ 'travel.free_places_short'|trans }}: <b>{{ travel.yacht.totalCabinsNumber - travel.busyPlaces.count }}</b></li>
+            <li><div class="round-red"></div> {{ 'travel.busy_places'|trans }}: <b>{{ travel.busyPlaces.count }}</b></li>
+        </ul>
+        <div>
+            {% set positions = [
+                '',
+                'top: 57px; left: 120px;',
+                'top: 94px; left: 60px;',
+                'top: 57px; left: 233px;',
+                'top: 94px; left: 174px;',
+                'top: 255px; left: -120px;',
+                'top: 292px; left: -180px;',
+                'top: 255px; left: -10px;',
+                'top: 292px; left: -70px;',
+            ] %}
+            {% for place in range(1, travel.yacht.totalCabinsNumber) %}
+                {% if place in travel.busyPlaces %}
+                    <div class="place busy" style="{{ positions[place] }}" data-place="{{ place }}">
+                        <i class="glyphicon glyphicon-check"></i> {{ place }}
+                    </div>
+                {% else %}
+                    <div class="place" style="{{ positions[place] }}" data-place="{{ place }}">
+                        <i class="glyphicon glyphicon-{% if place in app.request.get('places') %}check{% else %}unchecked{% endif %}"></i> {{ place }}
+                    </div>
+                {% endif %}
+            {% endfor %}
+            <img src="{% path travel.yacht.schemaImage, 'middle' %}" alt="Яхта" class="img-responsive">
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-offset-1 col-sm-5 col-md-offset-0 col-md-5 text-center">
+                <p>{{ 'travel.you_choosed'|trans }}:
+                    <span class="h4">
+                        <span id="places_choosed">
+                            {{ app.request.get('places') ? app.request.get('places')|length : 0 }}
+                        </span> <span id="plural-places">мест</span>
+                    </span>
+                </p>
+            </div>
+            <div class="col-xs-12 col-sm-5 col-md-5 text-center">
+                <p>{{ 'travel.total_sum'|trans }}:
+                    <span class="h4">
+                        {% set count = app.request.get('places') ? app.request.get('places')|length : 0 %}
+                        <span id="total_sum">{{ travel.dayPrice * travel.daysCount * count }}</span> {{ travel.dayPriceCurrency }}
+                    </span>
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            {% if bookingButton is defined %}
+                <div class="col-xs-12 col-md-10 text-center">
+                    <button  class="btn btn-1">{{ 'travel.booking_button'|trans }}</button>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</form>

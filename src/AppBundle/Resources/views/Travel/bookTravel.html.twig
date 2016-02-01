@@ -1,0 +1,83 @@
+{% extends 'AppBundle::base.html.twig' %}
+{% trans_default_domain "AppBundle" %}
+
+{% block js %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('js/bootstrap-file-input/fileinput.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/bootstrap-file-input/plugins/canvas-to-blob.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/bootstrap-file-input/fileinput_locale_ru.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/traveller-form.js') }}"></script>
+{% endblock js %}
+
+{% block content -%}
+    <div class="container content yachta">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <h1>{{ travel.name }}</h1>
+                    </div>
+                </div>
+                <div class="row btn-block">
+                    <div class="col-xs-12">
+                        <div class="search-filter">
+                            <a class="btn btn-9" href="{{ path('travel_show', { id: travel.id }) }}">
+                                {{ 'travel.menu.overview'|trans }}
+                            </a>
+                            <br class="visible-xs">
+                            <a class="btn btn-9 active" href="{{ path('travel_booking', { id: travel.id }) }}">
+                                {{ 'travel.menu.booking'|trans }}
+                            </a>
+                            <br class="visible-xs">
+                            <button  class="btn btn-9">{{ 'travel.menu.payment'|trans }}</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        {% include 'AppBundle:Travel:showCarousel.html.twig' with { photos: travel.photos, targetId: 'carousel2' } %}
+                    </div>
+                </div>
+                <div class="choice-place">
+                    <div class="row">
+                        {% include 'AppBundle:Travel:_bookingForm.html.twig' %}
+                        <div class="col-xs-12 col-md-5">
+                            {% include 'AppBundle:Travel:_travelMembers.html.twig' %}
+                        </div>
+                    </div>
+                </div>
+                <div class="important-form add-traveller-form">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <h1>{{ 'travel.enter_register_data'|trans|raw }}</h1>
+                        </div>
+                    </div>
+                    {{ form_start(form, {'method': 'post', 'action': path('booking_create', { id: travel.id }), 'attr': {'role': 'form'}}) }}
+                        <div class="form-items" data-prototype='{% include 'AppBundle:Traveller:_addTraveller.html.twig' with { 'form': form } %}'>
+                            <div class="row add-traveller" data-index="0"></div>
+                            <div class="deliver"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 text-center btn-block-form">
+                                <button class="btn btn-5">Сохранить инфо</button><br class="visible-xs">
+                                <a class="btn btn-5 add-traveller-form" onclick="addTraveller()">Добавить участника</a><br class="visible-xs">
+                                <button type="submit" class="btn btn-4">Продолжить</button>
+                            </div>
+                        </div>
+                        <div class="hidden">
+                            {{ form_rest(form) }}
+                        </div>
+                    {{ form_end(form) }}
+                    {% for place in app.request.get('places') %}
+                        <script>addTraveller({{ place }});</script>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 banner-xs">
+                {% include 'AppBundle:blocks:banners-bottom.html.twig' %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

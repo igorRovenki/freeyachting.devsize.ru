@@ -1,3 +1,6 @@
+function pluralForm( n, forms ) {
+    return forms[(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2) ];
+}
 //****************************************************************************
 // Предотвращает выполнение действия перехода по ссылке: href="#"
 //****************************************************************************
@@ -91,16 +94,7 @@ jQuery(document).ready(function () {
             }
         }
     });
-    $('#inputChild1').change(function () {
-        if ($(this).val() == "yesChild") {
-            $('#inputNumberChild1').attr('disabled', false);
-            $('#inputAgeChild1').attr('disabled', false);
-        }
-        if ($(this).val() == "noChild") {
-            $('#inputNumberChild1').attr('disabled', true);
-            $('#inputAgeChild1').attr('disabled', true);
-        }
-    });
+
     $('#inputParticipationChildren').change(function () {
         if ($(this).val() == "yes") {
             $('#ageChild').attr('disabled', false);
@@ -126,19 +120,30 @@ jQuery(document).ready(function () {
         $('.filter').slideUp("slow");
     });
 
-    var prev = $('.buttons-gender label.btn.active');
+    //var prev = $('.buttons-gender label.btn.active');
     $('.buttons-gender label.btn').click(function() {
-        $(this).addClass('active');
-        $(prev).removeClass('active');
-        var gender = $(this).attr('data-gender');
-        $('.gender').val(gender);
-        prev = this;
-
+        var holder = $(this).parent().parent().parent();
         /* Change avatar when changing "gender" */
-        var avatar = $('.file-default-preview img');
+        var avatar = $(holder).find('.file-default-preview img');
         if (avatar.attr('src').match(/avatar/)) {
-            avatar.attr('src', gender == 'm' ? '/images/avatar.png' : '/images/avatar2.png')
+            if (gender == 'm') {
+                avatar.attr('src', '/images/avatar.png');
+            }
+            if (gender == 'w') {
+                avatar.attr('src', '/images/avatar2.png');
+            }
         }
+    });
+    /* Custom radio buttons */
+    $('.radio-item').click(function() {
+        var id = $(this).attr('data-radio-hidden-id');
+        var value = $(this).attr('data-radio-value');
+        $('#' + id).val(value);
+
+        if ($(this).hasClass('active')) {
+            return;
+        }
+        $(this).parent().find('.radio-item').toggleClass('active');
     });
     enquire.register('screen and (max-width: 991px)', {
         match: function () {
@@ -203,6 +208,32 @@ jQuery(document).ready(function () {
     $('.fa-calendar, .datepicker-select button').click(function() {
         $('.datepicker').datepicker('show');
     });
+
+    var places = [];
+
+    $('.choice-place .place').click(function() {
+        var icon = $(this).children()[0];
+        if ($(this).hasClass('busy')) {
+            console.log('busy...');
+            return;
+        }
+        $(icon).toggleClass('glyphicon-check');
+        $(icon).toggleClass('glyphicon-unchecked');
+        var place = $(this).attr('data-place');
+
+        if ($(icon).hasClass('glyphicon-check')) {
+            $('#places_form').append('<input type="hidden" name="places[]" id="place' + place + '" value="' + place + '">')
+        }
+        if ($(icon).hasClass('glyphicon-unchecked')) {
+            $('#place' + place).remove();
+        }
+        var placesNumber = $('#places_form').children().length;
+        $('#places_choosed').text(placesNumber);
+        $('#total_sum').text(placesNumber * price);
+        $('#plural-places').text(pluralForm(placesNumber, ['место', 'места', 'мест']))
+    });
+    var placesNumber = $('#places_form').children().length;
+    $('#plural-places').text(pluralForm(placesNumber, ['место', 'места', 'мест']));
 
     try {
         $('.main-select').selectator({
