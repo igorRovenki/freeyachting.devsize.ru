@@ -10,10 +10,16 @@ class TravelRepository extends EntityRepository
 
     public function findTravelsByFilter(array $filter)
     {
-        $qb = $this->createQueryBuilder('travel_repository');
+        $qb = $this->_em->createQueryBuilder();
         $qb
-            ->select('t')
+            ->select('t', 'bookings', 'yacht', 'photos', 'country', 'aquatory', 'travellers')
             ->from('AppBundle:Travel', 't')
+            ->leftJoin('t.bookings', 'bookings')
+            ->leftJoin('bookings.travellers', 'travellers')
+            ->leftJoin('t.yacht', 'yacht')
+            ->leftJoin('t.photos', 'photos')
+            ->leftJoin('t.country', 'country')
+            ->leftJoin('t.aquatory', 'aquatory')
         ;
 
         foreach ($filter as $key => $parameter) {

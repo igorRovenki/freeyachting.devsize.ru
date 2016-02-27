@@ -8,8 +8,8 @@
     <div class="col-xs-12 col-md-7 yachta-block">
         <script>var price = {{ travel.dayPrice * travel.daysCount }};</script>
         <ul class="list-unstyled list-inline">
-            <li><div class="round-green"></div> {{ 'travel.free_places_short'|trans }}: <b>{{ travel.yacht.totalCabinsNumber - travel.busyPlaces.count }}</b></li>
-            <li><div class="round-red"></div> {{ 'travel.busy_places'|trans }}: <b>{{ travel.busyPlaces.count }}</b></li>
+            <li><div class="round-green"></div> {{ 'travel.free_places_short'|trans }}: <b>{{ travel.yacht.totalPlacesNumber - (travel.busyPlaces|length) }}</b></li>
+            <li><div class="round-red"></div> {{ 'travel.busy_places'|trans }}: <b>{{ travel.busyPlaces|length }}</b></li>
         </ul>
         <div>
             {% set positions = [
@@ -23,14 +23,20 @@
                 'top: 255px; left: -10px;',
                 'top: 292px; left: -70px;',
             ] %}
-            {% for place in range(1, travel.yacht.totalCabinsNumber) %}
+            {% for place in range(1, travel.yacht.totalPlacesNumber) %}
                 {% if place in travel.busyPlaces %}
                     <div class="place busy" style="{{ positions[place] }}" data-place="{{ place }}">
                         <i class="glyphicon glyphicon-check"></i> {{ place }}
                     </div>
                 {% else %}
-                    <div class="place" style="{{ positions[place] }}" data-place="{{ place }}">
-                        <i class="glyphicon glyphicon-{% if place in app.request.get('places') %}check{% else %}unchecked{% endif %}"></i> {{ place }}
+                    <div class="place" style="{{ positions[place] }}" data-place="{{ place }}" ng-init="booking.addPlace('{{ place }}')">
+                        {% if place in app.request.get('places') %}
+                            <i class="glyphicon glyphicon-check" ng-init="booking.addTraveller()"></i>
+                        {% else %}
+                            <i class="glyphicon glyphicon-unchecked"></i>
+                        {% endif %}
+
+                        {{ place }}
                     </div>
                 {% endif %}
             {% endfor %}

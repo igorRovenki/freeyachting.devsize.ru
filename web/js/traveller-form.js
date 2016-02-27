@@ -1,9 +1,16 @@
-function addTraveller(place) {
+function addTraveller(place, childForm) {
     var index = $('.add-traveller').length;
     var holder = $('.form-items');
     var prototype = $(holder).data('prototype');
     var newForm = prototype.replace(/__name__/g, index);
-    holder.append('<div class="row add-traveller">' + newForm + '</div>');
+    var row = $('<div class="row add-traveller"></div>');
+
+    if (typeof childForm != 'undefined') {
+        $(row).addClass('child');
+    }
+
+    $(row).append(newForm);
+    holder.append(row);
     holder.append('<div class="deliver"></div>');
     $('#app_booking_travellers_' + index + '_placeNumber').val(place);
 
@@ -60,8 +67,13 @@ function addTraveller(place) {
             $(parent).find('.child-age-option').attr('disabled', true);
         }
         if ($(this).val() == 0) {
+            $(parent).find('.child-number-option').trigger('change');
             $(parent).find('.child-number-option').attr('disabled', false);
             $(parent).find('.child-age-option').attr('disabled', false);
         }
+    });
+
+    $('.child-number-option').change(function() {
+        var childsNumber = parseInt($(this).val()) + 1;
     });
 }

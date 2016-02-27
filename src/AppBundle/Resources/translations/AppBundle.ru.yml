@@ -180,3 +180,9 @@ traveller:
     min_child_age: Минимальный возраст детей
     living_with_parents: Проживание в каюте с родителями?
     title: Путешественник
+    type:
+        child: Ребенок
+booking:
+    save_info: Сохранить инфо
+    add_traveller: Добавить участника
+    continue: Продолжить

@@ -1160,9 +1160,20 @@ class Travel
 
     public function getBusyPlaces()
     {
-        return $this->getAllTravellers()->map(function (Traveller $traveller) {
-            return $traveller->getPlaceNumber();
-        });
+        $places = [];
+
+        foreach ($this->getAllTravellers() as $traveller) {
+            if ($traveller->getPlaceNumber() !== null) {
+                $places[] = $traveller->getPlaceNumber();
+            }
+        }
+
+        return $places;
+    }
+
+    public function getFreePlaces()
+    {
+        return $this->getYacht()->getTotalPlacesNumber() - count($this->getBusyPlaces());
     }
 
     public function __toString()

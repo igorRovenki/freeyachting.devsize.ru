@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Application\Sonata\MediaBundle\Entity\Media;
+use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -75,6 +76,12 @@ class User extends BaseUser
      * @var string
      */
     private $photoPublicUrl;
+
+    /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="Booking", mappedBy="user", cascade={"persist", "remove"}, fetch="EXTRA_LAZY")
+     */
+    private $bookings;
 
 
     public function __construct()
@@ -232,5 +239,21 @@ class User extends BaseUser
         $this->photo = $photo;
 
         return $this;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getBookings()
+    {
+        return $this->bookings;
+    }
+
+    /**
+     * @param ArrayCollection $bookings
+     */
+    public function setBookings($bookings)
+    {
+        $this->bookings = $bookings;
     }
 }
