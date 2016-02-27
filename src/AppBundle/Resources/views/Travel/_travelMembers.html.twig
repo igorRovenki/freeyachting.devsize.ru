@@ -19,7 +19,9 @@
                                     </a>
                                 </div>
                                 <div class="col-xs-9 col-sm-9 text-block">
-                                    <p><b>{{ traveller.placeNumber }} {{ 'traveller.place'|trans }}</b></p>
+                                    {% if traveller.placeNumber %}
+                                        <p><b>{{ traveller.placeNumber }} {{ 'traveller.place'|trans }}</b></p>
+                                    {% endif %}
                                     <p>{{ ('traveller.gender.' ~ traveller.gender) |trans }}, {{ traveller.age }}</p>
                                     <h4>{{ traveller.fullName }}</h4>
                                     <p>{{ (traveller.oppositeGenderLiving ? ('traveller.opposite_gender_living.' ~ traveller.gender) : ('traveller.opposite_gender_living_not.' ~ traveller.gender))|trans }}</p>

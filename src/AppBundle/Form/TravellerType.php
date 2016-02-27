@@ -29,18 +29,21 @@ class TravellerType extends AbstractType
             ->add('children', 'choice', [
                 'label' => 'traveller.children',
                 'choices' => [
-                    'form.yes' => true,
                     'form.no' => false,
+                    'form.yes' => true,
                 ],
                 'choices_as_values' => true,
-                'preferred_choices' => [false]
+                'data' => false
             ])
             ->add('childNumber', 'choice', [
-                'choices' => range(1, 10)
+                'choices' => range(1, 10),
+                'placeholder' => '',
+                'choices_as_values' => false
             ])
             ->add('childMinAge', 'choice', [
                 'choices' => range(1, 21),
-                'label' => 'traveller.min_child_age'
+                'label' => 'traveller.min_child_age',
+                'empty_data' => null
             ])
             ->add('oppositeGenderLiving', 'hidden', ['attr' => ['value' => 1]])
             ->add('livingWithParents', 'hidden', [
@@ -48,7 +51,7 @@ class TravellerType extends AbstractType
                 'attr' => ['value' => 0]
             ])
             ->add('type', 'hidden', ['attr' => ['value' => Traveller::TYPE_ADULT]])
-            ->add('placeNumber', 'text', ['label' => 'traveller.place_number'])
+            ->add('placeNumber', 'hidden', ['label' => 'traveller.place_number', 'required' => false])
             ->add('photo', 'file', ['required' => false])
         ;
         $builder->get('photo')->addModelTransformer(new MediaToUploadedFileTransformer());

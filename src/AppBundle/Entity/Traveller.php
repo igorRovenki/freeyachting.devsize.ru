@@ -106,7 +106,7 @@ class Traveller
 
     /**
      * @var integer
-     * @ORM\Column(name="place_number", type="smallint")
+     * @ORM\Column(name="place_number", type="smallint", nullable=true)
      */
     private $placeNumber;
 
@@ -136,6 +136,7 @@ class Traveller
         $this->children = false;
         $this->livingWithParents = false;
         $this->initiator = true;
+        $this->childNumber = 0;
     }
 
     /**

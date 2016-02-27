@@ -40,7 +40,7 @@
                                     </a>
                                     <div class="property-top">
                                         <p>{{ 'travel.skipper_rating'|trans }}: <b>5</b></p>
-                                        <p>{{ 'travel.free_places'|trans }}: <b>7</b></p>
+                                        <p>{{ 'travel.free_places'|trans }}: <b>{{ travel.freePlaces }}</b></p>
                                     </div>
                                     <div class="row property-bottom">
                                         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
@@ -49,7 +49,7 @@
                                             <p>{{ 'travel.aquatory'|trans }}: <b>{{ travel.aquatory }}</b></p>
                                         </div>
                                         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                                            <p>{{ 'travel.participants_number'|trans }}: <b>8</b></p>
+                                            <p>{{ 'travel.participants_number'|trans }}: <b>{{ travel.allTravellers.count }}</b></p>
                                             <p>{{ 'travel.for_all'|trans }}: <b>{{ travel.weekPrice }} {{ travel.weekPriceCurrency }}</b></p>
                                         </div>
                                     </div>

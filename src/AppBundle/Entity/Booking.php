@@ -41,6 +41,13 @@ class Booking
     private $travel;
 
     /**
+     * @var User
+     * @ORM\ManyToOne(targetEntity="User", cascade={"persist"}, inversedBy="bookings")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $user;
+
+    /**
      * @var ArrayCollection
      * @ORM\ManyToMany(targetEntity="Traveller", cascade={"persist"}, fetch="EXTRA_LAZY")
      * @ORM\JoinTable(name="bookings_has_travellers",
@@ -125,5 +132,21 @@ class Booking
     public function addTraveller(Traveller $traveller)
     {
         $this->travellers->add($traveller);
+    }
+
+    /**
+     * @return User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param User $user
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
     }
 }

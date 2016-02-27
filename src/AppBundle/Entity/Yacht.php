@@ -336,6 +336,11 @@ class Yacht
      */
     public function getTotalCabinsNumber()
     {
+        return (int)$this->singleCabinsNumber + (int)$this->doubleCabinsNumber;
+    }
+
+    public function getTotalPlacesNumber()
+    {
         return (int)$this->singleCabinsNumber + ((int)$this->doubleCabinsNumber * 2);
     }
 

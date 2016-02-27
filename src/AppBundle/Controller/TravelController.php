@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Booking;
 use AppBundle\Form\BookingType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -47,6 +48,7 @@ class TravelController extends Controller
 
     /**
      * @Route("/travel/{id}/booking", name="travel_booking")
+     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      * @Template()
      */
     public function bookTravelAction(Travel $travel, Request $request)
@@ -59,18 +61,21 @@ class TravelController extends Controller
 
     /**
      * @Route("/travel/{id}/booking/new", name="booking_create")
+     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      * @Method(methods={"POST"})
      */
     public function createAction(Travel $travel, Request $request)
     {
         $booking = new Booking();
-        $booking->setStatus(Booking::STATUS_PENDING);
-        $booking->setTravel($travel);
 
         $form = $this->createForm(new BookingType(), $booking);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
+            $booking->setStatus(Booking::STATUS_PENDING);
+            $booking->setTravel($travel);
+            $booking->setUser($this->getUser());
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($booking);
             $em->flush();
