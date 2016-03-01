@@ -2,15 +2,14 @@
 {% trans_default_domain "AppBundle" %}
 
 {% block content %}
-    <div class="container content traveller-cabin">
+    <div class="container content traveller-booked">
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                 <div class="row btn-block">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <h1>{{ 'search.label'|trans }}</h1>
-                        <p>{{ 'search.sort_label'|trans }}</p>
+                        <h1>{{ title|trans }}</h1>
                         <div class="search-filter">
-                            {{ knp_menu_render('search_menu', { template: 'AppBundle::searchMenu.html.twig', currentClass: 'active' }) }}
+                            {{ knp_menu_render('profile_menu', { template: 'AppBundle::searchMenu.html.twig', currentClass: 'active' }) }}
                         </div>
                     </div>
                 </div>

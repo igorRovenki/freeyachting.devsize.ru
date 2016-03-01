@@ -42,6 +42,8 @@ class MenuBuilder
             case 'fos_user_resetting_reset':
             case 'fos_user_resetting_send_email':
             case 'travel_booking':
+            case 'booked_travels':
+            case 'travels_history':
                 $menu->addChild('breadcrumbs.' . $route)->setCurrent(true);
                 break;
             case 'travel_show':
@@ -94,6 +96,26 @@ class MenuBuilder
             if ($sort == 'skipperRating') {
                 $menu['search.sort.skipper_rating']->setLinkAttribute('class', 'btn btn-9 active');
             }
+        }
+
+        return $menu;
+    }
+
+    public function createProfileMenu()
+    {
+        $menu = $this->factory->createItem('root');
+        $items = [
+            'fos_user_profile_show',
+            'travels_history',
+            'booked_travels',
+        ];
+
+        foreach ($items as $route) {
+            $menu->addChild('profile_menu.' . $route, ['route' => $route]);
+            $menu['profile_menu.' . $route]->setLinkAttribute(
+                'class',
+                'btn btn-9' . ($this->request->get('_route') == $route ? ' active' : '')
+            );
         }
 
         return $menu;

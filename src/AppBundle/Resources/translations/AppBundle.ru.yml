@@ -78,6 +78,9 @@ breadcrumbs:
     fos_user_resetting_send_email: Сброс пароля
     fos_user_resetting_reset: Сброс пароля
     travel_booking: Бронирование мест
+    booked_travels: Забронированные путешествия
+    travels_history: История путешествий
+
 search:
     label: Выберете свое путешествие
     sort_label: "Сортировать по:"
@@ -123,6 +126,11 @@ profile:
     cabinet: Личный кабинет
     logout: Выйти
     change_password: Изменить пароль
+profile_menu:
+    fos_user_profile_show: Профиль
+    travels_history: История путешествий
+    booked_travels: Забронированные путешествия
+
 security:
     captcha:
         errors:
