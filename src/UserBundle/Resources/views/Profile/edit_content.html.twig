@@ -6,6 +6,9 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <h1>{{ 'profile.title'|trans }}</h1>
+                    <div class="search-filter">
+                        {{ knp_menu_render('profile_menu', { template: 'AppBundle::searchMenu.html.twig', currentClass: 'active' }) }}
+                    </div>
                 </div>
             </div>
             {{ form_start(form, {'method': 'post', 'action': path('fos_user_profile_edit'), 'attr': {'role': 'form'}}) }}
