@@ -21,30 +21,22 @@ class TravellerController extends Controller
      */
     public function bookedTravelsAction()
     {
-        /** @var User $user */
-        $user = $this->getUser();
-        $travels = $user->getBookings()->map(function ($booking) {
-            return $booking->getTravel();
-        });
-
-        return ['travels' => $travels, 'title' => 'breadcrumbs.booked_travels'];
+        return [
+            'bookings' => $this->getUser()->getBookings(),
+            'title' => 'breadcrumbs.booked_travels'
+        ];
     }
 
     /**
      * @Route("/history", name="travels_history")
      * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
+     * @Template()
      */
     public function travelsHistoryAction()
     {
-        /** @var User $user */
-        $user = $this->getUser();
-        $travels = $user->getBookings()->map(function ($booking) {
-            return $booking->getTravel();
-        });
-
-        return $this->render('AppBundle:Traveller:bookedTravels.html.twig', [
-            'travels' => $travels,
+        return [
+            'bookings' => $this->getUser()->getBookings(),
             'title' => 'breadcrumbs.travels_history'
-        ]);
+        ];
     }
 }

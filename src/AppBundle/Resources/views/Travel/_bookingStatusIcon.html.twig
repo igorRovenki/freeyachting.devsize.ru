@@ -1,0 +1,7 @@
+{% if booking.status == 'pending' %}
+    <i class="fa fa-clock-o"></i>
+{% elseif booking.status == 'canceled' %}
+    <i class="fa fa-times"></i>
+{% elseif booking.status == 'approved' %}
+    <i class="fa fa-check"></i>
+{% endif %}

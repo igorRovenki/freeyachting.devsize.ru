@@ -6,7 +6,9 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                 <div class="text-center">
                     <img src="{{ traveller.photoPublicUrl }}" class="img-circle" alt="{{ traveller.fullName }}">
-                    <h4 class="modal-title">{{ traveller.placeNumber }} {{ 'traveller.place'|trans|capitalize }}</h4>
+                    {% if traveller.placeNumber %}
+                        <h4 class="modal-title">{{ traveller.placeNumber }} {{ 'traveller.place'|trans|capitalize }}</h4>
+                    {% endif %}
                 </div>
             </div>
             <div class="modal-body text-center">

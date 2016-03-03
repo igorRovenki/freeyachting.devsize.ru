@@ -16,7 +16,7 @@
                 <div class="row">
                     <ul class="list-unstyled media-list">
                         {% for booking in bookings %}
-                            {% include 'AppBundle:Travel/travelCards:_profileTravelCard.html.twig' with { travel: booking.travel, bookingStatus: 1 } %}
+                            {% include 'AppBundle:Travel/travelCards:_profileTravelCard.html.twig' with { travel: booking.travel } %}
                         {% endfor %}
                     </ul>
                 </div>

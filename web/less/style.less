@@ -1748,7 +1748,7 @@ ul.question-answer-block {
   .property-list-top {
     p {margin: 0 0 2px !important;}
     .story-cost {margin-top: 15px !important;}
-    .confirmed {margin: 10px 0 !important;}
+    .booking-status {margin: 10px 0 !important;}
     .notactive {
       p {
         color: #d32758;
@@ -1775,7 +1775,7 @@ ul.question-answer-block {
 @media (max-width: @screen-xs-max) {
   .traveller-booked {
     .important {float: left;}
-    .confirmed {
+    .booking-status {
       float: right;
       padding-right: 15px;
       margin-top: 0 !important;
@@ -1802,13 +1802,15 @@ ul.question-answer-block {
 .icon-date {background-position: 0 -420px ;}
 .icon-days {background-position: -20px -420px ;}
 .icon-country {background-position: -40px -420px;}
-.confirmed {
+.booking-status {
   margin-top: 15px;
   p {
-    color: #67ad22;
     font: 16px @font-family-h4;
     text-transform: uppercase;
   }
+  .pending { color: #fcb40b; }
+  .approved { color: #67ad22; }
+  .canceled { color: #d32758; }
 }
 .new-info {
   margin-top: 20px;

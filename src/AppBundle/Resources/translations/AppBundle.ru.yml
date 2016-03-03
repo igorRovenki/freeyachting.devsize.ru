@@ -14,6 +14,7 @@ travel:
     date: Дата
     country: Страна
     dayPrice: В день на участника
+    card_day_price: За сутки
     price_for_all: Стоимость за всех участников
     schedule: Расписание путешествий
     share_with_friend: Отправить ссылку другу
@@ -143,6 +144,9 @@ form:
     gender_choices:
         m: Мужской
         w: Женский
+    gender_choices_short:
+        m: муж.
+        w: жен.
     email: Email
     username: Логин
     password: Пароль
@@ -194,3 +198,7 @@ booking:
     save_info: Сохранить инфо
     add_traveller: Добавить участника
     continue: Продолжить
+    status:
+        pending: Ожидает подтверждения
+        canceled: Отказано
+        approved: Подтверждено
