@@ -17,7 +17,7 @@
                 <div class="row">
                     <ul class="list-unstyled media-list media-search">
                         {% for travel in travels %}
-                            {% include 'AppBundle:Travel:_travelCard.html.twig' %}
+                            {% include 'AppBundle:Travel/travelCards:_travelCard.html.twig' %}
                         {% else %}
                             {{ 'search.travels_not_found'|trans }}
                         {% endfor %}

@@ -1,0 +1,65 @@
+{% trans_default_domain "AppBundle" %}
+<li>
+    <div class="media">
+        <div class="media-left hidden-xs">
+            <a href="{{ path('travel_show', { id: travel.id }) }}">
+                <img src="{% path travel.photos.first, 'small' %}" alt="{{ travel.name }}">
+            </a>
+        </div>
+        <div class="media-body">
+            <h4 class="media-heading">{{ travel.name }}</h4>
+            <div class="important">
+                <p>
+                    <i class="icon-date"></i>
+                    {{ travel.dateStart|localizeddate('none', 'none', app.request.locale, null, 'd MMM')|trim('.') }} -
+                    {{ travel.dateEnd|localizeddate('none', 'none', app.request.locale, null, 'd MMM')|trim('.') }} &nbsp;&nbsp;
+                    <i class="icon-days"></i> {{ travel.daysCount }} &nbsp;&nbsp;
+                    <i class="icon-country"></i> {{ travel.country }}
+                </p>
+            </div>
+            <div class="visible-xs booking-status">
+                <p class="{{ booking.status }}">
+                    {% include 'AppBundle:Travel:_bookingStatusIcon.html.twig' %}
+                    {{ ('booking.status.' ~ booking.status)|trans }}
+                </p>
+            </div>
+            <a class="media-left visible-xs" href="{{ path('travel_show', { id: travel.id }) }}">
+                <img src="{% path travel.photos.first, 'small' %}" alt="{{ travel.name }}" class="img-responsive">
+            </a>
+            <div class="row property-story-top">
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    {% set type = 'travel.type.' ~ travel.type %}
+                    <p>{{ 'travel.skipper_rating'|trans }}: <b>5</b></p>
+                    <p>{{ 'travel.free_places'|trans }}: <b>{{ travel.freePlaces }}</b></p>
+                    <p>{{ 'travel.type_label'|trans }}: <b>{{ type|trans }}</b></p>
+                    <p>{{ 'travel.aquatory'|trans }}: <b>{{ travel.aquatory }}</b></p>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <p><b>{{ 'travel.members'|trans }}</b></p>
+                    {% for traveller in booking.travellers %}
+                        <p>
+                            {{ traveller.fullName }}, {{ ('form.gender_choices_short.' ~ traveller.gender)|trans }}, {{ traveller.age }}
+                        </p>
+                    {% endfor %}
+
+                </div>
+            </div>
+            <p class="story-cost blue">{{ 'travel.card_day_price'|trans }}: <b>{{ travel.dayPrice }} {{ travel.dayPriceCurrency }}</b></p>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 btn-more">
+                    <a href="{{ path('travel_show', { id: travel.id }) }}" class="btn btn-3">
+                        {{ 'interface.buttons.more'|trans }}
+                    </a>
+                </div>
+                {% if bookingStatus is defined %}
+                    <div class="hidden-xs col-sm-6 col-md-6 col-lg-6 booking-status">
+                        <p class="{{ booking.status }}">
+                            {% include 'AppBundle:Travel:_bookingStatusIcon.html.twig' %}
+                            {{ ('booking.status.' ~ booking.status)|trans }}
+                        </p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</li>
