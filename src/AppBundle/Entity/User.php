@@ -15,6 +15,8 @@ class User extends BaseUser
 {
     const GENDER_M = 'm';
     const GENDER_W = 'w';
+    const USER_TYPE_TRAVELLER = 'traveller';
+    const USER_TYPE_SKIPPER = 'skipper';
 
     /**
      * @ORM\Id
@@ -82,6 +84,94 @@ class User extends BaseUser
      * @ORM\OneToMany(targetEntity="Booking", mappedBy="user", cascade={"persist", "remove"}, fetch="EXTRA_LAZY")
      */
     private $bookings;
+
+    /**
+     * @var string
+     * @ORM\Column(name="skype_login", type="string", length=255, nullable=true)
+     */
+    private $skypeLogin;
+
+    /**
+     * @var boolean
+     * @ORM\Column(name="know_russian", type="boolean", nullable=true)
+     */
+    private $knowRussian;
+
+    /**
+     * @var boolean
+     * @ORM\Column(name="know_english", type="boolean", nullable=true)
+     */
+    private $knowEnglish;
+
+    /**
+     * @var string
+     * @ORM\Column(name="first_another_lang", type="string", length=64, nullable=true)
+     */
+    private $firstAnotherLang;
+
+    /**
+     * @var string
+     * @ORM\Column(name="second_another_lang", type="string", length=64, nullable=true)
+     */
+    private $secondAnotherLang;
+
+    /**
+     * @var boolean
+     * @ORM\Column(name="iyt_certificate", type="boolean", nullable=true)
+     */
+    private $iytCertificate;
+
+    /**
+     * @var boolean
+     * @ORM\Column(name="rya_certificate", type="boolean", nullable=true)
+     */
+    private $ryaCertificate;
+
+    /**
+     * @var string
+     * @ORM\Column(name="certificate_number", type="string", length=255, nullable=true)
+     */
+    private $certificateNumber;
+
+    /**
+     * @var \DateTime
+     * @ORM\Column(name="certificate_issue_date", type="datetime", nullable=true)
+     */
+    private $certificateIssueDate;
+
+    /**
+     * @var string
+     * @ORM\Column(name="experience_years", type="string", length=255, nullable=true)
+     */
+    private $experienceYears;
+
+    /**
+     * @var string
+     * @ORM\Column(name="experience_miles", type="string", length=255, nullable=true)
+     */
+    private $experienceMiles;
+
+    /**
+     * @var boolean
+     * @ORM\Column(name="job_offers_agree", type="boolean", nullable=true)
+     */
+    private $jobOffersAgree;
+
+    /**
+     * @var boolean
+     * @ORM\Column(name="email_subscribtion", type="boolean", nullable=true)
+     */
+    private $emailSubscribtion;
+
+    /**
+     * @var ArrayCollection
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\WaterAreasExperience", cascade={"persist"})
+     * @ORM\JoinTable(name="skipper_has_water_experience",
+     *  joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *  inverseJoinColumns={@ORM\JoinColumn(name="water_areas_experience_id", referencedColumnName="id", unique=true)}
+     * )
+     */
+    private $waterAreasExperience;
 
 
     public function __construct()
@@ -255,5 +345,229 @@ class User extends BaseUser
     public function setBookings($bookings)
     {
         $this->bookings = $bookings;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSkypeLogin()
+    {
+        return $this->skypeLogin;
+    }
+
+    /**
+     * @param string $skypeLogin
+     */
+    public function setSkypeLogin($skypeLogin)
+    {
+        $this->skypeLogin = $skypeLogin;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isKnowRussian()
+    {
+        return $this->knowRussian;
+    }
+
+    /**
+     * @param boolean $knowRussian
+     */
+    public function setKnowRussian($knowRussian)
+    {
+        $this->knowRussian = $knowRussian;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isKnowEnglish()
+    {
+        return $this->knowEnglish;
+    }
+
+    /**
+     * @param boolean $knowEnglish
+     */
+    public function setKnowEnglish($knowEnglish)
+    {
+        $this->knowEnglish = $knowEnglish;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFirstAnotherLang()
+    {
+        return $this->firstAnotherLang;
+    }
+
+    /**
+     * @param string $firstAnotherLang
+     */
+    public function setFirstAnotherLang($firstAnotherLang)
+    {
+        $this->firstAnotherLang = $firstAnotherLang;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSecondAnotherLang()
+    {
+        return $this->secondAnotherLang;
+    }
+
+    /**
+     * @param string $secondAnotherLang
+     */
+    public function setSecondAnotherLang($secondAnotherLang)
+    {
+        $this->secondAnotherLang = $secondAnotherLang;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isIytCertificate()
+    {
+        return $this->iytCertificate;
+    }
+
+    /**
+     * @param boolean $iytCertificate
+     */
+    public function setIytCertificate($iytCertificate)
+    {
+        $this->iytCertificate = $iytCertificate;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isRyaCertificate()
+    {
+        return $this->ryaCertificate;
+    }
+
+    /**
+     * @param boolean $ryaCertificate
+     */
+    public function setRyaCertificate($ryaCertificate)
+    {
+        $this->ryaCertificate = $ryaCertificate;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCertificateNumber()
+    {
+        return $this->certificateNumber;
+    }
+
+    /**
+     * @param string $certificateNumber
+     */
+    public function setCertificateNumber($certificateNumber)
+    {
+        $this->certificateNumber = $certificateNumber;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getCertificateIssueDate()
+    {
+        return $this->certificateIssueDate;
+    }
+
+    /**
+     * @param \DateTime $certificateIssueDate
+     */
+    public function setCertificateIssueDate($certificateIssueDate)
+    {
+        $this->certificateIssueDate = $certificateIssueDate;
+    }
+
+    /**
+     * @return string
+     */
+    public function getExperienceYears()
+    {
+        return $this->experienceYears;
+    }
+
+    /**
+     * @param string $experienceYears
+     */
+    public function setExperienceYears($experienceYears)
+    {
+        $this->experienceYears = $experienceYears;
+    }
+
+    /**
+     * @return string
+     */
+    public function getExperienceMiles()
+    {
+        return $this->experienceMiles;
+    }
+
+    /**
+     * @param string $experienceMiles
+     */
+    public function setExperienceMiles($experienceMiles)
+    {
+        $this->experienceMiles = $experienceMiles;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isJobOffersAgree()
+    {
+        return $this->jobOffersAgree;
+    }
+
+    /**
+     * @param boolean $jobOffersAgree
+     */
+    public function setJobOffersAgree($jobOffersAgree)
+    {
+        $this->jobOffersAgree = $jobOffersAgree;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isEmailSubscribtion()
+    {
+        return $this->emailSubscribtion;
+    }
+
+    /**
+     * @param boolean $emailSubscribtion
+     */
+    public function setEmailSubscribtion($emailSubscribtion)
+    {
+        $this->emailSubscribtion = $emailSubscribtion;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getWaterAreasExperience()
+    {
+        return $this->waterAreasExperience;
+    }
+
+    /**
+     * @param ArrayCollection $waterAreasExperience
+     */
+    public function setWaterAreasExperience($waterAreasExperience)
+    {
+        $this->waterAreasExperience = $waterAreasExperience;
     }
 }

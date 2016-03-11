@@ -1,0 +1,305 @@
+{% trans_default_domain 'AppBundle' %}
+{% form_theme form 'AppBundle:form:captcha_widget.html.twig' %}
+<div class="container content traveller-registration">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <h1>{% block profile_title %}{{ 'registration.skipper_title'|trans }}{% endblock profile_title %}</h1>
+                </div>
+            </div>
+            {% block form_start %}{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'role': 'form'}}) }}{% endblock form_start %}
+                <div class="row profile-top">
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 text-center foto fileinput">
+                        {% include 'AppBundle:Media:bootstrap_file_input_register.html.twig' with {
+                            browseLabel: 'form.upload_photo'|trans,
+                            formImage: form.photo
+                        } %}
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                        <div class="form-group">
+                            {{ form_label(form.lastName) }}
+                            {{ form_errors(form.lastName) }}
+                            {{ form_widget(form.lastName, { attr: {class: 'form-control'} }) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_label(form.name) }}
+                            {{ form_errors(form.name) }}
+                            {{ form_widget(form.name, { attr: {class: 'form-control'} }) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_label(form.patronomic) }}
+                            {{ form_errors(form.patronomic) }}
+                            {{ form_widget(form.patronomic, { attr: {class: 'form-control'} }) }}
+                        </div>
+                        <div class="form-group">
+                            <label for="inputDate">{{ 'form.birthday'|trans }}</label>
+                            <div class="input-group">
+                                {{ form_widget(form.birthday, { attr: {class: 'form-control datepicker', 'aria-describedby': 'addonDateIcon'} }) }}
+                                <span class="input-group-addon" id="addonDateIcon"><i class="fa fa-calendar"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6 col-sm-push-6">
+                        <div class="btn-group buttons-gender" data-toggle="buttons">
+                            <label>{{ 'form.gender'|trans }}</label><br>
+                            <label class="btn btn-9 radio-item active" data-radio-hidden-id="{{ form.gender.vars.id }}" data-radio-value="{{ constant('AppBundle\\Entity\\User::GENDER_M') }}">
+                                {{ 'form.gender_choices.m'|trans }}
+                            </label>
+                            <label class="btn btn-9 radio-item" data-radio-hidden-id="{{ form.gender.vars.id }}" data-radio-value="{{ constant('AppBundle\\Entity\\User::GENDER_W') }}">
+                                {{ 'form.gender_choices.w'|trans }}
+                            </label>
+                            {{ form_widget(form.gender) }}
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-sm-pull-6">
+                        <div class="form-group">
+                            {{ form_label(form.email) }}
+                            {{ form_errors(form.email) }}
+                            {{ form_widget(form.email, { attr: {class: 'form-control'} }) }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                        <div class="form-group">
+                            {{ form_label(form.skypeLogin) }}
+                            {{ form_errors(form.skypeLogin) }}
+                            {{ form_widget(form.skypeLogin, { attr: {class: 'form-control'} }) }}
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                        <div class="form-group">
+                            {{ form_label(form.phone) }}
+                            {{ form_errors(form.phone) }}
+                            {{ form_widget(form.phone, { attr: {class: 'form-control'} }) }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="form-group">
+                            <label>{{ 'form.know_languages'|trans }}</label><br>
+                            <label class="checkbox-inline">
+                                {{ form_errors(form.knowRussian) }}
+                                {{ form_widget(form.knowRussian) }} {{ 'form.russian_lang'|trans }}
+                            </label>
+                            <label class="checkbox-inline">
+                                {{ form_errors(form.knowEnglish) }}
+                                {{ form_widget(form.knowEnglish) }} {{ 'form.english_lang'|trans }}
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="form-group">
+                            {{ form_label(form.firstAnotherLang) }}
+                            {{ form_errors(form.firstAnotherLang) }}
+                            {{ form_widget(form.firstAnotherLang, { attr: {class: 'form-control'} }) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_errors(form.secondAnotherLang) }}
+                            {{ form_widget(form.secondAnotherLang, { attr: {class: 'form-control'} }) }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h4>{{ 'form.skipper_license'|trans }}</h4>
+                        <div class="form-group">
+                            <label class="label-margin-right">{{ 'form.cert_type_title'|trans }} <span>*</span></label>
+                            <label class="checkbox-inline">
+                                {{ form_widget(form.iytCertificate) }} {{ 'form.cert_type.iyt'|trans }}
+                            </label>
+                            <label class="checkbox-inline">
+                                {{ form_widget(form.ryaCertificate) }} {{ 'form.cert_type.rya'|trans }}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="form-group">
+                            {{ form_label(form.certificateNumber) }}
+                            {{ form_errors(form.certificateNumber) }}
+                            {{ form_widget(form.certificateNumber, { attr: {class: 'form-control'} }) }}
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="form-group">
+                            {{ form_label(form.certificateIssueDate) }}
+                            {{ form_errors(form.certificateIssueDate) }}
+                            <div class="input-group">
+                                {{ form_widget(form.certificateIssueDate, { attr: {class: 'form-control datepicker', 'aria-describedby': 'addonDateIcon'} }) }}
+                                <span class="input-group-addon" id="addonDateIcon"><i class="fa fa-calendar"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h4>{{ 'form.skipper_experience'|trans }}</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="form-group">
+                            {{ form_label(form.experienceYears) }}
+                            {{ form_errors(form.experienceYears) }}
+                            {{ form_widget(form.experienceYears, { attr: {class: 'form-control'} }) }}
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6">
+                        {{ form_label(form.experienceMiles) }}
+                        {{ form_errors(form.experienceMiles) }}
+                        {{ form_widget(form.experienceMiles, { attr: {class: 'form-control'} }) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 header-small">
+                        <label><b>Опыт хождения по акваториям <span>*</span></b></label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="form-group">
+                            <label for="inputSelectCountry" class="control-label">Регион хождения №1</label>
+                            <select name="name" id="inputSelectCountry" class="form-control">
+                                <option value="no"></option>
+                                <option value="country-fra">Франция</option>
+                                <option value="country-esp">Испания</option>
+                                <option value="country-por">Португалия</option>
+                                <option value="country-nid">Нидерланды</option>
+                                <option value="country-ita">Италия</option>
+                                <option value="country-jpn">Япония</option>
+                                <option value="country-chi">Китай</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="form-group">
+                            <label for="inputWaterArea" class="control-label">Выбор акватории</label>
+                            <select name="name" id="inputWaterArea" class="form-control">
+                                <option value="wa1">Акватория похода 1</option>
+                                <option value="wa2">Акватория похода 2</option>
+                                <option value="wa3">Акватория похода 3</option>
+                                <option value="wa4">Акватория похода 4</option>
+                                <option value="wa5">Акватория похода 5</option>
+                                <option value="wa6">Акватория похода 6</option>
+                                <option value="wa7">Акватория похода 7</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row button-block">
+                    <div class="col-xs-12 col-sm-offset-2 col-sm-4 text-center">
+                        <button type="submit" class="btn btn-5">Добавить еще регион</button>
+                    </div>
+                    <div class="col-xs-12 col-sm-4 text-center">
+                        <button type="submit" class="btn btn-4">Сохранить</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 header-small">
+                        <label><b>Желаемый опыт хождения по акваториям <span>*</span></b></label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="form-group">
+                            <label for="inputSelectCountry2" class="control-label">Регион хождения №1</label>
+                            <select name="name" id="inputSelectCountry2" class="form-control">
+                                <option value="no"></option>
+                                <option value="country-fra2">Франция</option>
+                                <option value="country-esp2">Испания</option>
+                                <option value="country-por2">Португалия</option>
+                                <option value="country-nid2">Нидерланды</option>
+                                <option value="country-ita2">Италия</option>
+                                <option value="country-jpn2">Япония</option>
+                                <option value="country-chi2">Китай</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="form-group">
+                            <label for="inputWaterArea2" class="control-label">Выбор акватории</label>
+                            <select name="name" id="inputWaterArea2" class="form-control">
+                                <option value="wa21">Акватория похода 1</option>
+                                <option value="wa22">Акватория похода 2</option>
+                                <option value="wa23">Акватория похода 3</option>
+                                <option value="wa24">Акватория похода 4</option>
+                                <option value="wa25">Акватория похода 5</option>
+                                <option value="wa26">Акватория похода 6</option>
+                                <option value="wa27">Акватория похода 7</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row button-block">
+                    <div class="col-xs-12 col-sm-offset-2 col-sm-4 text-center">
+                        <button type="submit" class="btn btn-5">Добавить еще регион</button>
+                    </div>
+                    <div class="col-xs-12 col-sm-4 text-center">
+                        <button type="submit" class="btn btn-4">Сохранить</button>
+                    </div>
+                </div>
+
+                <div class="row profile-bottom">
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="form-group">
+                            {{ form_label(form.username) }}
+                            {{ form_errors(form.username) }}
+                            {{ form_widget(form.username, { attr: {class: 'form-control'} }) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_label(form.plainPassword.first) }}
+                            {{ form_errors(form.plainPassword.first) }}
+                            {{ form_widget(form.plainPassword.first, { attr: {class: 'form-control'} }) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_label(form.plainPassword.second) }}
+                            {{ form_errors(form.plainPassword.second) }}
+                            {{ form_widget(form.plainPassword.second, { attr: {class: 'form-control'} }) }}
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="form-group checkbox-margin-top">
+                            <label class="checkbox-inline">
+                                {{ form_errors(form.jobOffersAgree) }}
+                                {{ form_widget(form.jobOffersAgree) }}
+                                {{ 'form.jobOffersAgree'|trans }}
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label class="checkbox-inline">
+                                {{ form_errors(form.emailSubscribtion) }}
+                                {{ form_widget(form.emailSubscribtion) }}
+                                {{ 'form.emailSubscribtion'|trans|raw }}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row captcha-block">
+                    {{ form_widget(form.captcha) }}
+                </div>
+                <div class="row bottom-form">
+                    <div class="col-xs-12 text-center">
+                        <p>{{ 'form.required_fileds'|trans|raw }}</p>
+                    </div>
+                </div>
+                <div class="row button-block">
+                    <div class="col-xs-12 col-sm-offset-2 col-sm-4 text-center">
+                        <button type="submit" class="btn btn-5">{{ 'form.cancel_registration'|trans }}</button>
+                    </div>
+                    <div class="col-xs-12 col-sm-4 text-center">
+                        <button type="submit" class="btn btn-4">{{ 'form.register_submit'|trans }}</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 banner-xs">
+            {% include 'AppBundle:blocks:banners.html.twig' %}
+        </div>
+    </div>
+</div>

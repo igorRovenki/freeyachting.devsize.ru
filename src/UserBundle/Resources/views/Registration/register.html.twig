@@ -7,5 +7,9 @@
     <script type="text/javascript" src="{{ asset('js/bootstrap-file-input/fileinput_locale_ru.js') }}"></script>
 {% endblock js %}
 {% block content %}
-    {% include 'UserBundle:Registration:register_content.html.twig' %}
+    {% if app.request.get('type') == 'skipper' %}
+        {% include 'UserBundle:Registration:register_skipper_content.html.twig' %}
+    {% else %}
+        {% include 'UserBundle:Registration:register_content.html.twig' %}
+    {% endif %}
 {% endblock content %}
