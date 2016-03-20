@@ -122,7 +122,8 @@ jQuery(document).ready(function () {
 
     //var prev = $('.buttons-gender label.btn.active');
     $('.buttons-gender label.btn').click(function() {
-        var holder = $(this).parent().parent().parent();
+        console.log($(this).parent().parent().parent().parent())
+        var holder = ($(this).parent().parent().parent().parent());
         var gender = $(this).attr('data-radio-value');
         /* Change avatar when changing "gender" */
         var avatar = $(holder).find('.file-default-preview img');

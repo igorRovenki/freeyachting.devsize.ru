@@ -17,6 +17,8 @@ class User extends BaseUser
     const GENDER_W = 'w';
     const USER_TYPE_TRAVELLER = 'traveller';
     const USER_TYPE_SKIPPER = 'skipper';
+    const ROLE_SKIPPER = 'ROLE_SKIPPER';
+    const ROLE_TRAVELLER = 'ROLE_TRAVELLER';
 
     /**
      * @ORM\Id
@@ -168,7 +170,7 @@ class User extends BaseUser
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\WaterAreasExperience", cascade={"persist"})
      * @ORM\JoinTable(name="skipper_has_water_experience",
      *  joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
-     *  inverseJoinColumns={@ORM\JoinColumn(name="water_areas_experience_id", referencedColumnName="id", unique=true)}
+     *  inverseJoinColumns={@ORM\JoinColumn(name="water_areas_experience_id", referencedColumnName="id")}
      * )
      */
     private $waterAreasExperience;

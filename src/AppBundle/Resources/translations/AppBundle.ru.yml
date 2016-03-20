@@ -71,8 +71,8 @@ breadcrumbs:
     search_travel: Результаты поиска
     travel_show: Обзор путешествия
     fos_user_registration_register: Регистрация путешественника
-    fos_user_profile_edit: Профиль путешественника
-    fos_user_profile_show: Профиль путешественника
+    fos_user_profile_edit: Личный кабинет
+    fos_user_profile_show: Личный кабинет
     fos_user_security_login: Вход
     fos_user_change_password: Изменить пароль
     fos_user_resetting_check_email: Проверка Email
@@ -128,6 +128,7 @@ profile:
     cabinet: Личный кабинет
     logout: Выйти
     change_password: Изменить пароль
+    skipper_title: Профиль шкипера
 profile_menu:
     fos_user_profile_show: Профиль
     travels_history: История путешествий
@@ -195,6 +196,12 @@ form:
     jobOffersAgree: Открыт для предложений по работе
     emailSubscribtion: Я хотел бы получать рассылку по специальным<br> предложениям для шкиперов
     cancel_registration: Отменить регистрацию
+    region_water: Регион хождения
+    region_aquatory: Выбор акватории
+resetting:
+    resetting_password: Восстановление пароля
+    login_or_email: Логин или Email
+    send: Выслать
 traveller:
     full_name: ФИО
     email: Email

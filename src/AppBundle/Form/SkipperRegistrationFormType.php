@@ -2,6 +2,7 @@
 
 namespace AppBundle\Form;
 
+use AppBundle\Entity\WaterAreasExperience;
 use Symfony\Component\Form\Extension\Core\DataTransformer\DateTimeToStringTransformer;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -48,12 +49,13 @@ class SkipperRegistrationFormType extends RegistrationFormType
                 'choices' => $this->getLangs(),
                 'choice_label' => $this->getChoiceCallable()
             ])
-            ->add('iytCertificate', 'checkbox', ['label' => 'form.iytCertificate'])
-            ->add('ryaCertificate', 'checkbox', ['label' => 'form.ryaCertificate'])
+            ->add('iytCertificate', 'checkbox', ['label' => 'form.iytCertificate', 'required' => false])
+            ->add('ryaCertificate', 'checkbox', ['label' => 'form.ryaCertificate', 'required' => false])
             ->add('certificateNumber', 'text', ['label' => 'form.certificateNumber', 'constraints' => [new NotBlank()]])
             ->add('certificateIssueDate', 'text', ['label' => 'form.certificateIssueDate'])
             ->add('experienceYears', 'text', ['label' => 'form.experienceYears'])
             ->add('experienceMiles', 'text', ['label' => 'form.experienceMiles'])
+            ->add('waterAreasExperience', 'collection', ['type' => new WaterAreasExperienceType(), 'allow_add' => true])
             ->add('jobOffersAgree', 'checkbox', ['label' => 'form.jobOffersAgree', 'required' => false])
             ->add('emailSubscribtion', 'checkbox', ['label' => 'form.jobOffersAgree', 'required' => false])
             ->add(
@@ -71,6 +73,9 @@ class SkipperRegistrationFormType extends RegistrationFormType
         ;
 
         $builder->get('birthday')->addModelTransformer(new DateTimeToStringTransformer(null, null, 'Y-m-d'));
+        $builder->get('certificateIssueDate')->addModelTransformer(
+            new DateTimeToStringTransformer(null, null, 'Y-m-d')
+        );
         $builder->get('photo')->addModelTransformer(new MediaToUploadedFileTransformer());
 
     }
@@ -82,6 +87,7 @@ class SkipperRegistrationFormType extends RegistrationFormType
                 'data_class' => 'AppBundle\Entity\User',
                 'intention'  => 'skipper_registration',
                 'translation_domain' => 'AppBundle',
+                'csrf_protection' => false
             ]
         );
     }

@@ -63,6 +63,12 @@ class RegistrationController extends BaseController
             $event = new FormEvent($form, $request);
             $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
 
+            if ($request->get('type') == User::USER_TYPE_SKIPPER) {
+                $user->addRole(User::ROLE_SKIPPER);
+            } else {
+                $user->addRole(User::ROLE_TRAVELLER);
+            }
+
             $userManager->updateUser($user);
 
             if (null === $response = $event->getResponse()) {

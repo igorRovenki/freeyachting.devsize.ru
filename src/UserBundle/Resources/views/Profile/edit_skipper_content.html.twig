@@ -1,0 +1,107 @@
+{% trans_default_domain 'AppBundle' %}
+
+<div class="container content traveller-registration">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <h1>{{ 'profile.skipper_title'|trans }}</h1>
+                    <div class="search-filter">
+                        <!-- skipper menu -->
+                    </div>
+                </div>
+            </div>
+            {{ form_start(form, {'method': 'post', 'action': path('fos_user_profile_edit'), 'attr': {'role': 'form'}}) }}
+            <div class="row profile-top">
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 text-center foto fileinput">
+                    {% include 'AppBundle:Media:bootstrap_file_input.html.twig' with {
+                        browseLabel: 'form.change_photo'|trans,
+                        formImage: form.photo
+                    } %}
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <div class="form-group">
+                        {{ form_label(form.lastName) }}
+                        {{ form_errors(form.lastName) }}
+                        {{ form_widget(form.lastName, { attr: {class: 'form-control'} }) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.name) }}
+                        {{ form_errors(form.name) }}
+                        {{ form_widget(form.name, { attr: {class: 'form-control'} }) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.patronomic) }}
+                        {{ form_errors(form.patronomic) }}
+                        {{ form_widget(form.patronomic, { attr: {class: 'form-control'} }) }}
+                    </div>
+                    <div class="btn-group buttons-gender" data-toggle="buttons">
+                        <label>{{ 'form.gender'|trans }}</label><br>
+                        {% set man = constant('AppBundle\\Entity\\User::GENDER_M') %}
+                        {% set woman = constant('AppBundle\\Entity\\User::GENDER_W') %}
+                        <label class="btn radio-item btn-9 {% if form.vars.value.gender == man %}active{% endif %}" data-radio-hidden-id="{{ form.gender.vars.id }}" data-radio-value="{{ man }}">
+                            {{ 'form.gender_choices.m'|trans }}
+                        </label>
+                        <label class="btn radio-item btn-9 {% if form.vars.value.gender == woman %}active{% endif %}" data-radio-hidden-id="{{ form.gender.vars.id }}" data-radio-value="{{ woman }}">
+                            {{ 'form.gender_choices.w'|trans }}
+                        </label>
+                        {{ form_widget(form.gender, { attr: { value: form.vars.value.gender, class: 'gender' } }) }}
+                    </div>
+                </div>
+            </div>
+            <div class="row profile-bottom">
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <div class="form-group">
+                        {{ form_label(form.username) }}
+                        {{ form_errors(form.username) }}
+                        {{ form_widget(form.username, { attr: {class: 'form-control'} }) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.current_password) }}
+                        {{ form_errors(form.current_password) }}
+                        {{ form_widget(form.current_password, { attr: {class: 'form-control'} }) }}
+                        <div class="text-right">
+                            <a href="{{ path('fos_user_change_password') }}">{{ 'form.change_password'|trans }}</a>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.phone) }}
+                        {{ form_errors(form.phone) }}
+                        {{ form_widget(form.phone, { attr: {class: 'form-control'} }) }}
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <div class="form-group">
+                        <label for="inputDate">{{ 'form.birthday'|trans }}</label>
+                        <div class="input-group">
+                            {{ form_widget(form.birthday, { attr: {class: 'form-control datepicker', 'aria-describedby': 'addonDateIcon'} }) }}
+                            <span class="input-group-addon" id="addonDateIcon"><i class="fa fa-calendar"></i></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.email) }}
+                        {{ form_errors(form.email) }}
+                        {{ form_widget(form.email, { attr: {class: 'form-control'} }) }}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    {{ form_label(form.interests) }}
+                    {{ form_errors(form.interests) }}
+                    {{ form_widget(form.interests, { attr: {class: 'form-control', rows: 10} }) }}
+                </div>
+            </div>
+            <div class="row bottom-form">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+                    <p>{{ 'form.required_fileds'|trans|raw }}</p>
+                    <button type="submit" class="btn btn-1">{{ 'form.edit_submit'|trans }}</button>
+                </div>
+            </div>
+            {{ form_end(form) }}
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 banner-xs">
+            {% include 'AppBundle:blocks:banners.html.twig' %}
+        </div>
+    </div>
+</div>

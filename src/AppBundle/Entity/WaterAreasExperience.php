@@ -27,14 +27,14 @@ class WaterAreasExperience
     /**
      * @var Country
      *
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Country", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Country", cascade={"persist"})
      */
     private $country;
 
     /**
      * @var Aquatory
      *
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Aquatory", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Aquatory", cascade={"persist"})
      */
     private $aquatory;
 
