@@ -1,0 +1,17 @@
+<div class="row">
+    <div class="col-xs-12 col-sm-6">
+        <div class="form-group">
+            {{ form_label(form.waterAreasExperience.vars.prototype.country) }}
+            {{ form_errors(form.waterAreasExperience.vars.prototype.country) }}
+            {{ form_widget(form.waterAreasExperience.vars.prototype.country, { attr: {class: 'form-control'} }) }}
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-6">
+        <div class="form-group">
+            {{ form_label(form.waterAreasExperience.vars.prototype.aquatory) }}
+            {{ form_errors(form.waterAreasExperience.vars.prototype.aquatory) }}
+            {{ form_widget(form.waterAreasExperience.vars.prototype.aquatory, { attr: {class: 'form-control'} }) }}
+            {{ form_widget(form.waterAreasExperience.vars.prototype.type) }}
+        </div>
+    </div>
+</div>

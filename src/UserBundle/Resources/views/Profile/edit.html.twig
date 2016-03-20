@@ -8,5 +8,9 @@
     <script type="text/javascript" src="{{ asset('js/bootstrap-file-input/fileinput_locale_ru.js') }}"></script>
 {% endblock js %}
 {% block content %}
-    {% include "UserBundle:Profile:edit_content.html.twig" %}
+    {% if app.user.hasRole(constant('ROLE_SKIPPER', app.user)) %}
+        {% include "UserBundle:Profile:edit_skipper_content.html.twig" %}
+    {% else %}
+        {% include "UserBundle:Profile:edit_content.html.twig" %}
+    {% endif %}
 {% endblock content %}

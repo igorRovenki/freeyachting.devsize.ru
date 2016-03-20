@@ -71,8 +71,8 @@ breadcrumbs:
     search_travel: Результаты поиска
     travel_show: Обзор путешествия
     fos_user_registration_register: Регистрация путешественника
-    fos_user_profile_edit: Профиль путешественника
-    fos_user_profile_show: Профиль путешественника
+    fos_user_profile_edit: Личный кабинет
+    fos_user_profile_show: Личный кабинет
     fos_user_security_login: Вход
     fos_user_change_password: Изменить пароль
     fos_user_resetting_check_email: Проверка Email
@@ -122,11 +122,13 @@ modal:
         skipper: Капитан
 registration:
     title: Регистрация путешественника
+    skipper_title: Регистрация шкипера
 profile:
     title: Профиль путешественника
     cabinet: Личный кабинет
     logout: Выйти
     change_password: Изменить пароль
+    skipper_title: Профиль шкипера
 profile_menu:
     fos_user_profile_show: Профиль
     travels_history: История путешествий
@@ -164,6 +166,38 @@ form:
     change_password: Изменить пароль
     yes: Да
     no: Нет
+    skypeLogin: Skype
+    know_languages: Знание языков
+    russian_lang: Русский язык
+    english_lang: Английский язык
+    another_lang: Другой язык
+    languages:
+        english: Английский язык
+        french: Французкий язык
+        spanish: Испанский язык
+        portuguese: Португальский язык
+        dutch: Голландский язык
+        italian: Итальянский язык
+        japanese: Японский язык
+        chinese: Китайский язык
+    skipper_license: Капитанская лицензия
+    cert_type_title: Тип сертификата
+    cert_type:
+        iyt: IYT
+        rya: RYA
+    certificateNumber: Номер сертификата
+    certificateIssueDate: Дата выдачи
+    experienceYears: Количество лет
+    experienceMiles: Количество пройденных миль
+    resetting_password: Восстановление пароля
+    login_or_email: Логин или Email
+    send: Выслать
+    skipper_experience: Капитанский опыт
+    jobOffersAgree: Открыт для предложений по работе
+    emailSubscribtion: Я хотел бы получать рассылку по специальным<br> предложениям для шкиперов
+    cancel_registration: Отменить регистрацию
+    region_water: Регион хождения
+    region_aquatory: Выбор акватории
 resetting:
     resetting_password: Восстановление пароля
     login_or_email: Логин или Email
