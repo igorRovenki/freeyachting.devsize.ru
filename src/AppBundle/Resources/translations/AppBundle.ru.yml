@@ -236,3 +236,9 @@ booking:
         pending: Ожидает подтверждения
         canceled: Отказано
         approved: Подтверждено
+
+errors:
+    page404:
+        title: Страница <br class="visible-xs">не найдена
+        desc: Данной страницы не существует<br class="visible-xs"> или она была удалена.
+        link: Попробуйте вернуться <a href="javascript:history.back()">назад</a><br class="visible-xs"> или на <a href="/">главную страницу</a>

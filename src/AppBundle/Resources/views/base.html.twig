@@ -70,17 +70,19 @@
                     <li class="active"><a href="#"><i class="fa fa-anchor"></i>Шкиперам</a></li>
                     <li><a href="#"><i class="fa fa-life-ring"></i>Помощь</a><div class="visible-lg"></div></li>
                     <li class="user-profile">
-                        {% if is_granted("IS_AUTHENTICATED_FULLY") %}
-                            <a id="drop3" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                <i class="fa fa-lock"></i>{{ app.user.username }}
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="drop3">
-                                <li><a href="{{ path('fos_user_profile_edit') }}">{{ 'profile.cabinet'|trans }}</a></li>
-                                <li><a href="{{ path('fos_user_security_logout') }}">{{ 'profile.logout'|trans }}</a></li>
-                            </ul>
-                        {% else %}
-                            <a href="#" data-toggle="modal" data-target="#modal-login"><i class="fa fa-lock"></i>Личный кабинет</a>
-                        {% endif %}
+                        {% block security %}
+                            {% if is_granted("IS_AUTHENTICATED_FULLY") %}
+                                <a id="drop3" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fa fa-lock"></i>{{ app.user.username }}
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="drop3">
+                                    <li><a href="{{ path('fos_user_profile_edit') }}">{{ 'profile.cabinet'|trans }}</a></li>
+                                    <li><a href="{{ path('fos_user_security_logout') }}">{{ 'profile.logout'|trans }}</a></li>
+                                </ul>
+                            {% else %}
+                                <a href="#" data-toggle="modal" data-target="#modal-login"><i class="fa fa-lock"></i>Личный кабинет</a>
+                            {% endif %}
+                        {% endblock %}
                     </li>
                     <li><a href="#"><i class="fa fa-globe"></i>Ru</a></li>
                 </ul>
@@ -110,7 +112,9 @@
     {% include 'AppBundle:blocks:inhelp.html.twig' %}
 {% endblock %}
 
-{% include 'AppBundle:blocks:seoblock.html.twig' %}
+{% block seoblock %}
+    {% include 'AppBundle:blocks:seoblock.html.twig' %}
+{% endblock %}
 
 <footer>
     <div class="container">

@@ -1,0 +1,25 @@
+{% extends 'AppBundle::base.html.twig' %}
+{% trans_default_domain "AppBundle" %}
+
+{% block security %}
+{% endblock %}
+
+{% block breadcrumbs %}
+{% endblock %}
+
+{% block content %}
+    <div class="container content">
+        <div class="error404 text-center">
+            <p>{{ 'errors.page404.title'|trans|raw }}</p>
+            <p class="p404">4<i class="fa fa-life-ring"></i>4</p>
+            <p>{{ 'errors.page404.desc'|trans|raw }}</p>
+            <p>{{ 'errors.page404.link'|trans|raw }}</p>
+        </div>
+    </div>
+{% endblock %}
+
+{% block inhelp %}
+{% endblock %}
+
+{% block seoblock %}
+{% endblock %}
