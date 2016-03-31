@@ -179,6 +179,7 @@ class User extends BaseUser
     public function __construct()
     {
         $this->gender = self::GENDER_M;
+        $this->waterAreasExperience = new ArrayCollection();
         parent::__construct();
     }
 
