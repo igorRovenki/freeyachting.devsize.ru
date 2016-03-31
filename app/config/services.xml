@@ -18,6 +18,18 @@
             <argument>AppBundle\Entity\User</argument>
         </service>
 
+        <service id="app.skipper.profile.form.factory" class="FOS\UserBundle\Form\Factory\FormFactory">
+            <argument type="service" id="form.factory" />
+            <argument>app_user_skipper_profile</argument>
+            <argument>app_user_skipper_profile</argument>
+            <argument>%fos_user.profile.form.validation_groups%</argument>
+        </service>
+
+        <service id="app.skipper.profile.form.type" class="AppBundle\Form\SkipperProfileFormType">
+            <argument>%fos_user.model.user.class%</argument>
+            <tag name="form.type" alias="app_user_skipper_profile" />
+        </service>
+
     </services>
 
 </container>
