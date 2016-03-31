@@ -198,6 +198,11 @@ form:
     cancel_registration: Отменить регистрацию
     region_water: Регион хождения
     region_aquatory: Выбор акватории
+    water_experience:
+        title: Опыт хождения по акваториям
+        wanted_title: Желаемый опыт хождения по акваториям
+        add_region: Добавить еще регион
+        remove: Удалить
 resetting:
     resetting_password: Восстановление пароля
     login_or_email: Логин или Email

@@ -572,4 +572,20 @@ class User extends BaseUser
     {
         $this->waterAreasExperience = $waterAreasExperience;
     }
+
+    /**
+     * @param WaterAreasExperience $waterAreasExperience
+     */
+    public function addWaterAreasExperience(WaterAreasExperience $waterAreasExperience)
+    {
+        $this->waterAreasExperience->add($waterAreasExperience);
+    }
+
+    /**
+     * @param WaterAreasExperience $waterAreasExperience
+     */
+    public function removeWaterAreasExperience(WaterAreasExperience $waterAreasExperience)
+    {
+        $this->waterAreasExperience->removeElement($waterAreasExperience);
+    }
 }

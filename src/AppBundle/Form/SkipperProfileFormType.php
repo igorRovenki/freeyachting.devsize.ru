@@ -34,13 +34,14 @@ class SkipperProfileFormType extends AbstractType
                 'data_class' => 'AppBundle\Entity\User',
                 'intention' => 'profile',
                 'translation_domain' => 'AppBundle',
+                'csrf_protection' => false,
             ]
         );
     }
 
     public function getName()
     {
-        return 'app_user_profile';
+        return 'app_user_skipper_profile';
     }
 
     /**
@@ -52,7 +53,7 @@ class SkipperProfileFormType extends AbstractType
     protected function buildUserForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('lastName', null, ['label' => 'form.lastname', 'constraints'])
+            ->add('lastName', null, ['label' => 'form.lastname'])
             ->add('photo', 'file', ['required' => false])
             ->add('name', null, ['label' => 'form.name'])
             ->add('patronomic', null, ['label' => 'form.patronomic'])
@@ -61,21 +62,67 @@ class SkipperProfileFormType extends AbstractType
             ->add('birthday', 'text', ['label' => 'form.birthday', 'required' => false])
             ->add('email', 'email', ['label' => 'form.email'])
             ->add('skypeLogin', 'text', ['label' => 'form.skypeLogin', 'required' => false])
-            ->add('phone', 'email', ['label' => 'form.phone', 'required' => false])
+            ->add('phone', 'text', ['label' => 'form.phone', 'required' => false])
             ->add('knowRussian', 'checkbox', ['label' => 'form.knowRussian', 'required' => false])
             ->add('knowEnglish', 'checkbox', ['label' => 'form.knowEnglish', 'required' => false])
-            ->add('firstAnotherLang', 'choice', ['label' => 'form.anotherLang', 'required' => false])
-            ->add('secondAnotherLang', 'choice', ['required' => false])
-            ->add('iytCertificate', 'checkbox', ['label' => 'form.iytCertificate'])
-            ->add('ryaCertificate', 'checkbox', ['label' => 'form.ryaCertificate'])
-            ->add('certificateNumber', 'text', ['label' => 'form.ryaCertificate', 'constraints' => [new NotBlank()]])
-            ->add('certificateIssueDate', 'datetime', ['label' => 'form.certificateIssueDate'])
+            ->add('firstAnotherLang', 'choice', [
+                'label' => 'form.another_lang',
+                'required' => false,
+                'choices' => $this->getLangs(),
+                'choice_label' => $this->getChoiceCallable()
+            ])
+            ->add('secondAnotherLang', 'choice', [
+                'label' => 'form.another_lang',
+                'required' => false,
+                'choices' => $this->getLangs(),
+                'choice_label' => $this->getChoiceCallable()
+            ])
+            ->add('iytCertificate', 'checkbox', ['label' => 'form.iytCertificate', 'required' => false])
+            ->add('ryaCertificate', 'checkbox', ['label' => 'form.ryaCertificate', 'required' => false])
+            ->add('certificateNumber', 'text', ['label' => 'form.certificateNumber', 'constraints' => [new NotBlank()]])
+            ->add('certificateIssueDate', 'text', ['label' => 'form.certificateIssueDate'])
             ->add('experienceYears', 'text', ['label' => 'form.experienceYears'])
             ->add('experienceMiles', 'text', ['label' => 'form.experienceMiles'])
             ->add('jobOffersAgree', 'checkbox', ['label' => 'form.jobOffersAgree', 'required' => false])
             ->add('emailSubscribtion', 'checkbox', ['label' => 'form.jobOffersAgree', 'required' => false])
+            ->add('waterAreasExperience', 'collection', [
+                'type' => new WaterAreasExperienceType(),
+                'allow_add' => true,
+                'by_reference' => false,
+                'allow_delete' => true
+            ])
         ;
         $builder->get('birthday')->addModelTransformer(new DateTimeToStringTransformer(null, null, 'Y-m-d'));
+        $builder->get('certificateIssueDate')->addModelTransformer(
+            new DateTimeToStringTransformer(null, null, 'Y-m-d')
+        );
         $builder->get('photo')->addModelTransformer(new MediaToUploadedFileTransformer());
+    }
+
+    /**
+     * @return array
+     */
+    protected function getLangs()
+    {
+        return [
+            'english',
+            'french',
+            'spanish',
+            'portuguese',
+            'dutch',
+            'italian',
+            'japanese',
+            'chinese',
+        ];
+    }
+
+    /**
+     * @return \Closure
+     */
+    protected function getChoiceCallable()
+    {
+        return function ($value, $key, $index) {
+            return 'form.languages.' . $key;
+        };
     }
 }
