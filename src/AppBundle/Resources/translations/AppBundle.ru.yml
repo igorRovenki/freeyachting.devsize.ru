@@ -43,6 +43,24 @@ travel:
         payment: 3. Оплата
     enter_register_data: Введите регистрационные <br> данные путешественников
     success_booked: Путешествие успешно забронировано!
+    form:
+        participant_level_title: Уровень подготовки участников
+        participant_level:
+            advanced: Продвинутый уровень
+            averaged: Средний уровень
+            first: Начальный уровень
+        has_children_title: Участие детей
+        has_children:
+            1: Да
+            0: Нет
+        min_child_age: Мин. возраст детей
+        week_price_currency: Стоимость за место на яхте в неделю
+        week_price: Стоимость за место на яхте в сутки
+        day_price: Стоимость за место на яхте в сутки
+        currency:
+            EUR: EURO
+            USD: DOLLAR
+            RUB: РУБЛЬ
 yacht:
     short_description: Краткое описание
     ship_type_label: Тип судна
@@ -81,6 +99,7 @@ breadcrumbs:
     travel_booking: Бронирование мест
     booked_travels: Забронированные путешествия
     travels_history: История путешествий
+    create_new_travel: Создание путешествия
 
 search:
     label: Выберете свое путешествие
@@ -133,6 +152,10 @@ profile_menu:
     fos_user_profile_show: Профиль
     travels_history: История путешествий
     booked_travels: Забронированные путешествия
+skipper_profile_menu:
+    fos_user_profile_show: Профиль
+    current_travels: Текущие путешествия
+    archive_travels: Архив путешествий
 
 security:
     captcha:
@@ -203,6 +226,8 @@ form:
         wanted_title: Желаемый опыт хождения по акваториям
         add_region: Добавить еще регион
         remove: Удалить
+    travel_crate:
+        title: Создание путешествия
 resetting:
     resetting_password: Восстановление пароля
     login_or_email: Логин или Email

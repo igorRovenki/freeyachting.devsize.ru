@@ -8,6 +8,16 @@
                     <h1>{% block profile_title %}{{ 'profile.skipper_title'|trans }}{% endblock profile_title %}</h1>
                 </div>
             </div>
+            <div class="row btn-block">
+                <div class="col-xs-12 col-sm-8">
+                    <div class="search-filter">
+                        {{ knp_menu_render('skipper_profile_menu', { template: 'AppBundle::searchMenu.html.twig', currentClass: 'active' }) }}
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-4 text-right">
+                    <a href="{{ path('create_new_travel') }}" type="button" class="btn btn-4">Создать новое путешествие</a>
+                </div>
+            </div>
             {{ form_start(form, {'method': 'post', 'action': path('fos_user_profile_edit'), 'attr': {'role': 'form'}}) }}
             <div class="row profile-top">
                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 text-center foto fileinput">

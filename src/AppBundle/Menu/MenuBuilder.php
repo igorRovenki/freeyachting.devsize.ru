@@ -44,6 +44,7 @@ class MenuBuilder
             case 'travel_booking':
             case 'booked_travels':
             case 'travels_history':
+            case 'create_new_travel':
                 $menu->addChild('breadcrumbs.' . $route)->setCurrent(true);
                 break;
             case 'travel_show':
@@ -113,6 +114,26 @@ class MenuBuilder
         foreach ($items as $route) {
             $menu->addChild('profile_menu.' . $route, ['route' => $route]);
             $menu['profile_menu.' . $route]->setLinkAttribute(
+                'class',
+                'btn btn-9' . ($this->request->get('_route') == $route ? ' active' : '')
+            );
+        }
+
+        return $menu;
+    }
+
+    public function createSkipperProfileMenu()
+    {
+        $menu = $this->factory->createItem('root');
+        $items = [
+            'fos_user_profile_show',
+            'current_travels',
+            'archive_travels',
+        ];
+
+        foreach ($items as $route) {
+            $menu->addChild('skipper_profile_menu.' . $route, ['route' => $route]);
+            $menu['skipper_profile_menu.' . $route]->setLinkAttribute(
                 'class',
                 'btn btn-9' . ($this->request->get('_route') == $route ? ' active' : '')
             );

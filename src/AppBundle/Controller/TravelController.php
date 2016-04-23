@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Booking;
 use AppBundle\Form\BookingType;
+use AppBundle\Form\TravelType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
@@ -36,7 +37,7 @@ class TravelController extends Controller
     /**
      * Finds and displays a Travel
      *
-     * @Route("/travel/{id}", name="travel_show")
+     * @Route("/travel/{id}", name="travel_show", requirements={"id" = "\d+"})
      * @Template()
      * @param Travel $travel
      * @return array
