@@ -21,8 +21,7 @@ class TravelType extends AbstractType
                 'type',
                 'choice',
                 [
-                    'choices' =>
-                    [
+                    'choices' => [
                         Travel::TYPE_REST => 'travel.type.' . Travel::TYPE_REST,
                         Travel::TYPE_STUDING => 'travel.type.' . Travel::TYPE_STUDING,
                         Travel::TYPE_REGATTA_PARTICIPATION => 'travel.type.' . Travel::TYPE_REGATTA_PARTICIPATION,
@@ -30,13 +29,48 @@ class TravelType extends AbstractType
                     'label' => 'travel.type_label'
                 ]
             )
-            ->add('participantLevel')
-            ->add('dayPrice')
-            ->add('dayPriceCurrency')
-            ->add('weekPrice')
-            ->add('weekPriceCurrency')
-            ->add('children')
-            ->add('minChildAge')
+            ->add('participantLevel', 'choice', [
+                'label' => 'travel.form.participant_level_title',
+                'required' => false,
+                'choices' => [
+                    'advanced',
+                    'averaged',
+                    'first',
+                ],
+                'choice_label' => function ($value, $key, $index) {
+                    return 'travel.form.participant_level.' . $key;
+                },
+            ])
+            ->add('dayPrice', 'text', ['label' => 'travel.form.day_price'])
+            ->add('dayPriceCurrency', 'choice', [
+                'label' => 'travel.form.day_price_currency',
+                'choices' => [
+                    Travel::PRICE_CURRENCY_EUR => 'travel.form.currency.' . Travel::PRICE_CURRENCY_EUR,
+                    Travel::PRICE_CURRENCY_USD => 'travel.form.currency.' . Travel::PRICE_CURRENCY_USD,
+                    Travel::PRICE_CURRENCY_RUB => 'travel.form.currency.' . Travel::PRICE_CURRENCY_RUB,
+                ]
+            ])
+            ->add('weekPrice', 'text', ['label' => 'travel.form.week_price'])
+            ->add('weekPriceCurrency', 'choice', [
+                'label' => 'travel.form.week_price_currency',
+                'choices' => [
+                    Travel::PRICE_CURRENCY_EUR => 'travel.form.currency.' . Travel::PRICE_CURRENCY_EUR,
+                    Travel::PRICE_CURRENCY_USD => 'travel.form.currency.' . Travel::PRICE_CURRENCY_USD,
+                    Travel::PRICE_CURRENCY_RUB => 'travel.form.currency.' . Travel::PRICE_CURRENCY_RUB,
+                ]
+            ])
+            ->add('children', 'choice', [
+                'label' => 'travel.form.has_children_title',
+                'choices' => [0, 1],
+                'choice_label' => function ($value, $key, $index) {
+                    return 'travel.form.has_children.' . $key;
+                },
+            ])
+            ->add('minChildAge', 'choice', [
+                'choices' => range(1, 21),
+                'label' => 'travel.form.min_child_age',
+                'empty_data' => null
+            ])
             ->add('hotOffers')
             ->add('percentOfDiscount')
             ->add('timeForDiscountActivation')
@@ -44,10 +78,8 @@ class TravelType extends AbstractType
             ->add('skipperConfirmation')
             ->add('dateStart')
             ->add('dateEnd')
-            ->add('daysCount')
             ->add('country')
             ->add('aquatory')
-            ->add('yacht')
             ->add('skipperPaymentMethod')
             ->add('websiteComission')
             ->add('placeOfArrival')
@@ -62,7 +94,6 @@ class TravelType extends AbstractType
             ->add('included')
             ->add('excluded')
             ->add('photos')
-            ->add('days')
         ;
     }
 
