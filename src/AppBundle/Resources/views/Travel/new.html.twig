@@ -86,33 +86,25 @@
                     <div class="row">
                         <div class="col-xs-12 col-sm-6">
                             <div class="form-group">
-                                <label for="inputDiscountHot">Скидка для Горящих предложений</label>
-                                <select name="inputDiscountHot" id="inputDiscountHot" class="form-control">
-                                    <option value="yes">Да</option>
-                                    <option value="no" selected>Нет</option>
-                                </select>
+                                {{ form_label(form.hotOffers) }}
+                                {{ form_errors(form.hotOffers) }}
+                                {{ form_widget(form.hotOffers, { attr: {class: 'form-control'} }) }}
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-6">
                             <div class="row">
                                 <div class="col-xs-6">
                                     <div class="form-group">
-                                        <label for="inputDiscountHotPercent">Укажите % скидки</label>
-                                        <select name="inputDiscountHotPercent" id="inputDiscountHotPercent" class="form-control" disabled="disabled">
-                                            <?for($i=5; $i <= 100; $i += 5):?>
-                                            <option value="<?=$i?>"><?=$i?></option>
-                                            <?endfor;?>
-                                        </select>
+                                        {{ form_label(form.percentOfDiscount) }}
+                                        {{ form_errors(form.percentOfDiscount) }}
+                                        {{ form_widget(form.percentOfDiscount, { attr: {class: 'form-control', disabled: 'disabled'} }) }}
                                     </div>
                                 </div>
                                 <div class="col-xs-6">
                                     <div class="form-group">
-                                        <label for="inputDiscountHotDate">Срок активации скидки</label>
-                                        <select name="inputDiscountHotPercent" id="inputDiscountHotDate" class="form-control" disabled="disabled">
-                                            <?for($i=1; $i <= 12; $i++):?>
-                                            <option value="<?=$i?>"><?=$i?></option>
-                                            <?endfor;?>
-                                        </select>
+                                        {{ form_label(form.timeForDiscountActivation) }}
+                                        {{ form_errors(form.timeForDiscountActivation) }}
+                                        {{ form_widget(form.timeForDiscountActivation, { attr: {class: 'form-control', disabled: 'disabled'} }) }}
                                     </div>
                                 </div>
                             </div>
@@ -122,59 +114,52 @@
                     <div class="row">
                         <div class="col-xs-12 col-sm-6">
                             <div class="form-group">
-                                <label for="inputMinNumberTravellers">Минимальное количество заполненных мест на яхте, <br>
-                                    при котором путешествие состоится <span>*</span></label>
-                                <select name="inputMinNumberTravellers" id="inputMinNumberTravellers" class="form-control">
-                                    <?for($i=1; $i <= 10; $i++):?>
-                                    <option value="<?=$i?>"><?=$i?></option>
-                                    <?endfor;?>
-                                </select>
+                                <label>{{ 'travel.form.min_places_for_travel'|trans|raw }} <span>*</span></label>
+                                {{ form_errors(form.minPlacesForTravel) }}
+                                {{ form_widget(form.minPlacesForTravel, { attr: {class: 'form-control'} }) }}
                             </div>
                             <div class="form-group">
-                                <label for="inputDateBeginTravel">Дата начала путешествия <span>*</span></label>
+                                {{ form_label(form.dateStart) }}
+                                {{ form_errors(form.dateStart) }}
                                 <div class="input-group">
-                                    <input type="text" class="form-control" name="inputDateBeginTravel" id="inputDateBeginTravel" aria-describedby="addonDateBeginIcon">
-                                    <span class="input-group-addon" id="addonDateBeginIcon"><i class="fa fa-calendar"></i></span>
+                                    {{ form_widget(form.dateStart, { attr: {class: 'form-control datepicker', 'aria-describedby': 'addonDateIcon'} }) }}
+                                    <span class="input-group-addon" id="addonDateIcon"><i class="fa fa-calendar"></i></span>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="inputDateEndTravel">Дата окончания путешествия <span>*</span></label>
+                                {{ form_label(form.dateEnd) }}
+                                {{ form_errors(form.dateEnd) }}
                                 <div class="input-group">
-                                    <input type="text" class="form-control" name="inputDateEndTravel" id="inputDateEndTravel" aria-describedby="addonDateEndIcon">
-                                    <span class="input-group-addon" id="addonDateEndIcon"><i class="fa fa-calendar"></i></span>
+                                    {{ form_widget(form.dateEnd, { attr: {class: 'form-control datepicker', 'aria-describedby': 'addonDateIcon'} }) }}
+                                    <span class="input-group-addon" id="addonDateIcon"><i class="fa fa-calendar"></i></span>
                                 </div>
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-6">
                             <div class="form-group">
-                                <label for="inputConfirmSkipper"><br class="hidden-xs">Подтверждение участия со стороны шкипера</label>
-                                <select name="inputConfirmSkipper" id="inputConfirmSkipper" class="form-control">
-                                    <option value="yes">Да</option>
-                                    <option value="no">Нет</option>
-                                </select>
+                                <br>
+                                {{ form_label(form.skipperConfirmation) }}
+                                {{ form_errors(form.skipperConfirmation) }}
+                                {{ form_widget(form.skipperConfirmation, { attr: {class: 'form-control'} }) }}
                             </div>
                             <div class="form-group">
-                                <label for="inputDays">Количество дней путешествия</label>
-                                <select name="inputDays" id="inputDays" class="form-control">
-                                    <?for($i=1; $i <= 30; $i++):?>
-                                    <option value="<?=$i?>"><?=$i?></option>
-                                    <?endfor;?>
-                                </select>
+                                {{ form_label(form.country) }}
+                                {{ form_errors(form.country) }}
+                                {{ form_widget(form.country, { attr: {class: 'form-control'} }) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.aquatory) }}
+                                {{ form_errors(form.aquatory) }}
+                                {{ form_widget(form.aquatory, { attr: {class: 'form-control'} }) }}
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-12 col-sm-6">
-                            <div class="form-group">
-                                <label for="inputCountryTravel">Страна путешествия <span>*</span></label>
-                                <input type="text" class="form-control" name="inputCountryTravel" id="inputCountryTravel">
-                            </div>
+
                         </div>
                         <div class="col-xs-12 col-sm-6">
-                            <div class="form-group">
-                                <label for="inputWaterareaTravel">Акватория путешествия <span>*</span></label>
-                                <input type="text" class="form-control" name="inputWaterareaTravel" id="inputWaterareaTravel">
-                            </div>
+
                         </div>
                     </div>
                     <div class="deliver"></div>
