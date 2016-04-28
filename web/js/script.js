@@ -103,14 +103,14 @@ jQuery(document).ready(function () {
             $('#ageChild').attr('disabled', true);
         }
     });
-    $('#inputDiscountHot').change(function () {
-        if ($(this).val() == "yes") {
-            $('#inputDiscountHotPercent').attr('disabled', false);
-            $('#inputDiscountHotDate').attr('disabled', false);
+    $('#appbundle_travel_hotOffers').change(function () {
+        if ($(this).val() == 1) {
+            $('#appbundle_travel_percentOfDiscount').attr('disabled', false);
+            $('#appbundle_travel_timeForDiscountActivation').attr('disabled', false);
         }
-        if ($(this).val() == "no") {
-            $('#inputDiscountHotPercent').attr('disabled', true);
-            $('#inputDiscountHotDate').attr('disabled', true);
+        if ($(this).val() == 0) {
+            $('#appbundle_travel_percentOfDiscount').attr('disabled', true);
+            $('#appbundle_travel_timeForDiscountActivation').attr('disabled', true);
         }
     });
     $('#filterXS').click(function () {

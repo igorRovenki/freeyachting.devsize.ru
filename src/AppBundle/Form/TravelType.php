@@ -71,15 +71,46 @@ class TravelType extends AbstractType
                 'label' => 'travel.form.min_child_age',
                 'empty_data' => null
             ])
-            ->add('hotOffers')
-            ->add('percentOfDiscount')
-            ->add('timeForDiscountActivation')
-            ->add('minPlacesForTravel')
-            ->add('skipperConfirmation')
-            ->add('dateStart')
-            ->add('dateEnd')
-            ->add('country')
-            ->add('aquatory')
+            ->add('hotOffers', 'choice', [
+                'label' => 'travel.form.hot_offers',
+                'choices' => [0, 1],
+                'choice_label' => function ($value, $key, $index) {
+                    return 'form.yes_no.' . $key;
+                }
+            ])
+            ->add('percentOfDiscount', 'choice', [
+                'label' => 'travel.form.percent_of_discount',
+                'choices' => [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95]
+            ])
+            ->add('timeForDiscountActivation', 'choice', [
+                'label' => 'travel.form.time_for_discount_activation',
+                'choices' => range(1, 12)
+            ])
+            ->add('minPlacesForTravel', 'choice', [
+                'label' => 'travel.form.min_places_for_travel',
+                'choices' => range(1, 10)
+            ])
+            ->add('skipperConfirmation', 'choice', [
+                'label' => 'travel.form.skipper_confirmation',
+                'choices' => [0, 1],
+                'choice_label' => function ($value, $key, $index) {
+                    return 'form.yes_no.' . $key;
+                }
+            ])
+            ->add('dateStart', 'text', ['label' => 'travel.form.date_start'])
+            ->add('dateEnd', 'text', ['label' => 'travel.form.date_end'])
+            ->add('country', 'entity', [
+                'class' => 'AppBundle\Entity\Country',
+                'label' => 'travel.form.country',
+                'placeholder' => '',
+                'empty_data' => null,
+            ])
+            ->add('aquatory', 'entity', [
+                'class' => 'AppBundle\Entity\Aquatory',
+                'label' => 'travel.form.aquatory',
+                'placeholder' => '',
+                'empty_data' => null,
+            ])
             ->add('skipperPaymentMethod')
             ->add('websiteComission')
             ->add('placeOfArrival')

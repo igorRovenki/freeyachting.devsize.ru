@@ -61,6 +61,15 @@ travel:
             EUR: EURO
             USD: DOLLAR
             RUB: РУБЛЬ
+        hot_offers: Скидка для Горящих предложений
+        percent_of_discount: Укажите % скидки
+        time_for_discount_activation: Срок активации скидки
+        min_places_for_travel: Минимальное количество заполненных мест на яхте, <br>при котором путешествие состоится
+        date_start: Дата начала путешествия
+        date_end: Дата окончания путешествия
+        skipper_confirmation: Подтверждение участия со стороны шкипера
+        country: Страна путешествия
+        aquatory: Акватория путешествия
 yacht:
     short_description: Краткое описание
     ship_type_label: Тип судна
@@ -162,6 +171,9 @@ security:
         errors:
             missing-input-response: 'Пожалуйста, подвердите, что Вы не робот'
 form:
+    yes_no:
+        1: Да
+        0: Нет
     lastname: Фамилия
     name: Имя
     patronomic: Отчество
