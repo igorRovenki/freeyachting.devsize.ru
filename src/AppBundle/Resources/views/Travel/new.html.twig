@@ -156,16 +156,14 @@
                     </div>
                     <div class="row">
                         <div class="col-xs-12 col-sm-6">
-
                         </div>
                         <div class="col-xs-12 col-sm-6">
-
                         </div>
                     </div>
                     <div class="deliver"></div>
                     <div class="row">
                         <div class="col-xs-12">
-                            <p><b>Информация о яхте</b></p>
+                            <p><b>{{ 'travel.form.yacht.info'|trans }}</b></p>
                         </div>
                     </div>
                     <div class="row">
@@ -173,22 +171,16 @@
                             <div class="row">
                                 <div class="col-xs-12 col-sm-6">
                                     <div class="form-group">
-                                        <label for="inputTypeBoat">Тип судна</label>
-                                        <select name="inputTypeBoat" id="inputTypeBoat" class="form-control">
-                                            <option value="yacht">Яхта</option>
-                                            <option value="catamaran">Катамаран</option>
-                                            <option value="other">Другой тип судна</option>
-                                        </select>
+                                        {{ form_label(form.yacht.children.shipType) }}
+                                        {{ form_errors(form.yacht.children.shipType) }}
+                                        {{ form_widget(form.yacht.children.shipType, { attr: {class: 'form-control'}}) }}
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-6">
                                     <div class="form-group">
-                                        <label for="inputTypeYacht">Тип Яхты</label>
-                                        <select name="inputTypeYacht" id="inputTypeYacht" class="form-control">
-                                            <option value="yachtAndEngine">Парус / Мотор</option>
-                                            <option value="velum">Парус</option>
-                                            <option value="engine">Мотор</option>
-                                        </select>
+                                        {{ form_label(form.yacht.children.yachtType) }}
+                                        {{ form_errors(form.yacht.children.yachtType) }}
+                                        {{ form_widget(form.yacht.children.yachtType, { attr: {class: 'form-control'}}) }}
                                     </div>
                                 </div>
                             </div>
@@ -197,18 +189,16 @@
                             <div class="row">
                                 <div class="col-xs-12 col-sm-6">
                                     <div class="form-group">
-                                        <label for="inputManufacturer">Производитель</label>
-                                        <select name="inputManufacturer" id="inputManufacturer" class="form-control">
-                                            <option value="yachtAndEngine">Bavaria 38</option>
-                                            <option value="velum">Bavaria 38</option>
-                                            <option value="engine">Bavaria 38</option>
-                                        </select>
+                                        {{ form_label(form.yacht.children.manufacturer) }}
+                                        {{ form_errors(form.yacht.children.manufacturer) }}
+                                        {{ form_widget(form.yacht.children.manufacturer, { attr: {class: 'form-control'}}) }}
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-6">
                                     <div class="form-group">
-                                        <label for="inputYearManufacture">Год выпуска</label>
-                                        <input type="text" class="form-control" name="inputYearManufacture" id="inputYearManufacture">
+                                        {{ form_label(form.yacht.children.yearOfProduction) }}
+                                        {{ form_errors(form.yacht.children.yearOfProduction) }}
+                                        {{ form_widget(form.yacht.children.yearOfProduction, { attr: {class: 'form-control'}}) }}
                                     </div>
                                 </div>
                             </div>
@@ -219,9 +209,10 @@
                             <div class="row">
                                 <div class="col-xs-12 col-sm-6">
                                     <div class="form-group">
-                                        <label>Длина яхты <span>*</span></label>
+                                        <label>{{ 'travel.form.yacht.yacht_length'|trans }} <span>*</span></label>
                                         <div class="input-group">
-                                            <input type="text" class="form-control" name="inputLengthBoatsFT" id="inputLengthBoatsFT" aria-describedby="addonLengthBoatsFT">
+                                            {{ form_errors(form.yacht.children.yachtLengthFt) }}
+                                            {{ form_widget(form.yacht.children.yachtLengthFt, { attr: {class: 'form-control', id: 'inputLengthBoatsFT', 'aria-describedby': 'addonLengthBoatsFT'}}) }}
                                             <span class="input-group-addon addon2" id="addonLengthBoatsFT">FT</span>
                                         </div>
                                     </div>
@@ -230,7 +221,8 @@
                                     <div class="form-group">
                                         <label>&nbsp;</label>
                                         <div class="input-group">
-                                            <input type="text" class="form-control" name="inputLengthBoatsM" id="inputLengthBoatsM" aria-describedby="addonLengthBoatsM">
+                                            {{ form_errors(form.yacht.children.yachtLengthM) }}
+                                            {{ form_widget(form.yacht.children.yachtLengthM, { attr: {class: 'form-control', id: 'inputLengthBoatsM', 'aria-describedby': 'addonLengthBoatsM'}}) }}
                                             <span class="input-group-addon addon2" id="addonLengthBoatsM">M</span>
                                         </div>
                                     </div>
@@ -239,43 +231,48 @@
                         </div>
                         <div class="col-xs-12 col-sm-6">
                             <div class="form-group">
-                                <label for="inputWсСount">Количество санузлов</label>
-                                <input type="text" class="form-control" name="inputWсСount" id="inputWсСount">
+                                {{ form_label(form.yacht.children.bathroomsNumber) }}
+                                {{ form_errors(form.yacht.children.bathroomsNumber) }}
+                                {{ form_widget(form.yacht.children.bathroomsNumber, { attr: {class: 'form-control'}}) }}
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-12 col-sm-6">
                             <div class="form-group">
-                                <label for="inputDoubleCabinСount">Количество свободных двухместных кают <span>*</span></label>
-                                <input type="text" class="form-control" name="inputDoubleCabinСount" id="inputDoubleCabinСount">
+                                {{ form_label(form.yacht.children.doubleCabinsNumber) }}
+                                {{ form_errors(form.yacht.children.doubleCabinsNumber) }}
+                                {{ form_widget(form.yacht.children.doubleCabinsNumber, { attr: {class: 'form-control'}}) }}
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-6">
                             <div class="form-group">
-                                <label for="inputSingleCabinСount">Количество свободных одноместных кают <span>*</span></label>
-                                <input type="text" class="form-control" name="inputSingleCabinСount" id="inputSingleCabinСount">
+                                {{ form_label(form.yacht.children.singleCabinsNumber) }}
+                                {{ form_errors(form.yacht.children.singleCabinsNumber) }}
+                                {{ form_widget(form.yacht.children.singleCabinsNumber, { attr: {class: 'form-control'}}) }}
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-12 col-sm-6">
                             <div class="form-group">
-                                <label for="textareaDescription">Краткое описание яхты</label>
-                                <textarea class="form-control" rows="7" name="textareaDescription" id="textareaDescription"></textarea>
+                                {{ form_label(form.yacht.children.description) }}
+                                {{ form_errors(form.yacht.children.description) }}
+                                {{ form_widget(form.yacht.children.description, { attr: {class: 'form-control', rows: 7}}) }}
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-6">
                             <div class="form-group">
-                                <label for="textareaFeatures">Особенности</label>
-                                <textarea class="form-control" rows="7" name="textareaFeatures" id="textareaFeatures"></textarea>
+                                {{ form_label(form.yacht.children.features) }}
+                                {{ form_errors(form.yacht.children.features) }}
+                                {{ form_widget(form.yacht.children.features, { attr: {class: 'form-control', rows: 7}}) }}
                             </div>
                         </div>
                     </div>
                     <div class="deliver"></div>
                     <div class="row">
                         <div class="col-xs-12">
-                            <p><b>Выберете типовую яхту из списка <br class="visible-xs">или загрузите схему</b></p>
+                            <p><b>{{ 'travel.form.yacht.choose_schema_image'|trans }}</b></p>
                         </div>
                     </div>
                     <div class="row">

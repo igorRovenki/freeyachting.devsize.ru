@@ -165,7 +165,7 @@ class Travel
     /**
      * @var Yacht
      *
-     * @ORM\ManyToOne(targetEntity="Yacht", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="Yacht", cascade={"persist"})
      * @ORM\JoinColumn(name="yacht_id", referencedColumnName="id")
      */
     private $yacht;

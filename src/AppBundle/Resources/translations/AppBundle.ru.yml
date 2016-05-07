@@ -70,6 +70,29 @@ travel:
         skipper_confirmation: Подтверждение участия со стороны шкипера
         country: Страна путешествия
         aquatory: Акватория путешествия
+        yacht:
+            info: Информация о яхте
+            ship_type_title: Тип судна
+            ship_type:
+                yacht: Яхта
+                catamaran: Катамаран
+                other: Другой тип судна
+            yacht_type_title: Тип Яхты
+            yacht_type:
+                sail_motor: Парус / Мотор
+                sail: Парус
+                motor: Мотор
+            manufacturer_title: Производитель
+            manufacturer:
+                manufacturer_bavaria_38: Bavaria 38
+            year_of_production: Год выпуска
+            yacht_length: Длина яхты
+            bathrooms_number: Количество санузлов
+            double_cabins_number: Количество свободных двухместных кают
+            single_cabins_number: Количество свободных одноместных кают
+            description: Краткое описание яхты
+            features: Особенности
+            choose_schema_image: Выберете типовую яхту из списка <br class="visible-xs">или загрузите схему
 yacht:
     short_description: Краткое описание
     ship_type_label: Тип судна

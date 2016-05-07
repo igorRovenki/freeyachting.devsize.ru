@@ -111,6 +111,10 @@ class TravelType extends AbstractType
                 'placeholder' => '',
                 'empty_data' => null,
             ])
+            ->add('yacht', new YachtType(), [
+                'label' => 'travel.form.yacht_info',
+                'data_class' => 'AppBundle\Entity\Yacht'
+            ])
             ->add('skipperPaymentMethod')
             ->add('websiteComission')
             ->add('placeOfArrival')

@@ -20,6 +20,7 @@ class Yacht
     const YACHT_TYPE_SAIL_MOTOR = 'sail_motor';
     const YACHT_TYPE_SAIL = 'sail';
     const YACHT_TYPE_MOTOR = 'motor';
+    const MANUFACTURER_BAVARIA_38 = 'manufacturer_bavaria_38';
 
     /**
      * @var integer
