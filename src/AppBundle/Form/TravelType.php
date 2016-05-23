@@ -115,20 +115,50 @@ class TravelType extends AbstractType
                 'label' => 'travel.form.yacht_info',
                 'data_class' => 'AppBundle\Entity\Yacht'
             ])
-            ->add('skipperPaymentMethod')
-            ->add('websiteComission')
-            ->add('placeOfArrival')
-            ->add('placeOfDeparture')
-            ->add('transferFromAirport')
-            ->add('transferPrice')
-            ->add('transferPriceCurrency')
-            ->add('teamGatheringAddress')
-            ->add('teamGatheringLatitude')
-            ->add('teamGatheringLongitude')
-            ->add('teamGatheringTime')
-            ->add('included')
-            ->add('excluded')
-            ->add('photos')
+            ->add('skipperPaymentMethod', 'choice', [
+                'label' => 'travel.form.skipper_payment_method_title',
+                'choices' => [
+                    'via_site',
+                    'cash',
+                    'another_way',
+                ],
+                'choice_label' => function ($value, $key, $index) {
+                    return 'travel.form.skipper_payment_method.' . $key;
+                }
+            ])
+            ->add('websiteComission', 'text', ['label' => 'travel.form.website_comission'])
+            ->add('placeOfArrival', 'text', ['label' => 'travel.form.place_of_arrival'])
+            ->add('placeOfDeparture', 'text', ['label' => 'travel.form.place_of_departure'])
+            ->add('transferFromAirport', 'choice', [
+                'label' => 'travel.form.transfer_from_airport_title',
+                'choices' => [
+                    'group',
+                    'individual',
+                    'no_transfer',
+                ],
+                'choice_label' => function ($value, $key, $index) {
+                    return 'travel.form.transfer_from_airport.' . $key;
+                }
+            ])
+            ->add('transferPrice', 'text', ['label' => 'travel.form.transfer_price'])
+            ->add('transferPriceCurrency', 'choice', [
+                'label' => 'form.currency_title',
+                'choices' => [
+                    'EUR',
+                    'USD',
+                    'RUB',
+                ],
+                'choice_label' => function ($value, $key, $index) {
+                    return 'form.currency.' . $key;
+                }
+            ])
+            ->add('teamGatheringAddress', 'textarea', ['label' => 'travel.form.team_gathering_address'])
+            ->add('teamGatheringLatitude', 'text')
+            ->add('teamGatheringLongitude', 'text')
+            ->add('teamGatheringTime', 'time', ['label' => 'travel.team_gathering_time'])
+            ->add('included', 'textarea', ['label' => 'travel.form.included'])
+            ->add('excluded', 'textarea', ['label' => 'travel.form.excluded'])
+            ->add('photos', 'file', ['data_class' => null])
         ;
     }
 

@@ -22,8 +22,11 @@ class SkipperController extends Controller
         $form = $this->createForm(new TravelType(), new Travel());
         $form->handleRequest($request);
 
+        $schemas = $this->get('sonata.media.manager.media')->findBy(['context' => 'yacht']);
+
         return $this->render('AppBundle:Travel:new.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'schemas' => $schemas
         ]);
     }
 

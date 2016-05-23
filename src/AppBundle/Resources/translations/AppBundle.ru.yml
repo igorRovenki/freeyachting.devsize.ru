@@ -93,6 +93,29 @@ travel:
             description: Краткое описание яхты
             features: Особенности
             choose_schema_image: Выберете типовую яхту из списка <br class="visible-xs">или загрузите схему
+            choose: Выбрать
+            load_schema: Загрузить схему яхты
+            choose_yacht: Выберете яхту
+            load_photos: Загрузить фото
+        skipper_payment_method_title: Способ оплаты услуг Капитана
+        skipper_payment_method:
+            via_site: Оплата через сайт
+            cash: Оплата наличными капитану
+            another_way: Другой способ
+        website_comission: Процент коммисии сайта
+        place_of_arrival: Место прилета (аэропорт)
+        place_of_departure: Место вылета (аэропорт)
+        transfer_from_airport_title: Трансфер от аэропорта до места отплытия
+        transfer_from_airport:
+            group: Групповой
+            individual: Индивидуальный
+            no_transfer: Нет трансфера
+        team_gathering_address: Адрес места сбора команды
+        coordinates: Географические координаты
+        included: Перечень того, что входит в стоимость путешествия
+        excluded: Перечень того, что не входит в стоимость путешествия
+        team_gathering_time: Время сбора команды
+
 yacht:
     short_description: Краткое описание
     ship_type_label: Тип судна
@@ -194,6 +217,11 @@ security:
         errors:
             missing-input-response: 'Пожалуйста, подвердите, что Вы не робот'
 form:
+    currency_title: Стоимость
+    currency:
+        EUR: EURO
+        USD: DOLLAR
+        RUB: РУБЛЬ
     yes_no:
         1: Да
         0: Нет

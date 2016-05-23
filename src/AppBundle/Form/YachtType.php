@@ -47,15 +47,19 @@ class YachtType extends AbstractType
                     return 'travel.form.yacht.manufacturer.' . $key;
                 }
             ])
-            ->add('yearOfProduction', 'text', ['label' => 'travel.form.yacht.year_of_production'])
+            ->add('yearOfProduction', 'text', ['label' => 'travel.form.yacht.year_of_production', 'required' => false])
             ->add('yachtLengthFt')
             ->add('yachtLengthM')
-            ->add('bathroomsNumber', 'text', ['label' => 'travel.form.yacht.bathrooms_number'])
+            ->add('bathroomsNumber', 'text', ['label' => 'travel.form.yacht.bathrooms_number', 'required' => false])
             ->add('doubleCabinsNumber', 'text', ['label' => 'travel.form.yacht.double_cabins_number'])
             ->add('singleCabinsNumber', 'text', ['label' => 'travel.form.yacht.single_cabins_number'])
             ->add('description', 'textarea', ['label' => 'travel.form.yacht.description'])
             ->add('features', 'textarea', ['label' => 'travel.form.yacht.features'])
-            ->add('schemaImage')
+            ->add('schemaImage', 'entity', [
+                'class' => 'Application\Sonata\MediaBundle\Entity\Media',
+                'placeholder' => '',
+                'empty_data' => null,
+            ])
         ;
     }
 
