@@ -43,19 +43,20 @@ travel:
         payment: 3. Оплата
     enter_register_data: Введите регистрационные <br> данные путешественников
     success_booked: Путешествие успешно забронировано!
+    success_created: Путешествие успешно создано!
     form:
         participant_level_title: Уровень подготовки участников
         participant_level:
             advanced: Продвинутый уровень
             averaged: Средний уровень
-            first: Начальный уровень
+            beginner: Начальный уровень
         has_children_title: Участие детей
         has_children:
             1: Да
             0: Нет
         min_child_age: Мин. возраст детей
         week_price_currency: Стоимость за место на яхте в неделю
-        week_price: Стоимость за место на яхте в сутки
+        week_price: Стоимость за место на яхте в неделю
         day_price: Стоимость за место на яхте в сутки
         currency:
             EUR: EURO
@@ -70,6 +71,62 @@ travel:
         skipper_confirmation: Подтверждение участия со стороны шкипера
         country: Страна путешествия
         aquatory: Акватория путешествия
+        yacht:
+            info: Информация о яхте
+            ship_type_title: Тип судна
+            ship_type:
+                yacht: Яхта
+                catamaran: Катамаран
+                other: Другой тип судна
+            yacht_type_title: Тип Яхты
+            yacht_type:
+                sail_motor: Парус / Мотор
+                sail: Парус
+                motor: Мотор
+            manufacturer_title: Производитель
+            manufacturer:
+                manufacturer_bavaria_38: Bavaria 38
+            year_of_production: Год выпуска
+            yacht_length: Длина яхты
+            bathrooms_number: Количество санузлов
+            double_cabins_number: Количество свободных двухместных кают
+            single_cabins_number: Количество свободных одноместных кают
+            description: Краткое описание яхты
+            features: Особенности
+            choose_schema_image: Выберете типовую яхту из списка <br class="visible-xs">или загрузите схему
+            choose: Выбрать
+            load_schema: Загрузить схему яхты
+            choose_yacht: Выберете яхту
+            load_photos: Загрузить фото
+        skipper_payment_method_title: Способ оплаты услуг Капитана
+        skipper_payment_method:
+            via_site: Оплата через сайт
+            cash: Оплата наличными капитану
+            another_way: Другой способ
+        website_comission: Процент коммисии сайта
+        place_of_arrival: Место прилета (аэропорт)
+        place_of_departure: Место вылета (аэропорт)
+        transfer_from_airport_title: Трансфер от аэропорта до места отплытия
+        transfer_from_airport:
+            group: Групповой
+            individual: Индивидуальный
+            no_transfer: Нет трансфера
+        team_gathering_address: Адрес места сбора команды
+        coordinates: Географические координаты
+        included: Перечень того, что входит в стоимость путешествия
+        excluded: Перечень того, что не входит в стоимость путешествия
+        team_gathering_time: Время сбора команды
+        travel_photos: Фотографии путешествий
+        photos_limit: Не более 10 фотографий. Формат jpeg. Размер не более 4 мб
+        days_description: Описание путешествия по дням
+        days:
+            city_departure: Город отправления
+            city_arrival: Город прибытия
+            route_length: Протяженность маршрута
+            route_miles: Миль
+            full_description: Подробное описание
+            date: Дата
+            coordinates: Географические координаты
 yacht:
     short_description: Краткое описание
     ship_type_label: Тип судна
@@ -119,7 +176,7 @@ search:
         skipper_rating: Рейтингу капитана
     travels_not_found: Ничего не найдено
 day:
-    days_not_fount: Капитан пока не добавил информацию о днях путешествия
+    days_not_found: Капитан пока не добавил информацию о днях путешествия
     miles: миль
     cityDeparture: Место отправления
     cityArrival: Место прибытия
@@ -171,6 +228,11 @@ security:
         errors:
             missing-input-response: 'Пожалуйста, подвердите, что Вы не робот'
 form:
+    currency_title: Стоимость
+    currency:
+        EUR: EURO
+        USD: DOLLAR
+        RUB: РУБЛЬ
     yes_no:
         1: Да
         0: Нет

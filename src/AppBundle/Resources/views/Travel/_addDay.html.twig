@@ -1,0 +1,105 @@
+{% trans_default_domain 'AppBundle' %}
+<div>
+<div class="one-day">
+    <div class="row">
+        <div class="col-xs-12">
+            <p><b>День __day__</b></p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-6">
+            <div class="form-group">
+                {{ form_label(form.days.vars.prototype.cityDeparture) }}
+                {{ form_errors(form.days.vars.prototype.cityDeparture) }}
+                {{ form_widget(form.days.vars.prototype.cityDeparture, { attr: {class: 'form-control'} }) }}
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+            <div class="form-group">
+                <label>{{ 'travel.form.days.coordinates'|trans }} <span>*</span></label>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="input-group left-addon">
+                            <span class="input-group-addon addon2" id="addonCityDepartureN1">N</span>
+                            {{ form_errors(form.days.vars.prototype.cityDepartureLatitude) }}
+                            {{ form_widget(form.days.vars.prototype.cityDepartureLatitude, { attr: {class: 'form-control', id: 'inputCityDepartureN1', 'aria-describedby': 'addonCityDepartureN1'} }) }}
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="input-group left-addon">
+                            <span class="input-group-addon addon2" id="addonCityDepartureE1">E</span>
+                            {{ form_errors(form.days.vars.prototype.cityDepartureLongitude) }}
+                            {{ form_widget(form.days.vars.prototype.cityDepartureLongitude, { attr: {class: 'form-control', id: 'inputCityDepartureE1', 'aria-describedby': 'addonCityDepartureE1'} }) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+            <div class="form-group">
+                {{ form_label(form.days.vars.prototype.cityArrival) }}
+                {{ form_errors(form.days.vars.prototype.cityArrival) }}
+                {{ form_widget(form.days.vars.prototype.cityArrival, { attr: {class: 'form-control'} }) }}
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+            <div class="form-group">
+                <label>{{ 'travel.form.days.coordinates'|trans }} <span>*</span></label>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="input-group left-addon">
+                            <span class="input-group-addon addon2" id="addonCityArrivalN1">N</span>
+                            {{ form_errors(form.days.vars.prototype.cityArrivalLatitude) }}
+                            {{ form_widget(form.days.vars.prototype.cityArrivalLatitude, { attr: {class: 'form-control', id: 'inputCityArrivalN1', 'aria-describedby': 'addonCityArrivalN1'} }) }}
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="input-group left-addon">
+                            <span class="input-group-addon addon2" id="addonCityArrivalE1">E</span>
+                            {{ form_errors(form.days.vars.prototype.cityArrivalLongitude) }}
+                            {{ form_widget(form.days.vars.prototype.cityArrivalLongitude, { attr: {class: 'form-control', id: 'inputCityArrivalE1', 'aria-describedby': 'addonCityArrivalE1'} }) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-6">
+            <div class="form-group">
+                <label for="inputLength1">{{ 'travel.form.days.route_length'|trans }} <span>*</span></label>
+                <div class="input-group">
+                    {{ form_errors(form.days.vars.prototype.routeLength) }}
+                    {{ form_widget(form.days.vars.prototype.routeLength, { attr: {class: 'form-control', id: 'inputLength1', 'aria-describedby': 'addonLength1'} }) }}
+                    <span class="input-group-addon addon2" id="addonLength1">{{ 'travel.form.days.route_miles'|trans }}</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+            <div class="form-group">
+                    {{ form_label(form.days.vars.prototype.date) }}
+                    {{ form_errors(form.days.vars.prototype.date) }}
+                    <div class="input-group">
+                        {{ form_widget(form.days.vars.prototype.date, { attr: {class: 'form-control datepicker', 'aria-describedby': 'addonDayDateIcon'} }) }}
+                        <span class="input-group-addon" id="addonDayDateIcon"><i class="fa fa-calendar"></i></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--
+        <div class="col-xs-12 col-sm-6">
+            <a href="#" class="btn btn-3 btn-middle margin-left0">Добавить точку</a>
+        </div>
+        -->
+    </div>
+    <div class="row mt20">
+        <div class="col-xs-12 col-sm-6">
+            <div class="form-group">
+                {{ form_label(form.days.vars.prototype.fullDescription) }}
+                {{ form_errors(form.days.vars.prototype.fullDescription) }}
+                {{ form_widget(form.days.vars.prototype.fullDescription, { attr: {class: 'form-control', rows: 7} }) }}
+            </div>
+        </div>
+    </div>
+<div class="deliver"></div>
+</div>

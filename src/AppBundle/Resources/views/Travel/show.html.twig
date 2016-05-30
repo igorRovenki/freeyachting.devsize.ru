@@ -100,7 +100,7 @@
                             </div>
                             <div class="deliver-small">
                                 <p>{{ 'yacht.manufacturer'|trans }} / {{ 'yacht.year_of_producation'|trans }}:</p>
-                                <p class="h4">{{ travel.yacht.manufacturer }} / {{ travel.yacht.yearOfProduction }} {{ 'yacht.year'|trans }}</p>
+                                <p class="h4">{{ ('travel.form.yacht.manufacturer.' ~ travel.yacht.manufacturer)|trans }} / {{ travel.yacht.yearOfProduction }} {{ 'yacht.year'|trans }}</p>
                             </div>
                             <div class="deliver-small">
                                 <p>{{ 'yacht.length'|trans }}:</p>

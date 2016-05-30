@@ -23,7 +23,8 @@
                 'top: 255px; left: -10px;',
                 'top: 292px; left: -70px;',
             ] %}
-            {% for place in range(1, travel.yacht.totalPlacesNumber) %}
+            {# @todo for place in range(1, travel.yacht.totalPlacesNumber) #}
+            {% for place in range(1, 8) %}
                 {% if place in travel.busyPlaces %}
                     <div class="place busy" style="{{ positions[place] }}" data-place="{{ place }}">
                         <i class="glyphicon glyphicon-check"></i> {{ place }}

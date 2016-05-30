@@ -86,7 +86,10 @@
     margin-bottom: 5px;
 }
 
-.fileinput .file-preview-frame {}
+.fileinput .file-preview-frame {
+    width: 25%;
+    float: left;
+}
 
 .fileinput .file-preview-frame:not(.file-preview-error):hover {}
 

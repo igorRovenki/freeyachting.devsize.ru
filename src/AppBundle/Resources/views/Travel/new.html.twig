@@ -1,7 +1,22 @@
 {% extends 'AppBundle::base.html.twig' %}
 {% trans_default_domain 'AppBundle' %}
 
+{% block js %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('js/bootstrap-file-input/fileinput.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/bootstrap-file-input/plugins/canvas-to-blob.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/bootstrap-file-input/fileinput_locale_ru.js') }}"></script>
+{% endblock js %}
+
 {% block content %}
+    <script>
+        $('document').ready(function() {
+            var option = $('#appbundle_travel_yacht_schemaImage').children()[0];
+            $('#yachtSchema').attr('src', $(option).attr('data-src'));
+            addDay();
+        })
+    </script>
+    <script src="{{ asset('js/new-travel-form.js') }}"></script>
     <div class="container content form-common">
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
@@ -55,7 +70,7 @@
                                 {{ form_widget(form.type, { attr: {class: 'form-control'} }) }}
                             </div>
                             <div class="form-group">
-                                <label for="inputPriceWeek">{{ 'travel.form.week_price'|trans }}</label>
+                                <label for="inputPriceWeek">{{ 'travel.form.week_price'|trans }} <span>*</span></label>
                                 <div class="row">
                                     <div class="col-xs-6">
                                         {{ form_errors(form.weekPrice) }}
@@ -68,7 +83,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="inputPriceWeek">{{ 'travel.form.day_price'|trans }}</label>
+                                <label for="inputPriceWeek">{{ 'travel.form.day_price'|trans }} <span>*</span></label>
                                 <div class="row">
                                     <div class="col-xs-6">
                                         {{ form_errors(form.dayPrice) }}
@@ -156,16 +171,14 @@
                     </div>
                     <div class="row">
                         <div class="col-xs-12 col-sm-6">
-
                         </div>
                         <div class="col-xs-12 col-sm-6">
-
                         </div>
                     </div>
                     <div class="deliver"></div>
                     <div class="row">
                         <div class="col-xs-12">
-                            <p><b>Информация о яхте</b></p>
+                            <p><b>{{ 'travel.form.yacht.info'|trans }}</b></p>
                         </div>
                     </div>
                     <div class="row">
@@ -173,22 +186,16 @@
                             <div class="row">
                                 <div class="col-xs-12 col-sm-6">
                                     <div class="form-group">
-                                        <label for="inputTypeBoat">Тип судна</label>
-                                        <select name="inputTypeBoat" id="inputTypeBoat" class="form-control">
-                                            <option value="yacht">Яхта</option>
-                                            <option value="catamaran">Катамаран</option>
-                                            <option value="other">Другой тип судна</option>
-                                        </select>
+                                        {{ form_label(form.yacht.children.shipType) }}
+                                        {{ form_errors(form.yacht.children.shipType) }}
+                                        {{ form_widget(form.yacht.children.shipType, { attr: {class: 'form-control'}}) }}
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-6">
                                     <div class="form-group">
-                                        <label for="inputTypeYacht">Тип Яхты</label>
-                                        <select name="inputTypeYacht" id="inputTypeYacht" class="form-control">
-                                            <option value="yachtAndEngine">Парус / Мотор</option>
-                                            <option value="velum">Парус</option>
-                                            <option value="engine">Мотор</option>
-                                        </select>
+                                        {{ form_label(form.yacht.children.yachtType) }}
+                                        {{ form_errors(form.yacht.children.yachtType) }}
+                                        {{ form_widget(form.yacht.children.yachtType, { attr: {class: 'form-control'}}) }}
                                     </div>
                                 </div>
                             </div>
@@ -197,18 +204,16 @@
                             <div class="row">
                                 <div class="col-xs-12 col-sm-6">
                                     <div class="form-group">
-                                        <label for="inputManufacturer">Производитель</label>
-                                        <select name="inputManufacturer" id="inputManufacturer" class="form-control">
-                                            <option value="yachtAndEngine">Bavaria 38</option>
-                                            <option value="velum">Bavaria 38</option>
-                                            <option value="engine">Bavaria 38</option>
-                                        </select>
+                                        {{ form_label(form.yacht.children.manufacturer) }}
+                                        {{ form_errors(form.yacht.children.manufacturer) }}
+                                        {{ form_widget(form.yacht.children.manufacturer, { attr: {class: 'form-control'}}) }}
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-6">
                                     <div class="form-group">
-                                        <label for="inputYearManufacture">Год выпуска</label>
-                                        <input type="text" class="form-control" name="inputYearManufacture" id="inputYearManufacture">
+                                        {{ form_label(form.yacht.children.yearOfProduction) }}
+                                        {{ form_errors(form.yacht.children.yearOfProduction) }}
+                                        {{ form_widget(form.yacht.children.yearOfProduction, { attr: {class: 'form-control'}}) }}
                                     </div>
                                 </div>
                             </div>
@@ -219,9 +224,10 @@
                             <div class="row">
                                 <div class="col-xs-12 col-sm-6">
                                     <div class="form-group">
-                                        <label>Длина яхты <span>*</span></label>
+                                        <label>{{ 'travel.form.yacht.yacht_length'|trans }} <span>*</span></label>
                                         <div class="input-group">
-                                            <input type="text" class="form-control" name="inputLengthBoatsFT" id="inputLengthBoatsFT" aria-describedby="addonLengthBoatsFT">
+                                            {{ form_errors(form.yacht.children.yachtLengthFt) }}
+                                            {{ form_widget(form.yacht.children.yachtLengthFt, { attr: {class: 'form-control', id: 'inputLengthBoatsFT', 'aria-describedby': 'addonLengthBoatsFT'}}) }}
                                             <span class="input-group-addon addon2" id="addonLengthBoatsFT">FT</span>
                                         </div>
                                     </div>
@@ -230,7 +236,8 @@
                                     <div class="form-group">
                                         <label>&nbsp;</label>
                                         <div class="input-group">
-                                            <input type="text" class="form-control" name="inputLengthBoatsM" id="inputLengthBoatsM" aria-describedby="addonLengthBoatsM">
+                                            {{ form_errors(form.yacht.children.yachtLengthM) }}
+                                            {{ form_widget(form.yacht.children.yachtLengthM, { attr: {class: 'form-control', id: 'inputLengthBoatsM', 'aria-describedby': 'addonLengthBoatsM'}}) }}
                                             <span class="input-group-addon addon2" id="addonLengthBoatsM">M</span>
                                         </div>
                                     </div>
@@ -239,130 +246,157 @@
                         </div>
                         <div class="col-xs-12 col-sm-6">
                             <div class="form-group">
-                                <label for="inputWсСount">Количество санузлов</label>
-                                <input type="text" class="form-control" name="inputWсСount" id="inputWсСount">
+                                {{ form_label(form.yacht.children.bathroomsNumber) }}
+                                {{ form_errors(form.yacht.children.bathroomsNumber) }}
+                                {{ form_widget(form.yacht.children.bathroomsNumber, { attr: {class: 'form-control'}}) }}
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-12 col-sm-6">
                             <div class="form-group">
-                                <label for="inputDoubleCabinСount">Количество свободных двухместных кают <span>*</span></label>
-                                <input type="text" class="form-control" name="inputDoubleCabinСount" id="inputDoubleCabinСount">
+                                {{ form_label(form.yacht.children.doubleCabinsNumber) }}
+                                {{ form_errors(form.yacht.children.doubleCabinsNumber) }}
+                                {{ form_widget(form.yacht.children.doubleCabinsNumber, { attr: {class: 'form-control'}}) }}
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-6">
                             <div class="form-group">
-                                <label for="inputSingleCabinСount">Количество свободных одноместных кают <span>*</span></label>
-                                <input type="text" class="form-control" name="inputSingleCabinСount" id="inputSingleCabinСount">
+                                {{ form_label(form.yacht.children.singleCabinsNumber) }}
+                                {{ form_errors(form.yacht.children.singleCabinsNumber) }}
+                                {{ form_widget(form.yacht.children.singleCabinsNumber, { attr: {class: 'form-control'}}) }}
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-12 col-sm-6">
                             <div class="form-group">
-                                <label for="textareaDescription">Краткое описание яхты</label>
-                                <textarea class="form-control" rows="7" name="textareaDescription" id="textareaDescription"></textarea>
+                                {{ form_label(form.yacht.children.description) }}
+                                {{ form_errors(form.yacht.children.description) }}
+                                {{ form_widget(form.yacht.children.description, { attr: {class: 'form-control', rows: 7}}) }}
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-6">
                             <div class="form-group">
-                                <label for="textareaFeatures">Особенности</label>
-                                <textarea class="form-control" rows="7" name="textareaFeatures" id="textareaFeatures"></textarea>
+                                {{ form_label(form.yacht.children.features) }}
+                                {{ form_errors(form.yacht.children.features) }}
+                                {{ form_widget(form.yacht.children.features, { attr: {class: 'form-control', rows: 7}}) }}
                             </div>
                         </div>
                     </div>
                     <div class="deliver"></div>
                     <div class="row">
                         <div class="col-xs-12">
-                            <p><b>Выберете типовую яхту из списка <br class="visible-xs">или загрузите схему</b></p>
+                            <p><b>{{ 'travel.form.yacht.choose_schema_image'|trans|raw }}</b></p>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-12">
-                            <img src="/images/yachts/yacht.jpg" alt="Яхта..." class="img-responsive yachta-foto">
+                            <img id="yachtSchema" src="" alt="Яхта..." class="img-responsive yachta-foto" />
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-12 col-sm-5">
                             <div class="form-group">
-                                <label for="inputSelectYacht">Выберете яхту</label>
-                                <select name="inputSelectYacht" id="inputSelectYacht" class="form-control">
-                                    <option value="yacht1">Яхта такая то</option>
-                                    <option value="yacht2">Яхта сякая то</option>
-                                    <option value="yacht3">Яхта не такая, не сякая</option>
-                                    <option value="yacht4">Яхта такая, сякая</option>
+                                <label for="inputSelectYacht">{{ 'travel.form.yacht.choose_yacht'|trans }}</label>
+                                {{ form_errors(form.yacht) }}
+                                <select name="{{ form.yacht.children.schemaImage.vars['full_name'] }}" id="{{ form.yacht.children.schemaImage.vars['id'] }}" class="form-control">
+                                    {% for image in form.yacht.children.schemaImage.vars.choices %}
+                                        {% if image.data.context == 'yacht' %}
+                                            <option value="{{ image.value }}" data-src="{% path image.data, 'middle' %}">
+                                                Яхта {{ image.value }}
+                                            </option>
+                                        {% endif %}
+                                    {% endfor %}
                                 </select>
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-3">
-                            <a href="#" class="btn btn-3 btn-middle">Выбрать</a>
+                            <a href="#" class="btn btn-3 btn-middle">{{ 'travel.form.yacht.choose'|trans }}</a>
                         </div>
-                        <div class="col-xs-12 col-sm-4 text-right">
-                            <a href="#" class="btn btn-4 btn-middle">Загрузить схему яхты</a>
+                        <div class="col-xs-12 col-sm-4 text-right fileinput">
+                            <input id="loadSchema" type="file" class="file-loading" multiple="false">
+                            <button class="hidden"></button>
+                            <script>
+                                $(document).on('ready', function() {
+                                    $("#loadSchema").fileinput({
+                                        language: 'ru',
+                                        overwriteInitial: true,
+                                        maxFileSize: 2000,
+                                        showClose: false,
+                                        showCaption: false,
+                                        browseLabel: '{{ 'travel.form.yacht.load_schema'|trans }}',
+                                        browseClass: 'btn btn-4 btn-middle',
+                                        buttonLabelClass: '',
+                                        removeLabel: '',
+                                        browseIcon: '',
+                                        removeIcon: '<i class="glyphicon glyphicon-remove"></i>',
+                                        removeTitle: 'Cancel or reset changes',
+                                        elErrorContainer: '#kv-avatar-errors',
+                                        msgErrorClass: 'alert alert-block alert-danger',
+                                        layoutTemplates: {
+                                            main2: '{preview} {browse}',
+                                            preview: '<div class="file-preview-thumbnails"></div>'
+                                        },
+                                        previewSettings: {image: {width: "180px", height: "180px"}},
+                                        allowedFileExtensions: ["jpg", "jpeg", "png", "gif"]
+                                    });
+                                });
+                            </script>
                         </div>
                     </div>
                     <div class="deliver"></div>
                     <div class="row">
                         <div class="col-xs-12 col-sm-6">
                             <div class="form-group">
-                                <label for="inputMethodPayment">Способ оплаты услуг Капитана</label>
-                                <select name="inputMethodPayment" id="inputMethodPayment" class="form-control">
-                                    <option value="yacht1">Оплата через сайт</option>
-                                    <option value="yacht2">Оплата наличными капитану</option>
-                                    <option value="yacht3">Другой способ</option>
-                                </select>
+                                {{ form_label(form.skipperPaymentMethod) }}
+                                {{ form_errors(form.skipperPaymentMethod) }}
+                                {{ form_widget(form.skipperPaymentMethod, { attr: {class: 'form-control'}}) }}
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-6">
                             <div class="form-group">
-                                <label for="inputSitePercent">Процент коммисии сайта</label>
-                                <select name="inputSitePercent" id="inputSitePercent" class="form-control">
-                                    <?for($i=0; $i <= 30; $i += 5):?>
-                                    <option value="<?=$i?>"><?=$i?>%</option>
-                                    <?endfor;?>
-                                </select>
+                                {{ form_label(form.websiteComission) }}
+                                {{ form_errors(form.websiteComission) }}
+                                {{ form_widget(form.websiteComission, { attr: {class: 'form-control'}}) }}
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-12 col-sm-6">
                             <div class="form-group">
-                                <label for="inputArrival">Место прилета (аэропорт) <span>*</span></label>
-                                <input type="text" class="form-control" name="inputArrival" id="inputArrival">
+                                {{ form_label(form.placeOfArrival) }}
+                                {{ form_errors(form.placeOfArrival) }}
+                                {{ form_widget(form.placeOfArrival, { attr: {class: 'form-control'}}) }}
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-6">
                             <div class="form-group">
-                                <label for="inputDeparture">Место вылета (аэропорт) <span>*</span></label>
-                                <input type="text" class="form-control" name="inputDeparture" id="inputDeparture">
+                                {{ form_label(form.placeOfDeparture) }}
+                                {{ form_errors(form.placeOfDeparture) }}
+                                {{ form_widget(form.placeOfDeparture, { attr: {class: 'form-control'}}) }}
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-12 col-sm-6">
                             <div class="form-group">
-                                <label for="inputTransfer">Трансфер от аэропорта до места отплытия:</label>
-                                <select name="inputTransfer" id="inputTransfer" class="form-control">
-                                    <option value="group">Групповой</option>
-                                    <option value="individual">Индивидуальный</option>
-                                    <option value="none">Нет трансфера</option>
-                                </select>
+                                {{ form_label(form.transferFromAirport) }}
+                                {{ form_errors(form.transferFromAirport) }}
+                                {{ form_widget(form.transferFromAirport, { attr: {class: 'form-control'}}) }}
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-6">
                             <div class="form-group">
-                                <label for="inputPriceWeek">Стоимость</label>
+                                <label for="inputPriceWeek">{{ 'form.currency_title'|trans }}</label>
                                 <div class="row">
                                     <div class="col-xs-6">
-                                        <input type="text" class="form-control" name="inputPriceTransfer" id="inputPriceTransfer">
+                                        {{ form_errors(form.transferPrice) }}
+                                        {{ form_widget(form.transferPrice, { attr: {class: 'form-control'}}) }}
                                     </div>
                                     <div class="col-xs-6">
-                                        <select name="inputCurrencyPriceTransfer" id="inputCurrencyPriceTransfer" class="form-control">
-                                            <option value="EURO">EURO</option>
-                                            <option value="DOLLAR">DOLLAR</option>
-                                            <option value="RUBLE">РУБЛЬ</option>
-                                        </select>
+                                        {{ form_errors(form.transferPriceCurrency) }}
+                                        {{ form_widget(form.transferPriceCurrency, { attr: {class: 'form-control'}}) }}
                                     </div>
                                 </div>
                             </div>
@@ -371,37 +405,41 @@
                     <div class="row">
                         <div class="col-xs-12 col-sm-6">
                             <div class="form-group">
-                                <label for="textareaAddressCollection">Адрес места сбора команды</label>
-                                <textarea class="form-control" rows="5" name="textareaAddressCollection" id="textareaAddressCollection"></textarea>
+                                {{ form_label(form.teamGatheringAddress) }}
+                                {{ form_errors(form.teamGatheringAddress) }}
+                                {{ form_widget(form.teamGatheringAddress, { attr: {class: 'form-control', rows: 5}}) }}
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-6">
                             <div class="form-group">
-                                <label>Географические координаты <span>*</span></label>
+                                <label>{{ 'travel.form.coordinates'|trans }} <span>*</span></label>
                                 <div class="row">
                                     <div class="col-xs-6">
                                         <div class="input-group left-addon">
-                                            <span class="input-group-addon addon2" id="addonCoordinateN">N</span>
-                                            <input type="text" class="form-control" name="inputCoordinateN" id="inputCoordinateN" aria-describedby="addonCoordinateN">
+                                            <span class="input-group-addon addon2" id="addonCoordinateN" style="border-color: rgb(204, 204, 204);">N</span>
+                                            {{ form_errors(form.teamGatheringLatitude) }}
+                                            {{ form_widget(form.teamGatheringLatitude, { attr: {class: 'form-control', id:'inputCoordinateN', 'aria-describedby': 'addonCoordinateN'}}) }}
                                         </div>
                                     </div>
                                     <div class="col-xs-6">
                                         <div class="input-group left-addon">
                                             <span class="input-group-addon addon2" id="addonCoordinateE">E</span>
-                                            <input type="text" class="form-control" name="inputCoordinateE" id="inputCoordinateE" aria-describedby="addonCoordinateE">
+                                            {{ form_errors(form.teamGatheringLongitude) }}
+                                            {{ form_widget(form.teamGatheringLongitude, { attr: {class: 'form-control', id:'inputCoordinateE', 'aria-describedby': 'addonCoordinateE'}}) }}
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label>Время сбора команды <span>*</span></label>
+                                {{ form_label(form.teamGatheringTime) }}
+                                {{ form_errors(form.teamGatheringTime) }}
                                 <div class="row">
                                     <div class="col-xs-6">
-                                        <input type="text" class="form-control" name="inputTimeHour" id="inputTimeHour" aria-describedby="addonCoordinateN">
+                                        {{ form_widget(form.teamGatheringTime.children['hour'], { attr: { class: 'form-control' }}) }}
                                         <div class="points">:</div>
                                     </div>
                                     <div class="col-xs-6">
-                                        <input type="text" class="form-control" name="inputTimeMinute" id="inputTimeMinute" aria-describedby="addonCoordinateE">
+                                        {{ form_widget(form.teamGatheringTime.children['minute'], { attr: { class: 'form-control' }}) }}
                                     </div>
                                 </div>
                             </div>
@@ -410,230 +448,85 @@
                     <div class="row">
                         <div class="col-xs-12 col-sm-6">
                             <div class="form-group">
-                                <label for="textareaListIncluded">Перечень того, что входит в стоимость путешествия <span>*</span></label>
-                                <textarea class="form-control" rows="7" name="textareaListIncluded" id="textareaListIncluded"></textarea>
+                                {{ form_label(form.included) }}
+                                {{ form_errors(form.included) }}
+                                {{ form_widget(form.included, { attr: {class: 'form-control', rows: 7}}) }}
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-6">
                             <div class="form-group">
-                                <label for="textareaListNotIncluded">Перечень того, что не входит в стоимость путешествия <span>*</span></label>
-                                <textarea class="form-control" rows="7" name="textareaListNotIncluded" id="textareaListNotIncluded"></textarea>
+                                {{ form_label(form.excluded) }}
+                                {{ form_errors(form.excluded) }}
+                                {{ form_widget(form.excluded, { attr: {class: 'form-control', rows: 7}}) }}
                             </div>
                         </div>
                     </div>
                     <div class="deliver"></div>
                     <div class="row">
                         <div class="col-xs-12">
-                            <p><b>Фотографии путешествий</b></p>
-                            <p>Основное фото</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12 main-foto-block">
-                            <img src="/images/travels/foto1.jpg" alt="Основное фото" class="img-responsive main-foto">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <p>Дополнительное фото</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-6 col-sm-3">
-                            <img src="/images/travels/foto2.jpg" alt="Дополнительное фото" class="img-responsive addinitional-foto">
-                        </div>
-                        <div class="col-xs-6 col-sm-3">
-                            <img src="/images/travels/foto3.jpg" alt="Дополнительное фото" class="img-responsive addinitional-foto">
-                        </div>
-                        <div class="col-xs-6 col-sm-3">
-                            <img src="/images/travels/foto2.jpg" alt="Дополнительное фото" class="img-responsive addinitional-foto">
-                        </div>
-                        <div class="col-xs-6 col-sm-3">
-                            <img src="/images/travels/foto3.jpg" alt="Дополнительное фото" class="img-responsive addinitional-foto">
+                            <p><b>{{ 'travel.form.travel_photos'|trans }}</b></p>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-12 text-center">
-                            <p>Не более 10 фотографий. Формат jpeg. Размер не более 4 мб <span class="red">*</span></p>
+                            <p>{{ 'travel.form.photos_limit'|trans }} <span class="red">*</span></p>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-xs-12 text-center">
-                            <a href="#" class="btn btn-4 btn-long">Загрузить фото</a>
+                        <div class="col-xs-12 text-center fileinput">
+                            {{ form_errors(form.photos) }}
+                            {{ form_widget(form.photos, { attr: { multiple: '' } }) }}
+                            <script>
+                                $(document).on('ready', function() {
+                                    $("#{{ form.photos.vars['id'] }}").fileinput({
+                                        language: 'ru',
+                                        overwriteInitial: true,
+                                        maxFileSize: 4000,
+                                        showClose: false,
+                                        showCaption: false,
+                                        browseLabel: '{{ 'travel.form.yacht.load_photos'|trans }}',
+                                        browseClass: 'btn btn-4 btn-long',
+                                        buttonLabelClass: '',
+                                        removeLabel: '',
+                                        browseIcon: '',
+                                        removeIcon: '<i class="glyphicon glyphicon-remove"></i>',
+                                        removeTitle: 'Cancel or reset changes',
+                                        elErrorContainer: '#kv-avatar-errors',
+                                        msgErrorClass: 'alert alert-block alert-danger',
+                                        layoutTemplates: {
+                                            main2: '{preview} {browse}',
+                                            preview: '<div class="file-preview-thumbnails row"></div>'
+                                        },
+                                        previewSettings: {image: {width: "180px", height: "180px"}},
+                                        allowedFileExtensions: ["jpg", "jpeg", "png", "gif"],
+                                    });
+                                });
+                            </script>
                         </div>
                     </div>
                     <div class="deliver"></div>
                     <div class="row">
                         <div class="col-xs-12">
-                            <p><b>Описание путешествия по дням</b></p>
+                            <p><b>{{ 'travel.form.days_description'|trans }}</b></p>
                         </div>
                     </div>
-                    <div class="one-day">
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <p><b>День 1</b></p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-6">
-                                <div class="form-group">
-                                    <label for="inputCityDeparture1">Город отправления <span>*</span></label>
-                                    <input type="text" class="form-control" name="inputCityDeparture1" id="inputCityDeparture1">
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-sm-6">
-                                <div class="form-group">
-                                    <label>Географические координаты <span>*</span></label>
-                                    <div class="row">
-                                        <div class="col-xs-6">
-                                            <div class="input-group left-addon">
-                                                <span class="input-group-addon addon2" id="addonCityDepartureN1">N</span>
-                                                <input type="text" class="form-control" name="inputCityDepartureN1" id="inputCityDepartureN1" aria-describedby="addonCityDepartureN1">
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-6">
-                                            <div class="input-group left-addon">
-                                                <span class="input-group-addon addon2" id="addonCityDepartureE1">E</span>
-                                                <input type="text" class="form-control" name="inputCityDepartureE1" id="inputCityDepartureE1" aria-describedby="addonCityDepartureE1">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-sm-6">
-                                <div class="form-group">
-                                    <label for="inputCityArrival1">Город прибытия <span>*</span></label>
-                                    <input type="text" class="form-control" name="inputCityArrival1" id="inputCityArrival1">
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-sm-6">
-                                <div class="form-group">
-                                    <label>Географические координаты <span>*</span></label>
-                                    <div class="row">
-                                        <div class="col-xs-6">
-                                            <div class="input-group left-addon">
-                                                <span class="input-group-addon addon2" id="addonCityArrivalN1">N</span>
-                                                <input type="text" class="form-control" name="inputCityArrivalN1" id="inputCityArrivalN1" aria-describedby="addonCityArrivalN1">
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-6">
-                                            <div class="input-group left-addon">
-                                                <span class="input-group-addon addon2" id="addonCityArrivalE1">E</span>
-                                                <input type="text" class="form-control" name="inputCityArrivalE1" id="inputCityArrivalE1" aria-describedby="addonCityArrivalE1">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-6">
-                                <div class="form-group">
-                                    <label for="inputLength1">Протяженность маршрута <span>*</span></label>
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" name="inputLength1" id="inputLength1" aria-describedby="addonLength1">
-                                        <span class="input-group-addon addon2" id="addonLength1">Миль</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-sm-6">
-                                <a href="#" class="btn btn-3 btn-middle margin-left0">Добавить точку</a>
-                            </div>
-                        </div>
-                        <div class="row mt20">
-                            <div class="col-xs-12 col-sm-6">
-                                <div class="form-group">
-                                    <label for="textareaDetailed1">Подробное описание</label>
-                                    <textarea class="form-control" rows="7" name="textareaDetailed1" id="textareaDetailed1"></textarea>
-                                </div>
-                            </div>
+
+                    {{ form_errors(form.days) }}
+                    <div class="day-prototype" data-prototype='{% include 'AppBundle:Travel:_addDay.html.twig' %}'></div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="days-list"></div>
                         </div>
                     </div>
-                    <div class="deliver"></div>
-                    <div class="one-day">
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <p><b>День 2</b></p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-6">
-                                <div class="form-group">
-                                    <label for="inputCityDeparture2">Город отправления <span>*</span></label>
-                                    <input type="text" class="form-control" name="inputCityDeparture2" id="inputCityDeparture2">
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-sm-6">
-                                <div class="form-group">
-                                    <label>Географические координаты <span>*</span></label>
-                                    <div class="row">
-                                        <div class="col-xs-6">
-                                            <div class="input-group left-addon">
-                                                <span class="input-group-addon addon2" id="addonCityDepartureN2">N</span>
-                                                <input type="text" class="form-control" name="inputCityDepartureN2" id="inputCityDepartureN2" aria-describedby="addonCityDepartureN2">
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-6">
-                                            <div class="input-group left-addon">
-                                                <span class="input-group-addon addon2" id="addonCityDepartureE2">E</span>
-                                                <input type="text" class="form-control" name="inputCityDepartureE2" id="inputCityDepartureE2" aria-describedby="addonCityDepartureE2">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-sm-6">
-                                <div class="form-group">
-                                    <label for="inputCityArrival2">Город прибытия <span>*</span></label>
-                                    <input type="text" class="form-control" name="inputCityArrival2" id="inputCityArrival2">
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-sm-6">
-                                <div class="form-group">
-                                    <label>Географические координаты <span>*</span></label>
-                                    <div class="row">
-                                        <div class="col-xs-6">
-                                            <div class="input-group left-addon">
-                                                <span class="input-group-addon addon2" id="addonCityArrivalN2">N</span>
-                                                <input type="text" class="form-control" name="inputCityArrivalN2" id="inputCityArrivalN2" aria-describedby="addonCityArrivalN2">
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-6">
-                                            <div class="input-group left-addon">
-                                                <span class="input-group-addon addon2" id="addonCityArrivalE2">E</span>
-                                                <input type="text" class="form-control" name="inputCityArrivalE2" id="inputCityArrivalE2" aria-describedby="addonCityArrivalE2">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-6">
-                                <div class="form-group">
-                                    <label for="inputLength2">Протяженность маршрута <span>*</span></label>
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" name="inputLength2" id="inputLength2" aria-describedby="addonLength2">
-                                        <span class="input-group-addon addon2" id="addonLength2">Миль</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-sm-6">
-                                <a href="#" class="btn btn-3 btn-middle margin-left0">Добавить точку</a>
-                            </div>
-                        </div>
-                        <div class="row mt20">
-                            <div class="col-xs-12 col-sm-6">
-                                <div class="form-group">
-                                    <label for="textareaDetailed2">Подробное описание</label>
-                                    <textarea class="form-control" rows="7" name="textareaDetailed2" id="textareaDetailed2"></textarea>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
                     <div class="row bottom-form">
                         <div class="col-xs-12 text-center">
                             <p>Поля, отмеченные <span>*</span>, обязательны к заполнению</p>
+                        </div>
+                        <div class="col-xs-12 text-center">
+                            <p>
+                                <a href="javascript:addDay()" class="btn btn-3 btn-middle">Добавить день</a>
+                            </p>
                         </div>
                     </div>
                     <div class="row button-block">
