@@ -19,10 +19,24 @@ class SkipperController extends Controller
      */
     public function createTravelAction(Request $request)
     {
-        $form = $this->createForm(new TravelType(), new Travel());
+        $travel = new Travel();
+        $form = $this->createForm(new TravelType(), $travel);
         $form->handleRequest($request);
 
         $schemas = $this->get('sonata.media.manager.media')->findBy(['context' => 'yacht']);
+
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($travel);
+            $em->flush();
+
+            $this->get('session')->getFlashBag()->add(
+                'success',
+                $this->get('translator')->trans('travel.success_created', [], 'AppBundle')
+            );
+
+            return $this->redirect($this->generateUrl('travel_show', ['id' => $travel->getId()]));
+        }
 
         return $this->render('AppBundle:Travel:new.html.twig', [
             'form' => $form->createView(),

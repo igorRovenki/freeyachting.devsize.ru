@@ -20,10 +20,19 @@ class Travel
 
     const PARTICIPANT_LEVEL_BEGINNER = 'beginner';
     const PARTICIPANT_LEVEL_ADVANCED = 'advanced';
+    const PARTICIPANT_LEVEL_AVERAGED = 'averaged';
 
     const PRICE_CURRENCY_EUR = 'EUR';
     const PRICE_CURRENCY_USD = 'USD';
     const PRICE_CURRENCY_RUB = 'RUB';
+
+    const SKIPPER_PAYMENT_METHOD_VIA_SITE = 'via_site';
+    const SKIPPER_PAYMENT_METHOD_CASH = 'cash';
+    const SKIPPER_PAYMENT_ANOTHER_WAY = 'another_way';
+
+    const TRANSFER_FROM_AIRPORT_GROUP = 'group';
+    const TRANSFER_FROM_AIRPORT_INDIVIDUAL = 'individual';
+    const TRANSFER_FROM_AIRPORT_NO_TRANSFER = 'no_transfer';
 
     /**
      * @var integer
@@ -107,7 +116,7 @@ class Travel
     /**
      * @var integer
      *
-     * @ORM\Column(name="percent_of_discount", type="smallint")
+     * @ORM\Column(name="percent_of_discount", type="smallint", nullable=true)
      */
     private $percentOfDiscount;
 
@@ -264,7 +273,7 @@ class Travel
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="Application\Sonata\MediaBundle\Entity\Media")
+     * @ORM\ManyToMany(targetEntity="Application\Sonata\MediaBundle\Entity\Media", cascade={"persist"})
      * @ORM\JoinTable(name="travels_photos",
      *  joinColumns={@ORM\JoinColumn(name="travel_id", referencedColumnName="id")},
      *  inverseJoinColumns={@ORM\JoinColumn(name="image_id", referencedColumnName="id")}
@@ -295,7 +304,7 @@ class Travel
         $this->children = false;
         $this->websiteComission = 0;
         $this->skipperConfirmation = false;
-        $this->percentOfDiscount = 0;
+        $this->percentOfDiscount = null;
         $this->photos = new ArrayCollection();
         $this->days = new ArrayCollection();
         $this->bookings = new ArrayCollection();
@@ -641,6 +650,10 @@ class Travel
      */
     public function setDateStart($dateStart)
     {
+        if (!$dateStart instanceof \DateTime) {
+            $dateStart = new \DateTime($dateStart);
+        }
+
         $this->dateStart = $dateStart;
 
         return $this;
@@ -664,6 +677,10 @@ class Travel
      */
     public function setDateEnd($dateEnd)
     {
+        if (!$dateEnd instanceof \DateTime) {
+            $dateEnd = new \DateTime($dateEnd);
+        }
+
         $this->dateEnd = $dateEnd;
 
         return $this;

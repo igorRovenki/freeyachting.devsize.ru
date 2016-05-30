@@ -43,19 +43,20 @@ travel:
         payment: 3. Оплата
     enter_register_data: Введите регистрационные <br> данные путешественников
     success_booked: Путешествие успешно забронировано!
+    success_created: Путешествие успешно создано!
     form:
         participant_level_title: Уровень подготовки участников
         participant_level:
             advanced: Продвинутый уровень
             averaged: Средний уровень
-            first: Начальный уровень
+            beginner: Начальный уровень
         has_children_title: Участие детей
         has_children:
             1: Да
             0: Нет
         min_child_age: Мин. возраст детей
         week_price_currency: Стоимость за место на яхте в неделю
-        week_price: Стоимость за место на яхте в сутки
+        week_price: Стоимость за место на яхте в неделю
         day_price: Стоимость за место на яхте в сутки
         currency:
             EUR: EURO
@@ -115,7 +116,17 @@ travel:
         included: Перечень того, что входит в стоимость путешествия
         excluded: Перечень того, что не входит в стоимость путешествия
         team_gathering_time: Время сбора команды
-
+        travel_photos: Фотографии путешествий
+        photos_limit: Не более 10 фотографий. Формат jpeg. Размер не более 4 мб
+        days_description: Описание путешествия по дням
+        days:
+            city_departure: Город отправления
+            city_arrival: Город прибытия
+            route_length: Протяженность маршрута
+            route_miles: Миль
+            full_description: Подробное описание
+            date: Дата
+            coordinates: Географические координаты
 yacht:
     short_description: Краткое описание
     ship_type_label: Тип судна
@@ -165,7 +176,7 @@ search:
         skipper_rating: Рейтингу капитана
     travels_not_found: Ничего не найдено
 day:
-    days_not_fount: Капитан пока не добавил информацию о днях путешествия
+    days_not_found: Капитан пока не добавил информацию о днях путешествия
     miles: миль
     cityDeparture: Место отправления
     cityArrival: Место прибытия

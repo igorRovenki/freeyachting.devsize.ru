@@ -292,6 +292,10 @@ class Day
      */
     public function setDate($date)
     {
+        if (!$date instanceof \DateTime) {
+            $date = new \DateTime($date);
+        }
+
         $this->date = $date;
     }
 }
