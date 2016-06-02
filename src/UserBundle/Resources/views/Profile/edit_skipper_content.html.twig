@@ -15,7 +15,7 @@
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-4 text-right">
-                    <a href="{{ path('create_new_travel') }}" type="button" class="btn btn-4">Создать новое путешествие</a>
+                    <a href="{{ path('create_new_travel') }}" type="button" class="btn btn-4">{{ 'skipper.travels.create_new'|trans }}</a>
                 </div>
             </div>
             {{ form_start(form, {'method': 'post', 'action': path('fos_user_profile_edit'), 'attr': {'role': 'form'}}) }}

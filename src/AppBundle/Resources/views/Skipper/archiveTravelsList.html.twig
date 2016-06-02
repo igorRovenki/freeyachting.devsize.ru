@@ -1,0 +1,12 @@
+{% extends 'AppBundle:Skipper:travelsList.html.twig' %}
+{% trans_default_domain "AppBundle" %}
+
+{% block travel_list_title %}<h1>{{ 'skipper.travels.archive_list'|trans }}</h1>{% endblock %}
+
+{% block travelCards %}
+    {% for travel in app.user.skipperTravels %}
+        {% include 'AppBundle:Travel/travelCards:_skipperArchiveTravelCard.html.twig' %}
+    {% else %}
+        {{ 'skipper.travels.not_found'|trans }}
+    {% endfor %}
+{% endblock %}

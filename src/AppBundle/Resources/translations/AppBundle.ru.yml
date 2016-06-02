@@ -127,6 +127,7 @@ travel:
             full_description: Подробное описание
             date: Дата
             coordinates: Географические координаты
+    route_title: Маршрут
 yacht:
     short_description: Краткое описание
     ship_type_label: Тип судна
@@ -150,6 +151,7 @@ yacht:
 interface:
     buttons:
         more: 'Подробнее'
+        repeat_travel: Повторить путешествие
 breadcrumbs:
     homepage: Главная
     search_travel: Результаты поиска
@@ -166,6 +168,8 @@ breadcrumbs:
     booked_travels: Забронированные путешествия
     travels_history: История путешествий
     create_new_travel: Создание путешествия
+    current_travels: Список путешествий
+    archive_travels: Архив путешествий
 
 search:
     label: Выберете свое путешествие
@@ -346,3 +350,15 @@ errors:
         title: Страница <br class="visible-xs">не найдена
         desc: Данной страницы не существует<br class="visible-xs"> или она была удалена.
         link: Попробуйте вернуться <a href="javascript:history.back()">назад</a><br class="visible-xs"> или на <a href="/">главную страницу</a>
+
+skipper:
+    travels:
+        list: Список путешествий
+        not_found: Создайте первое путешествие!
+        create_new: Создать новое путешествие
+        payment_method: Способ оплаты услуг
+        booked: Забронировано
+        approved: Подтверждено
+        pending: Ждет подтверждения
+        free_places: Свободных мест
+        archive_list: Архив путешествий

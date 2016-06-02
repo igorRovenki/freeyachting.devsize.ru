@@ -298,6 +298,13 @@ class Travel
      */
     private $bookings;
 
+    /**
+     * @var User
+     * @ORM\ManyToOne(targetEntity="User", cascade={"persist"}, inversedBy="skipperTravels")
+     * @ORM\JoinColumn(name="skipper_id", referencedColumnName="id")
+     */
+    private $skipper;
+
     public function __construct()
     {
         $this->hotOffers = false;
@@ -1197,4 +1204,50 @@ class Travel
     {
         return $this->getName();
     }
+
+    /**
+     * @return User
+     */
+    public function getSkipper()
+    {
+        return $this->skipper;
+    }
+
+    /**
+     * @param User $skipper
+     */
+    public function setSkipper(User $skipper)
+    {
+        $this->skipper = $skipper;
+    }
+
+    /**
+     * Count free places
+     * @return int
+     */
+    public function countFreePlaces()
+    {
+        return $this->getYacht()->getTotalPlacesNumber() - count($this->getBusyPlaces());
+    }
+
+    /**
+     * @return array
+     */
+    public function getApprovedBookings()
+    {
+        return $this->bookings->filter(function (Booking $booking) {
+            return $booking->getStatus() == Booking::STATUS_APPROVED;
+        })->toArray();
+    }
+
+    /**
+     * @return array
+     */
+    public function getPendingBookings()
+    {
+        return $this->bookings->filter(function (Booking $booking) {
+            return $booking->getStatus() == Booking::STATUS_PENDING;
+        })->toArray();
+    }
+
 }

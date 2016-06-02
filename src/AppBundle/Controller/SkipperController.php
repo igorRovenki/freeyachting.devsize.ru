@@ -6,10 +6,8 @@ use AppBundle\Entity\Travel;
 use AppBundle\Form\TravelType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 class SkipperController extends Controller
 {
@@ -26,6 +24,7 @@ class SkipperController extends Controller
         $schemas = $this->get('sonata.media.manager.media')->findBy(['context' => 'yacht']);
 
         if ($form->isValid()) {
+            $travel->setSkipper($this->getUser());
             $em = $this->getDoctrine()->getManager();
             $em->persist($travel);
             $em->flush();
@@ -46,17 +45,19 @@ class SkipperController extends Controller
 
     /**
      * @Route("/skipper/travels", name="current_travels")
+     * @Security("is_granted('ROLE_SKIPPER')")
      */
     public function skipperTravelsAction()
     {
-        return new Response();
+        return $this->render('AppBundle:Skipper:travelsList.html.twig');
     }
 
     /**
      * @Route("/skipper/archive", name="archive_travels")
+     * @Security("is_granted('ROLE_SKIPPER')")
      */
     public function indexAction()
     {
-        return new Response();
+        return $this->render('AppBundle:Skipper:archiveTravelsList.html.twig');
     }
 }
