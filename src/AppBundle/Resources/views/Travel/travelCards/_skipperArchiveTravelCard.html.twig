@@ -1,0 +1,54 @@
+{% trans_default_domain "AppBundle" %}
+<li>
+    <div class="media">
+        <div class="media-left hidden-xs">
+            <a href="{{ path('travel_show', { id: travel.id }) }}">
+                <img src="{% path travel.photos.first, 'small' %}" alt="{{ travel.name }}">
+            </a>
+        </div>
+        <div class="media-body">
+            <h4 class="media-heading">{{ travel.name }}</h4>
+            <div class="important">
+                <p>
+                    <i class="icon-date"></i>
+                    {{ travel.dateStart|localizeddate('none', 'none', app.request.locale, null, 'd MMM')|trim('.') }} -
+                    {{ travel.dateEnd|localizeddate('none', 'none', app.request.locale, null, 'd MMM')|trim('.') }} &nbsp;&nbsp;
+                    <i class="icon-days"></i> {{ travel.daysCount }} &nbsp;&nbsp;
+                    <i class="icon-country"></i> {{ travel.country }}
+                </p>
+            </div>
+            <a class="media-left visible-xs" href="{{ path('travel_show', { id: travel.id }) }}">
+                <img src="{% path travel.photos.first, 'small' %}" alt="{{ travel.name }}" class="img-responsive">
+            </a>
+            <div class="row property-list-top">
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 padding-right0">
+                    {% set type = 'travel.type.' ~ travel.type %}
+                    <p>{{ 'travel.type_label'|trans }}: <b>{{ type|trans }}</b></p>
+                    <p>{{ 'travel.aquatory'|trans }}: <b>{{ travel.aquatory }}</b></p>
+                    {% if travel.days.count > 0 %}
+                        <p>{{ 'travel.route_title'|trans }}: <b>{{ travel.days.first.cityDeparture }} в {{ travel.days.first.cityArrival }}</b></p>
+                    {% endif %}
+                    <p class="story-cost blue hidden-xs">
+                        {{ 'travel.card_day_price'|trans }}: <b>{{ travel.dayPrice }} {{ travel.dayPriceCurrency }}</b>
+                    </p>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <p>
+                        <b>{{ 'skipper.travels.payment_method'|trans }}:</b>
+                        {{ ('travel.form.skipper_payment_method.' ~ travel.skipperPaymentMethod)|trans }}
+                    </p>
+                </div>
+            </div>
+            <p class="story-cost blue visible-xs">
+                {{ 'travel.card_day_price'|trans }}: <b>{{ travel.dayPrice }} {{ travel.dayPriceCurrency }}</b>
+            </p>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 btn-story-more">
+                    <a href="{{ path('travel_show', { id: travel.id }) }}" class="btn btn-3">
+                        {{ 'interface.buttons.repeat_travel'|trans }}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</li>

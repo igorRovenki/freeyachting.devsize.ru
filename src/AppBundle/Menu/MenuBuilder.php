@@ -45,6 +45,8 @@ class MenuBuilder
             case 'booked_travels':
             case 'travels_history':
             case 'create_new_travel':
+            case 'current_travels':
+            case 'archive_travels':
                 $menu->addChild('breadcrumbs.' . $route)->setCurrent(true);
                 break;
             case 'travel_show':

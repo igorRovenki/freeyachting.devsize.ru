@@ -175,11 +175,18 @@ class User extends BaseUser
      */
     private $waterAreasExperience;
 
+    /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="Travel", mappedBy="skipper", cascade={"persist", "remove"}, fetch="EXTRA_LAZY")
+     */
+    private $skipperTravels;
+
 
     public function __construct()
     {
         $this->gender = self::GENDER_M;
         $this->waterAreasExperience = new ArrayCollection();
+        $this->skipperTravels = new ArrayCollection();
         parent::__construct();
     }
 
@@ -588,5 +595,37 @@ class User extends BaseUser
     public function removeWaterAreasExperience(WaterAreasExperience $waterAreasExperience)
     {
         $this->waterAreasExperience->removeElement($waterAreasExperience);
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getSkipperTravels()
+    {
+        return $this->skipperTravels;
+    }
+
+    /**
+     * @param ArrayCollection $skipperTravels
+     */
+    public function setSkipperTravels($skipperTravels)
+    {
+        $this->skipperTravels = $skipperTravels;
+    }
+
+    /**
+     * @param Travel $travel
+     */
+    public function addSkipperTravel(Travel $travel)
+    {
+        $this->skipperTravels->add($travel);
+    }
+
+    /**
+     * @param Travel $travel
+     */
+    public function removeSkipperTravel(Travel $travel)
+    {
+        $this->skipperTravels->removeElement($travel);
     }
 }

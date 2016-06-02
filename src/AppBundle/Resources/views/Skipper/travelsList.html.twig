@@ -1,0 +1,44 @@
+{% extends 'AppBundle::base.html.twig' %}
+{% trans_default_domain "AppBundle" %}
+
+{% block content %}
+    <div class="container content traveller-cabin">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-7">
+                        {% block travel_list_title %}<h1>{{ 'skipper.travels.list'|trans }}</h1>{% endblock %}
+                    </div>
+                    <div class="col-xs-12 col-sm-5 new-info">
+                        <div class="green-cicle">7</div><span>Новых участников</span>
+                    </div>
+                </div>
+                <div class="row btn-block">
+                    <div class="col-xs-12 col-sm-8">
+                        <div class="search-filter">
+                            {{ knp_menu_render('skipper_profile_menu', { template: 'AppBundle::searchMenu.html.twig', currentClass: 'active' }) }}
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-4 text-right">
+                        <a href="{{ path('create_new_travel') }}" type="button" class="btn btn-4">{{ 'skipper.travels.create_new'|trans }}</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <ul class="list-unstyled media-list">
+                        {% block travelCards %}
+                            {% for travel in app.user.skipperTravels %}
+                                {% include 'AppBundle:Travel/travelCards:_skipperProfileTravelCard.html.twig' %}
+                            {% else %}
+                                {{ 'skipper.travels.not_found'|trans }}
+                            {% endfor %}
+                        {% endblock %}
+                    </ul>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 banner-xs">
+                {% include 'AppBundle:blocks:banners.html.twig' %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
